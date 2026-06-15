@@ -1038,7 +1038,7 @@ function addChatbotMessage(role, content) {
     `;
     thumbsUp.onmouseover = () => thumbsUp.style.background = 'rgba(10,143,88,0.1)';
     thumbsUp.onmouseout = () => thumbsUp.style.background = 'transparent';
-    thumbsUp.onclick = () => handleRating('positive', content);
+    thumbsUp.onclick = () => handleRating('positive', content, ratingDiv);
     
     const thumbsDown = document.createElement('button');
     thumbsDown.innerHTML = '👎';
@@ -1053,7 +1053,7 @@ function addChatbotMessage(role, content) {
     `;
     thumbsDown.onmouseover = () => thumbsDown.style.background = 'rgba(231,76,60,0.1)';
     thumbsDown.onmouseout = () => thumbsDown.style.background = 'transparent';
-    thumbsDown.onclick = () => handleRating('negative', content);
+    thumbsDown.onclick = () => handleRating('negative', content, ratingDiv);
     
     ratingDiv.appendChild(thumbsUp);
     ratingDiv.appendChild(thumbsDown);
@@ -1063,33 +1063,27 @@ function addChatbotMessage(role, content) {
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-function handleRating(rating, content) {
-  // Envoyer la notation au serveur
-  const payload = {
-    json: {
-      rating: rating,
-      responseContent: content,
-      timestamp: new Date().toISOString()
-    }
-  };
-  
-  console.log('Rating:', rating, payload);
-  
-  // Afficher un message de confirmation
-  const messagesDiv = document.getElementById('chatbot-messages');
-  const confirmEl = document.createElement('div');
-  confirmEl.style.cssText = `
-    padding:8px 12px;
-    border-radius:8px;
-    background:rgba(10,143,88,0.15);
-    color:var(--text);
-    font-size:12px;
-    align-self:flex-start;
-    margin-top:4px;
-  `;
-  confirmEl.textContent = rating === 'positive' ? '✓ Merci pour votre avis positif!' : '✓ Merci pour votre avis!';
-  messagesDiv.appendChild(confirmEl);
-  setTimeout(() => confirmEl.remove(), 3000);
+function handleRating(rating, content, ratingDiv) {
+  console.log('Rating:', rating, content);
+
+  // Remplacer les boutons par une confirmation persistante
+  if (ratingDiv) {
+    ratingDiv.innerHTML = '';
+    ratingDiv.style.cssText = `
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin-top:8px;
+      align-self:flex-start;
+      padding:6px 12px;
+      border-radius:8px;
+      background:rgba(10,143,88,0.15);
+      color:var(--green);
+      font-size:12px;
+      font-weight:600;
+    `;
+    ratingDiv.textContent = rating === 'positive' ? '✓ Merci pour votre avis positif !' : '✓ Merci, nous allons améliorer notre réponse.';
+  }
 }
 
 function addTypingIndicator() {
