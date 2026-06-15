@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/", "destination": "/mediconnect.html" }
+    { "source": "/", "destination": "/mediconnect" }
   ],
   "headers": [
     {
