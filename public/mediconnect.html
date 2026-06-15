@@ -1073,103 +1073,8 @@ function handleRating(rating, content) {
     }
   };
   
-  fetch('/api/trpc/chatbot.rateResponse', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).catch(err => console.error('Erreur notation:', err));
-  
-  // Afficher un message de confirmation
-  const messagesDiv = document.getElementById('chatbot-messages');
-  const confirmEl = document.createElement('div');
-  confirmEl.style.cssText = `
-    padding:8px 12px;
-    border-radius:8px;
-    background:rgba(10,143,88,0.15);
-    color:var(--text);
-    font-size:12px;
-    align-self:flex-start;
-    margin-top:4px;
-  `;
-  confirmEl.textContent = rating === 'positive' ? '✓ Merci pour votre avis positif!' : '✓ Merci pour votre avis!';
-  messagesDiv.appendChild(confirmEl);
-  setTimeout(() => confirmEl.remove(), 3000);
-}
-
-function addTypingIndicator() {
-  const messagesDiv = document.getElementById('chatbot-messages');
-  const typingEl = document.createElement('div');
-  typingEl.id = 'typing-indicator';
-  typingEl.style.cssText = `
-    padding:12px; 
-    border-radius:12px; 
-    background:rgba(10,143,88,0.1); 
-    color:var(--text); 
-    align-self:flex-start; 
-    max-width:90%;
-    display:flex;
-    gap:4px;
-  `;
-  typingEl.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
-  messagesDiv.appendChild(typingEl);
-  messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-
-function removeTypingIndicator() {
-  const typingEl = document.getElementById('typing-indicator');
-  if (typingEl) typingEl.remove();
-}
-
-function showError(message) {
-  const errorDiv = document.getElementById('chatbot-error');
-  const errorText = document.getElementById('error-text');
-  errorText.textContent = message;
-  errorDiv.style.display = 'block';
-  setTimeout(() => {
-    errorDiv.style.display = 'none';
-  }, 5000);
-}
-
-function hideError() {
-  const errorDiv = document.getElementById('chatbot-error');
-  errorDiv.style.display = 'none';
-}
-
-function updateSendButtonState(disabled) {
-  const btn = document.getElementById('chatbot-send-btn');
-  btn.disabled = disabled;
-  btn.style.opacity = disabled ? '0.6' : '1';
-  btn.style.cursor = disabled ? 'not-allowed' : 'pointer';
-}
-
-async function sendChatbotMessage() {
-  const input = document.getElementById('chatbot-input');
-  const message = input.value.trim();
-  if (!message || isWaitingForResponse) return;
-  
-  addChatbotMessage('user', message);
-  input.value = '';
-  input.disabled = true;
-  isWaitingForResponse = true;
-  
-  // Afficher l'indicateur de frappe
-  addTypingIndicator();
-  
-  try {
-    // Appeler l'API tRPC chatbot.sendMessage
-    const response = await fetch('/api/trpc/chatbot.sendMessage', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        json: {
-          message: message,
-          conversationId: null,
-        },
-      }),
-    });
+  // rating désactivé (pas de backend dédié)
+  console.log('Rating:', rating);
     
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
@@ -1178,13 +1083,10 @@ async function sendChatbotMessage() {
     const data = await response.json();
     removeTypingIndicator();
     
-    // Accéder à la réponse correctement: data.result.data.json
-    const responseData = data.result?.data?.json || data.result?.data;
-    if (responseData?.success) {
-      addChatbotMessage('assistant', responseData.message);
+    if (data?.success) {
+      addChatbotMessage('assistant', data.message);
     } else {
-      showError('Erreur: ' + (responseData?.message || 'Réponse invalide'));
-      addChatbotMessage('assistant', 'Désolé, une erreur s\'est produite. Veuillez réessayer.');
+      addChatbotMessage('assistant', data?.message || 'Désolé, une erreur s\'est produite. Veuillez réessayer.');
     }
   } catch (error) {
     console.error('Chatbot error:', error);
