@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Postulants - MediConnect Africa</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+  <link rel="icon" href="/favicon.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green: #0A8F58;
+      --green-dark: #076B42;
+      --dark: #060E18;
+      --dark2: #0C1623;
+      --dark3: #121F2E;
+      --text: #F0F6FF;
+      --text2: rgba(240,246,255,.7);
+      --text3: rgba(240,246,255,.4);
+      --border: rgba(255,255,255,.08);
+      --card: rgba(255,255,255,.04);
+      --radius: 18px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: var(--dark2);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .header-title span {
+      color: var(--green);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .table-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .table-header {
+      background: var(--dark3);
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .search-box {
+      padding: 0.75rem 1rem;
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: inherit;
+      width: 250px;
+    }
+
+    .search-box::placeholder {
+      color: var(--text3);
+    }
+
+    .table-content {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: var(--dark3);
+    }
+
+    th {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    tbody tr:hover {
+      background: rgba(255,255,255,.02);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-pending {
+      background: rgba(217, 119, 6, 0.2);
+      color: #D97706;
+    }
+
+    .status-approved {
+      background: rgba(10, 143, 88, 0.2);
+      color: var(--green);
+    }
+
+    .status-rejected {
+      background: rgba(224, 90, 43, 0.2);
+      color: #E05A2B;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-small {
+      padding: 0.4rem 0.8rem;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-small:hover {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--text3);
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 1rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--green-dark);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text2);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .modal-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .modal-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-value {
+      font-size: 14px;
+      color: var(--text);
+      padding: 0.75rem;
+      background: var(--dark3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      word-break: break-word;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .modal-btn-approve {
+      background: var(--green);
+      color: white;
+    }
+
+    .modal-btn-approve:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .modal-btn-reject {
+      background: #E05A2B;
+      color: white;
+    }
+
+    .modal-btn-reject:hover {
+      background: #C84A1B;
+      transform: translateY(-2px);
+    }
+
+    .modal-btn-close {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .modal-btn-close:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .header-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .search-box {
+        width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      th, td {
+        padding: 0.75rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-title">Medi<span>Connect</span> - Dashboard Postulants</div>
+    <div class="header-actions">
+      <input type="text" class="search-box" id="searchBox" placeholder="Rechercher par nom ou email..."/>
+      <button class="btn btn-secondary" onclick="exportData()">📥 Exporter CSV</button>
+      <button class="btn btn-secondary" onclick="goBack()">← Retour</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <a href="/" class="back-link">← Retour au site</a>
+
+    <!-- Statistiques -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="totalCount">0</div>
+        <div class="stat-label">Total Postulants</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="pendingCount">0</div>
+        <div class="stat-label">En Attente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="approvedCount">0</div>
+        <div class="stat-label">Approuvés</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="rejectedCount">0</div>
+        <div class="stat-label">Rejetés</div>
+      </div>
+    </div>
+
+    <!-- Tableau des postulants -->
+    <div class="table-section">
+      <div class="table-header">
+        <div class="table-title">Liste des Postulants</div>
+      </div>
+      <div class="table-content">
+        <table id="postulantTable">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Téléphone</th>
+              <th>Date</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Les données seront injectées ici -->
+          </tbody>
+        </table>
+        <div id="emptyState" class="empty-state" style="display: none;">
+          <div class="empty-state-icon">📋</div>
+          <p>Aucun postulant pour le moment</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal pour afficher les détails -->
+  <div id="detailsModal" class="modal" onclick="if(event.target === this) closeModal()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Détails du Postulant</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Les détails seront injectés ici -->
+      </div>
+      <div class="modal-actions" id="modalActions">
+        <!-- Les actions seront injectées ici -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let postulants = [];
+
+    async function loadData() {
+      try {
+        const response = await fetch('/api/trpc/applicants.list');
+        const result = await response.json();
+        postulants = result.result?.data || [];
+        updateStats();
+        renderTable(postulants);
+      } catch (error) {
+        console.error('Erreur lors du chargement des postulants:', error);
+        postulants = [];
+        updateStats();
+        renderTable(postulants);
+      }
+    }
+
+    function updateStats() {
+      const total = postulants.length;
+      const pending = postulants.filter(p => p.status === 'pending').length;
+      const approved = postulants.filter(p => p.status === 'approved').length;
+      const rejected = postulants.filter(p => p.status === 'rejected').length;
+
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('pendingCount').textContent = pending;
+      document.getElementById('approvedCount').textContent = approved;
+      document.getElementById('rejectedCount').textContent = rejected;
+    }
+
+    function renderTable(data) {
+      const tbody = document.getElementById('tableBody');
+      const emptyState = document.getElementById('emptyState');
+
+      if (data.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      tbody.innerHTML = data.map((p, idx) => `
+        <tr>
+          <td>${p.name || 'N/A'}</td>
+          <td>${p.email || 'N/A'}</td>
+          <td>${p.phone || 'N/A'}</td>
+          <td>${new Date(p.date).toLocaleDateString('fr-FR')}</td>
+          <td>
+            <span class="status-badge status-${p.status || 'pending'}">
+              ${p.status === 'approved' ? 'Approuvé' : p.status === 'rejected' ? 'Rejeté' : 'En Attente'}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              ${p.status === 'pending' ? `
+                <button class="btn-small" onclick="updateStatus(${idx}, 'approved')">✓ Approuver</button>
+                <button class="btn-small" onclick="updateStatus(${idx}, 'rejected')">✕ Rejeter</button>
+              ` : ''}
+              <button class="btn-small" onclick="viewDetails(${idx})">👁 Voir</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function updateStatus(idx, status) {
+      const applicant = postulants[idx];
+      try {
+        const response = await fetch('/api/trpc/applicants.updateStatus', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            json: {
+              id: applicant.id,
+              status: status,
+            },
+          }),
+        });
+        if (response.ok) {
+          loadData();
+        }
+      } catch (error) {
+        console.error('Erreur lors de la mise à jour du statut:', error);
+      }
+    }
+
+    function viewDetails(idx) {
+      const p = postulants[idx];
+      const modalBody = document.getElementById('modalBody');
+      const modalActions = document.getElementById('modalActions');
+      
+      // Construire le contenu des détails
+      modalBody.innerHTML = `
+        <div class="modal-field">
+          <div class="modal-label">Nom</div>
+          <div class="modal-value">${p.name || 'N/A'}</div>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Email</div>
+          <div class="modal-value">${p.email || 'N/A'}</div>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Téléphone</div>
+          <div class="modal-value">${p.phone || 'N/A'}</div>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Message</div>
+          <div class="modal-value">${p.message || 'N/A'}</div>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Date de Candidature</div>
+          <div class="modal-value">${new Date(p.date).toLocaleDateString('fr-FR')} à ${new Date(p.date).toLocaleTimeString('fr-FR')}</div>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Statut</div>
+          <div class="modal-value">
+            <span class="status-badge status-${p.status || 'pending'}">
+              ${p.status === 'approved' ? 'Approuvé' : p.status === 'rejected' ? 'Rejeté' : 'En Attente'}
+            </span>
+          </div>
+        </div>
+      `;
+      
+      // Construire les actions
+      if (p.status === 'pending') {
+        modalActions.innerHTML = `
+          <button class="modal-btn modal-btn-approve" onclick="updateStatusAndClose(${idx}, 'approved')">✓ Approuver</button>
+          <button class="modal-btn modal-btn-reject" onclick="updateStatusAndClose(${idx}, 'rejected')">✕ Rejeter</button>
+          <button class="modal-btn modal-btn-close" onclick="closeModal()">Fermer</button>
+        `;
+      } else {
+        modalActions.innerHTML = `
+          <button class="modal-btn modal-btn-close" onclick="closeModal()">Fermer</button>
+        `;
+      }
+      
+      // Afficher la modale
+      document.getElementById('detailsModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('detailsModal').classList.remove('active');
+    }
+
+    async function updateStatusAndClose(idx, status) {
+      await updateStatus(idx, status);
+      closeModal();
+    }
+
+    function exportData() {
+      if (postulants.length === 0) {
+        alert('Aucune donnée à exporter');
+        return;
+      }
+
+      let csv = 'Nom,Email,Téléphone,Message,Date,Statut\n';
+      csv += postulants.map(p => 
+        `"${p.name}","${p.email}","${p.phone}","${p.message}","${new Date(p.date).toLocaleDateString('fr-FR')}","${p.status || 'pending'}"`
+      ).join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'postulants_mediconnect.csv';
+      a.click();
+    }
+
+    document.getElementById('searchBox').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const filtered = postulants.filter(p => 
+        p.name.toLowerCase().includes(query) || 
+        p.email.toLowerCase().includes(query)
+      );
+      renderTable(filtered);
+    });
+
+    function goBack() {
+      window.history.back();
+    }
+
+    // Fermer la modale au clic sur Échap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Charger les données au démarrage
+    loadData();
+  </script>
+</body>
+</html>

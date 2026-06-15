@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MediConnect Africa — La santé numérique pour l'Afrique</title>
+<meta name="description" content="Plateforme digitale de santé connectant patients, cliniques, pharmacies, livreurs, laboratoires, imagerie, cabinet optique et assureurs en Afrique." />
+<meta property="og:title" content="MediConnect Africa" />
+<meta property="og:description" content="La santé numérique pour l'Afrique de l'Ouest et centrale" />
+<meta property="og:url" content="https://www.mediconnect4africa.cloud" />
+<link rel="icon" href="https://mediconnect4africa.com/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green:   #0A8F58;
+    --greenL:  #34D399;
+    --greenD:  #065F3C;
+    --bg:      #060E18;
+    --card:    #0D1B2A;
+    --border:  #1a2d42;
+    --text:    #F0F6FF;
+    --muted:   #8BA3B8;
+    --dim:     #5A7A94;
+    --amber:   #F59E0B;
+    --blue:    #3B82F6;
+    --purple:  #8B5CF6;
+    --teal:    #14B8A6;
+    --red:     #EF4444;
+    --indigo:  #6366F1;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+
+  /* NAV */
+  nav { position:sticky; top:0; z-index:100; background:rgba(6,14,24,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 5%; }
+  .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:64px; gap:32px; padding:0 20px; }
+  .logo { display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:var(--text); text-decoration:none; margin-right:auto; }
+  .logo-icon { width:36px; height:36px; border-radius:10px; background:rgba(10,143,88,0.2); border:1.5px solid var(--green); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:var(--greenL); }
+  .logo span { color:var(--greenL); }
+  .nav-links { display:flex; gap:24px; flex:1; }
+  .nav-links a { color:var(--dim); font-size:14px; text-decoration:none; transition:color .2s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-actions { display:flex; gap:10px; align-items:center; }
+  .btn { padding:8px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:all .2s; }
+  .btn-ghost { background:transparent; border:1px solid var(--border); color:var(--muted); }
+  .btn-ghost:hover { border-color:var(--green); color:var(--greenL); }
+  .btn-primary { background:var(--green); border:none; color:#fff; }
+  .btn-primary:hover { background:var(--greenD); }
+  .btn-apk { background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); color:var(--greenL); }
+
+  /* HERO */
+  .hero { max-width:1200px; margin:0 auto; padding:80px 5% 60px; text-align:center; }
+  .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(10,143,88,0.1); border:1px solid rgba(10,143,88,0.25); border-radius:30px; padding:6px 16px; font-size:12px; color:var(--greenL); font-weight:700; margin-bottom:24px; }
+  .hero-badge-dot { width:8px; height:8px; border-radius:50%; background:var(--greenL); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(32px,5vw,62px); font-weight:700; line-height:1.1; letter-spacing:-1px; margin-bottom:20px; }
+  .hero h1 em { font-style:normal; color:var(--greenL); }
+  .hero p { font-size:18px; color:var(--muted); max-width:620px; margin:0 auto 36px; line-height:1.7; }
+  .hero-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:60px; }
+  .btn-lg { padding:14px 28px; font-size:15px; border-radius:12px; }
+
+  /* STATS */
+  .stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:16px; max-width:800px; margin:0 auto 60px; }
+  .stat-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 16px; text-align:center; }
+  .stat-num { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; color:var(--greenL); }
+  .stat-label { font-size:12px; color:var(--dim); margin-top:4px; }
+
+  /* COUNTRIES TICKER */
+  .ticker { overflow:hidden; padding:12px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); margin-bottom:80px; }
+  .ticker-inner { display:flex; gap:24px; animation:ticker 30s linear infinite; width:max-content; }
+  .ticker-inner span { font-size:14px; color:var(--dim); white-space:nowrap; }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* SECTIONS */
+  section { max-width:1200px; margin:0 auto; padding:60px 5%; }
+  .section-label { font-size:12px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
+  .section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(24px,3vw,38px); font-weight:700; margin-bottom:16px; }
+  .section-sub { font-size:16px; color:var(--muted); max-width:560px; margin-bottom:48px; line-height:1.7; }
+
+  /* MEDICONNECT CARD SECTION */
+  .card-section { background:linear-gradient(135deg,#0A3D2E 0%,#065F3C 100%); border-radius:24px; padding:48px; margin-bottom:60px; position:relative; overflow:hidden; }
+  .card-section::before { content:'+'; position:absolute; right:-20px; bottom:-30px; font-size:200px; color:rgba(255,255,255,0.03); font-weight:900; line-height:1; }
+  .card-section-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  .mc-card-preview { background:linear-gradient(135deg,#0A4D35 0%,#0A8F58 100%); border-radius:18px; padding:24px; border:1px solid rgba(52,211,153,0.3); }
+  .mc-card-brand { font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; color:#fff; margin-bottom:16px; }
+  .mc-card-brand span { color:var(--greenL); }
+  .mc-card-num { font-size:20px; font-weight:700; color:#fff; letter-spacing:4px; margin-bottom:16px; }
+  .mc-card-row { display:flex; justify-content:space-between; margin-bottom:16px; }
+  .mc-card-field label { font-size:9px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:.5px; display:block; margin-bottom:3px; }
+  .mc-card-field span { font-size:13px; color:#fff; font-weight:600; }
+  .mc-card-imc { display:flex; gap:16px; border-top:1px solid rgba(255,255,255,0.1); padding-top:14px; }
+  .mc-imc-item { flex:1; text-align:center; }
+  .mc-imc-item label { font-size:9px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:.5px; display:block; margin-bottom:3px; }
+  .mc-imc-item span { font-size:14px; font-weight:700; color:#fff; }
+  .mc-imc-item .imc-val { color:var(--greenL); }
+  .card-features { display:flex; flex-direction:column; gap:14px; }
+  .card-feature { display:flex; align-items:center; gap:12px; }
+  .card-feature-icon { width:40px; height:40px; border-radius:10px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.2); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+  .card-feature h4 { font-size:14px; font-weight:700; color:#fff; margin-bottom:2px; }
+  .card-feature p { font-size:12px; color:rgba(255,255,255,0.6); line-height:1.4; }
+
+  /* PROFILS GRID */
+  .profils-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+  .profil-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; transition:border-color .2s,transform .2s; }
+  .profil-card:hover { border-color:var(--accent,var(--green)); transform:translateY(-2px); }
+  .profil-header { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .profil-icon { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
+  .profil-title { font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; }
+  .profil-price { font-size:12px; color:var(--dim); margin-top:2px; }
+  .profil-badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; margin-bottom:12px; }
+  .profil-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:16px; }
+  .profil-features { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .profil-features li { font-size:12px; color:var(--dim); display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+  .profil-features li::before { content:'✓'; color:var(--greenL); font-weight:700; flex-shrink:0; margin-top:1px; }
+
+  /* NOUVEAU — Cabinet Optique */
+  .new-badge { background:rgba(99,102,241,0.15); color:#A5B4FC; border:1px solid rgba(99,102,241,0.3); font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; }
+
+  /* TARIFS */
+  .tarifs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; }
+  .tarif-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; text-align:center; }
+  .tarif-card.featured { border-color:var(--green); position:relative; }
+  .tarif-card.featured::before { content:'Populaire'; position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--green); color:#fff; font-size:11px; font-weight:700; padding:3px 12px; border-radius:20px; }
+  .tarif-icon { font-size:28px; margin-bottom:12px; }
+  .tarif-name { font-size:14px; font-weight:700; color:var(--muted); margin-bottom:8px; }
+  .tarif-price { font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:700; color:var(--greenL); line-height:1; }
+  .tarif-period { font-size:12px; color:var(--dim); margin-bottom:12px; }
+  .tarif-desc { font-size:12px; color:var(--dim); line-height:1.5; }
+
+  /* ABONNEMENTS PATIENT */
+  .abonnements { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px; }
+  .abo-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; text-align:center; }
+  .abo-card.best { border-color:var(--green); }
+  .abo-plan { font-size:13px; font-weight:700; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.5px; }
+  .abo-price { font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:var(--greenL); }
+  .abo-period { font-size:11px; color:var(--dim); }
+  .abo-saving { font-size:11px; color:var(--amber); font-weight:700; margin-top:4px; }
+
+  /* FAMILLE */
+  .famille-section { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:40px; margin-bottom:60px; }
+  .famille-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  .famille-members { display:flex; flex-direction:column; gap:12px; }
+  .famille-member { display:flex; align-items:center; gap:12px; background:rgba(10,143,88,0.05); border:1px solid rgba(10,143,88,0.15); border-radius:12px; padding:12px 16px; }
+  .famille-member-avatar { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .famille-member-info { flex:1; }
+  .famille-member-name { font-size:14px; font-weight:700; color:var(--text); }
+  .famille-member-role { font-size:11px; color:var(--dim); }
+  .famille-member-badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:20px; background:rgba(52,211,153,0.15); color:var(--greenL); border:1px solid rgba(52,211,153,0.2); }
+
+  /* MINISTÈRE */
+  .ministere-section { background:linear-gradient(135deg,rgba(29,78,216,0.1) 0%,rgba(10,143,88,0.1) 100%); border:1px solid rgba(59,130,246,0.2); border-radius:20px; padding:40px; margin-bottom:60px; }
+  .ministere-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:24px; }
+  .min-stat { text-align:center; }
+  .min-stat-num { font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; color:var(--blue); }
+  .min-stat-label { font-size:12px; color:var(--dim); margin-top:4px; }
+
+  /* ETAPES */
+  .steps { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; }
+  .step { text-align:center; padding:24px 16px; }
+  .step-num { width:44px; height:44px; border-radius:12px; background:rgba(10,143,88,0.1); border:1px solid rgba(10,143,88,0.25); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:var(--greenL); margin:0 auto 16px; }
+  .step h4 { font-size:14px; font-weight:700; margin-bottom:6px; }
+  .step p { font-size:12px; color:var(--dim); line-height:1.5; }
+
+  /* APK DOWNLOAD */
+  .apk-section { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:36px; text-align:center; margin-bottom:60px; }
+  .apk-section h3 { font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; margin-bottom:10px; }
+  .apk-section p { color:var(--muted); font-size:15px; margin-bottom:24px; }
+  .apk-badges { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .apk-badge { display:flex; align-items:center; gap:10px; background:rgba(10,143,88,0.1); border:1px solid rgba(10,143,88,0.25); border-radius:12px; padding:12px 20px; text-decoration:none; color:var(--text); transition:all .2s; }
+  .apk-badge:hover { background:rgba(10,143,88,0.2); border-color:var(--green); }
+  .apk-badge-icon { font-size:24px; }
+  .apk-badge-text label { font-size:10px; color:var(--dim); display:block; }
+  .apk-badge-text span { font-size:14px; font-weight:700; }
+
+  /* SECURITE */
+  .securite-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+  .sec-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; }
+  .sec-card-icon { font-size:24px; margin-bottom:10px; }
+  .sec-card h4 { font-size:14px; font-weight:700; margin-bottom:6px; }
+  .sec-card p { font-size:12px; color:var(--dim); line-height:1.6; }
+
+  /* PAIEMENTS */
+  .paiements { display:flex; gap:12px; flex-wrap:wrap; }
+  .paiement-badge { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px 16px; font-size:13px; color:var(--muted); }
+
+  /* CTA */
+  .cta-section { background:linear-gradient(135deg,#0A3D2E 0%,#065F3C 100%); border-radius:24px; padding:60px; text-align:center; margin-bottom:60px; }
+  .cta-section h2 { font-family:'Space Grotesk',sans-serif; font-size:32px; font-weight:700; margin-bottom:16px; }
+  .cta-section p { color:rgba(255,255,255,0.7); font-size:16px; margin-bottom:32px; max-width:500px; margin-left:auto; margin-right:auto; }
+  .cta-pills { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:24px; }
+  .cta-pill { font-size:12px; color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:4px 12px; }
+
+  /* FOOTER */
+  footer { border-top:1px solid var(--border); padding:40px 5%; }
+  .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .footer-copy { font-size:13px; color:var(--dim); }
+  .footer-links { display:flex; gap:20px; }
+  .footer-links a { font-size:13px; color:var(--dim); text-decoration:none; }
+  .footer-links a:hover { color:var(--greenL); }
+
+  /* SIDEBAR LATERALE VERTICALE */
+  body { margin-left:160px; }
+  .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; background:var(--card); border-right:2px solid var(--border); z-index:99; overflow-y:auto; padding:20px 0; display:flex; flex-direction:column; align-items:center; gap:30px; }
+  .sidebar-overlay { display:none; }
+  .sidebar-header { display:none; }
+  .sidebar-content { display:flex; flex-direction:column; gap:30px; align-items:center; width:100%; padding:0; }
+  .sidebar-item { display:flex; flex-direction:column; align-items:center; gap:8px; padding:15px 12px; color:rgba(255,255,255,0.8); text-decoration:none; transition:all 0.3s ease; border:none; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+  .sidebar-item:hover { color:#fff; transform:scale(1.05); }
+  .sidebar-item-icon { font-size:24px; }
+  .sidebar-item-text { font-size:11px; text-align:center; line-height:1.3; max-width:120px; word-break:break-word; }
+  .sidebar-toggle { display:none; position:fixed; top:20px; left:20px; z-index:102; background:var(--card); border:2px solid var(--border); color:var(--text); font-size:24px; cursor:pointer; padding:8px 12px; border-radius:8px; transition:all 0.3s ease; }
+  .sidebar-toggle:hover { background:rgba(10,143,88,0.2); border-color:var(--green); }
+  .sidebar-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:98; transition:opacity 0.3s ease; }
+  .sidebar-overlay.active { display:block; opacity:1; }
+
+  /* RESPONSIVE */
+  @media(max-width:768px) {
+    body { margin-left:0; padding-top:70px; }
+    nav { padding:0 10px; }
+    .nav-inner { gap:12px; padding:0 10px; height:56px; }
+    .logo { font-size:16px; gap:6px; }
+    .logo-icon { width:32px; height:32px; font-size:16px; }
+    .logo span { display:none; }
+    .sidebar-toggle { display:block; position:fixed; top:12px; left:12px; z-index:102; padding:6px 10px; font-size:20px; }
+    .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; flex-direction:column; border-right:2px solid var(--border); border-bottom:none; padding:20px 0; gap:30px; transform:translateX(-100%); transition:transform 0.3s ease; z-index:100; }
+    .sidebar.active { transform:translateX(0); }
+    .sidebar-overlay { display:none; }
+    .sidebar-overlay.active { display:block; }
+    .sidebar-content { flex-direction:column; gap:30px; }
+    .sidebar-item { flex-direction:column; gap:8px; padding:15px 12px; font-size:12px; }
+    .sidebar-item-icon { font-size:24px; }
+    .sidebar-item-text { font-size:11px; max-width:120px; }
+    .nav-links { display:none; }
+    .card-section-grid { grid-template-columns:1fr; }
+    .famille-grid { grid-template-columns:1fr; }
+    .abonnements { grid-template-columns:1fr; }
+    .ministere-stats { grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- BOUTON HAMBURGER POUR MOBILE -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- SIDEBAR LATÉRALE -->
+<div class="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>Navigation</h3>
+  </div>
+  <div class="sidebar-content">
+    <a href="#comment" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-text">❓ Comment<br>Marche</span>
+    </a>
+    <a href="/prestataires.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">👥</span>
+      <span class="sidebar-item-text">Prestataires</span>
+    </a>
+    <a href="#carte" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💳</span>
+      <span class="sidebar-item-text">Card</span>
+    </a>
+    <a href="#tarifs" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💰</span>
+      <span class="sidebar-item-text">Tarifs</span>
+    </a>
+    <a href="#securite" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🔒</span>
+      <span class="sidebar-item-text">Sécurité</span>
+    </a>
+    <a href="/demo.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🧪</span>
+      <span class="sidebar-item-text">Tests</span>
+    </a>
+    <a href="/api-docs.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">📚</span>
+      <span class="sidebar-item-text">API</span>
+    </a>
+    <a href="/offres-assurance.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🛡️</span>
+      <span class="sidebar-item-text">Offres Assurance</span>
+    </a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">+</div>
+      <span><span>Medi</span>Connect</span>
+    </a>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    Plateforme de santé numérique — Afrique
+  </div>
+  <h1>La santé <em>connectée</em><br>pour l'Afrique</h1>
+  <p>MediConnect Africa réunit tous les acteurs de la santé en une seule plateforme — patients, cliniques, pharmacies, livreurs, laboratoires, imagerie, cabinet optique et assureurs.</p>
+  <div class="hero-actions">
+    <a href="https://manager.mediconnect4africa.cloud/register" class="btn btn-primary btn-lg">Commencer gratuitement →</a>
+    <a href="#apk" class="btn btn-apk btn-lg">📱 Télécharger l'app Android</a>
+    <a href="#prestataires" class="btn btn-ghost btn-lg">Découvrir la plateforme</a>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">14</div><div class="stat-label">Pays couverts</div></div>
+    <div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Profils connectés</div></div>
+    <div class="stat-card"><div class="stat-num">24/7</div><div class="stat-label">Accès plateforme</div></div>
+    <div class="stat-card"><div class="stat-num">2 500F</div><div class="stat-label">Patient / mois</div></div>
+  </div>
+</div>
+
+<!-- TICKER PAYS -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>🇨🇮 Côte d'Ivoire</span><span>🇸🇳 Sénégal</span><span>🇧🇫 Burkina Faso</span><span>🇲🇱 Mali</span><span>🇹🇬 Togo</span><span>🇧🇯 Bénin</span><span>🇬🇳 Guinée</span><span>🇨🇲 Cameroun</span><span>🇬🇦 Gabon</span><span>🇨🇬 Congo</span><span>🇹🇩 Tchad</span><span>🇳🇪 Niger</span><span>🇬🇼 Guinée-Bissau</span><span>🇨🇫 RCA</span>
+    <span>🇨🇮 Côte d'Ivoire</span><span>🇸🇳 Sénégal</span><span>🇧🇫 Burkina Faso</span><span>🇲🇱 Mali</span><span>🇹🇬 Togo</span><span>🇧🇯 Bénin</span><span>🇬🇳 Guinée</span><span>🇨🇲 Cameroun</span><span>🇬🇦 Gabon</span><span>🇨🇬 Congo</span><span>🇹🇩 Tchad</span><span>🇳🇪 Niger</span><span>🇬🇼 Guinée-Bissau</span><span>🇨🇫 RCA</span>
+  </div>
+</div>
+
+<!-- MEDICONNECT CARD -->
+<section id="carte">
+  <div class="card-section">
+    <div class="card-section-grid">
+      <div>
+        <div class="section-label" style="color:var(--greenL)">Nouveau</div>
+        <h2 class="section-title" style="color:#fff">La MediConnect Card</h2>
+        <p style="color:rgba(255,255,255,0.7);font-size:15px;line-height:1.7;margin-bottom:24px">
+          Votre carte de santé numérique — accédez à tous vos soins, payez sans cash, gérez toute votre famille. Intégre votre profil médical complet : taille, poids, IMC et groupe sanguin visibles directement sur la carte.
+        </p>
+        <div class="card-features">
+          <div class="card-feature"><div class="card-feature-icon">💳</div><div><h4>Carte physique + numérique</h4><p>QR code scannable dans toutes les cliniques du réseau</p></div></div>
+          <div class="card-feature"><div class="card-feature-icon">👨‍👩‍👧</div><div><h4>Compte famille</h4><p>Père, mère et enfants (≤18 ans) — cartes liées en un seul compte</p></div></div>
+          <div class="card-feature"><div class="card-feature-icon">📱</div><div><h4>Mobile money intégré</h4><p>Wave, Orange Money, MTN MoMo, Moov — rechargez en un tap</p></div></div>
+          <div class="card-feature"><div class="card-feature-icon">⚕️</div><div><h4>Profil médical embarqué</h4><p>IMC, groupe sanguin, maladies chroniques — accès immédiat en urgence</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="mc-card-preview">
+          <div class="mc-card-brand"><span>Medi</span>Connect Card</div>
+          <div class="mc-card-num">•••• •••• •••• 4821</div>
+          <div class="mc-card-row">
+            <div class="mc-card-field"><label>Titulaire</label><span>ADJOUA KONÉ</span></div>
+            <div class="mc-card-field"><label>Validité</label><span>06/28</span></div>
+            <div style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);border-radius:20px;padding:3px 10px;align-self:flex-end"><span style="font-size:11px;font-weight:700;color:#34D399">✓ Active</span></div>
+          </div>
+          <div class="mc-card-imc">
+            <div class="mc-imc-item"><label>Taille</label><span>168 cm</span></div>
+            <div class="mc-imc-item"><label>Poids</label><span>62 kg</span></div>
+            <div class="mc-imc-item"><label>IMC</label><span class="imc-val">21.9 — Normal</span></div>
+            <div class="mc-imc-item"><label>Groupe</label><span style="color:#F87171;font-weight:900">O+</span></div>
+          </div>
+        </div>
+        <!-- Famille preview -->
+        <div style="margin-top:16px;background:rgba(255,255,255,0.05);border-radius:14px;padding:16px;border:1px solid rgba(255,255,255,0.1)">
+          <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Famille Koné — 3 cartes</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(10,143,88,0.1);border-radius:10px;padding:8px 12px">
+              <span style="font-size:18px">👨</span>
+              <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#fff">Kouassi Koné</div><div style="font-size:10px;color:rgba(255,255,255,0.5)">Père · Carte #4820</div></div>
+              <span style="font-size:10px;font-weight:700;color:#34D399;background:rgba(52,211,153,0.1);border-radius:20px;padding:2px 8px">Active</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(124,58,237,0.1);border-radius:10px;padding:8px 12px">
+              <span style="font-size:18px">👧</span>
+              <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#fff">Aya Koné</div><div style="font-size:10px;color:rgba(255,255,255,0.5)">Enfant · 12 ans</div></div>
+              <span style="font-size:10px;font-weight:700;color:#FCD34D;background:rgba(252,211,77,0.1);border-radius:20px;padding:2px 8px">En cours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- TARIFS -->
+<section id="tarifs">
+  <div class="section-label">Tarification</div>
+  <h2 class="section-title">Des tarifs accessibles pour tous</h2>
+  <p class="section-sub">Conçus pour être supportables à toute échelle, des zones rurales aux grandes métropoles d'Afrique.</p>
+
+  <!-- Abonnements patient -->
+  <h3 style="font-size:16px;font-weight:700;color:var(--muted);margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px">Patient — choisissez votre plan</h3>
+  <div class="abonnements" style="margin-bottom:40px">
+    <div class="abo-card">
+      <div class="abo-plan">Mensuel</div>
+      <div class="abo-price">2 500 <span style="font-size:14px;color:var(--dim)">FCFA</span></div>
+      <div class="abo-period">par mois</div>
+    </div>
+    <div class="abo-card best">
+      <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:4px">⭐ MEILLEURE OFFRE</div>
+      <div class="abo-plan">Trimestriel</div>
+      <div class="abo-price">6 500 <span style="font-size:14px;color:var(--dim)">FCFA</span></div>
+      <div class="abo-period">pour 3 mois</div>
+      <div class="abo-saving">Économisez 1 000 FCFA</div>
+    </div>
+    <div class="abo-card">
+      <div class="abo-plan">Annuel</div>
+      <div class="abo-price">20 000 <span style="font-size:14px;color:var(--dim)">FCFA</span></div>
+      <div class="abo-period">pour 12 mois</div>
+      <div class="abo-saving">Économisez 10 000 FCFA</div>
+    </div>
+  </div>
+
+  <!-- Autres tarifs -->
+  <div class="tarifs-grid">
+    <div class="tarif-card">
+      <div class="tarif-icon">⭐</div>
+      <div class="tarif-name">Médecin Conseil (MC)</div>
+      <div class="tarif-price">5 000</div>
+      <div class="tarif-period">FCFA / mois (récurrent)</div>
+      <div class="tarif-desc">Médecin indépendant, planning, suivi patients privés, facturation</div>
+    </div>
+    <div class="tarif-card featured">
+      <div class="tarif-icon">🏥</div>
+      <div class="tarif-name">Clinique / Hôpital</div>
+      <div class="tarif-price">10 000</div>
+      <div class="tarif-period">FCFA / mois (récurrent)</div>
+      <div class="tarif-desc">Agenda, DME, facturation, caisse, statistiques, intégrations</div>
+    </div>
+    <div class="tarif-card">
+      <div class="tarif-icon">💊</div>
+      <div class="tarif-name">Pharmacie</div>
+      <div class="tarif-price">10 000</div>
+      <div class="tarif-period">FCFA / mois (récurrent)</div>
+      <div class="tarif-desc">Commandes, stocks, livraisons, facturation</div>
+    </div>
+    <div class="tarif-card">
+      <div class="tarif-icon">🔭</div>
+      <div class="tarif-name">Cabinet Optique</div>
+      <div class="tarif-price">5 000</div>
+      <div class="tarif-period">FCFA / mois (récurrent)</div>
+      <div class="tarif-desc">Montures, verres, ventes, ordonnances, assurances optiques</div>
+    </div>
+    <div class="tarif-card">
+      <div class="tarif-icon">🧪</div>
+      <div class="tarif-name">Laboratoire</div>
+      <div class="tarif-price">5 000</div>
+      <div class="tarif-period">FCFA / mois (récurrent)</div>
+      <div class="tarif-desc">Analyses, résultats numériques, dossiers patients</div>
+    </div>
+    <div class="tarif-card">
+      <div class="tarif-icon">🩻</div>
+      <div class="tarif-name">Imagerie Médicale</div>
+      <div class="tarif-price">5 000</div>
+      <div class="tarif-period">FCFA / mois (récurrent)</div>
+      <div class="tarif-desc">Demandes imagerie, stockage sécurisé, intégration dossiers</div>
+    </div>
+    <div class="tarif-card">
+      <div class="tarif-icon">🛡️</div>
+      <div class="tarif-name">Compagnie d'Assurance</div>
+      <div class="tarif-price">50 000</div>
+      <div class="tarif-period">FCFA / mois (récurrent)</div>
+      <div class="tarif-desc">Validation dossiers, sinistres, remboursements, statistiques</div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉLÉCHARGER L'APP -->
+<section id="apk">
+  <div class="apk-section">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+      <h3 style="margin:0;">📱 Téléchargez l'application MediConnect</h3>
+      <div style="display:flex; align-items:center; gap:6px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:20px; padding:6px 12px; font-size:13px;">
+        <span style="color:var(--greenL);">⭐ 4.8/5</span>
+        <span style="color:var(--dim);">(2.3K avis)</span>
+      </div>
+    </div>
+    <p>Disponible sur Android — accédez à tous vos services de santé depuis votre téléphone, même sans connexion permanente.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; margin-top:32px;">
+      <div>
+        <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663089638801/5raZ8E5ywRMGmYbkrjGqrJ/mediconnect-apk-qrcode-Y8XSpbTZEZU2vQPGeBqWvi.webp" alt="QR Code MediConnect APK" style="width:100%; max-width:280px; border-radius:16px; border:2px solid rgba(52,211,153,0.2);">
+        <p style="text-align:center; font-size:12px; color:var(--dim); margin-top:12px;">Scannez pour télécharger</p>
+      </div>
+      <div>
+        <div class="apk-badges" style="flex-direction:column; gap:12px;">
+          <a href="https://expo.dev/artifacts/eas/2DWf1Aw7FRaivyuLt67WCW.apk" class="apk-badge" target="_blank" style="justify-content:flex-start;">
+            <div class="apk-badge-icon">🤖</div>
+            <div class="apk-badge-text"><label>Télécharger pour</label><span>Android (APK)</span></div>
+          </a>
+          <a href="https://manager.mediconnect4africa.cloud" class="apk-badge" style="justify-content:flex-start;">
+            <div class="apk-badge-icon">🌐</div>
+            <div class="apk-badge-text"><label>Accéder à la</label><span>Plateforme Web</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANGELOG -->
+<section id="changelog" style="background:rgba(10,143,88,0.05); border-radius:20px; padding:40px;">
+  <div class="section-label">Historique</div>
+  <h2 class="section-title">Changelog — Mises à jour de l'application</h2>
+  <p class="section-sub">Suivez les nouvelles fonctionnalités et améliorations de chaque version de MediConnect.</p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:32px;">
+    <!-- Version 2.5.0 -->
+    <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:16px; font-weight:700; color:var(--greenL);">v2.5.0</h4>
+        <span style="font-size:11px; color:var(--dim);">Janvier 2026</span>
+      </div>
+      <ul style="list-style:none; font-size:13px; color:var(--muted); line-height:1.8;">
+        <li>✨ Nouveau dashboard Ministère de la Santé</li>
+        <li>✨ Gestion des spécialités cliniques</li>
+        <li>🐛 Correction des bugs de synchronisation</li>
+        <li>🔧 Amélioration de la performance</li>
+      </ul>
+    </div>
+    <!-- Version 2.4.2 -->
+    <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:16px; font-weight:700; color:var(--greenL);">v2.4.2</h4>
+        <span style="font-size:11px; color:var(--dim);">Décembre 2025</span>
+      </div>
+      <ul style="list-style:none; font-size:13px; color:var(--muted); line-height:1.8;">
+        <li>✨ Support de MediConnect Card</li>
+        <li>✨ Compte Famille avancé</li>
+        <li>🐛 Correction des paiements mobiles</li>
+        <li>🔧 Interface responsive améliorée</li>
+      </ul>
+    </div>
+    <!-- Version 2.4.0 -->
+    <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:16px; font-weight:700; color:var(--greenL);">v2.4.0</h4>
+        <span style="font-size:11px; color:var(--dim);">Novembre 2025</span>
+      </div>
+      <ul style="list-style:none; font-size:13px; color:var(--muted); line-height:1.8;">
+        <li>✨ Système de notation des réponses chatbot</li>
+        <li>✨ Historique des consultations</li>
+        <li>🐛 Correction du système de paiement</li>
+        <li>🔧 Optimisation des images</li>
+      </ul>
+    </div>
+    <!-- Version 2.3.0 -->
+    <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:16px; font-weight:700; color:var(--greenL);">v2.3.0</h4>
+        <span style="font-size:11px; color:var(--dim);">Octobre 2025</span>
+      </div>
+      <ul style="list-style:none; font-size:13px; color:var(--muted); line-height:1.8;">
+        <li>✨ Chatbot IA avancé</li>
+        <li>✨ Système multilingue FR/EN</li>
+        <li>🐛 Amélioration de la sécurité</li>
+        <li>🔧 Accélération du chargement</li>
+      </ul>
+    </div>
+    <!-- Version 2.2.0 -->
+    <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:16px; font-weight:700; color:var(--greenL);">v2.2.0</h4>
+        <span style="font-size:11px; color:var(--dim);">Septembre 2025</span>
+      </div>
+      <ul style="list-style:none; font-size:13px; color:var(--muted); line-height:1.8;">
+        <li>✨ Prise de RDV en ligne</li>
+        <li>✨ Commande de médicaments</li>
+        <li>🐛 Correction de bugs mineurs</li>
+        <li>🔧 Optimisation de la base de données</li>
+      </ul>
+    </div>
+    <!-- Version 2.1.0 -->
+    <div style="background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:16px; font-weight:700; color:var(--greenL);">v2.1.0</h4>
+        <span style="font-size:11px; color:var(--dim);">Août 2025</span>
+      </div>
+      <ul style="list-style:none; font-size:13px; color:var(--muted); line-height:1.8;">
+        <li>✨ Dashboard patient complet</li>
+        <li>✨ Gestion des dossiers médicaux</li>
+        <li>🐛 Amélioration de la sécurité</li>
+        <li>🔧 Interface utilisateur raffinée</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- COMMENT ÇA MARCHE -->
+<section id="comment">
+  <div class="section-label">Démarrage</div>
+  <h2 class="section-title">Prêt en 5 étapes simples</h2>
+  <p class="section-sub">De l'inscription à la première utilisation, moins de 10 minutes suffisent.</p>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h4>Inscription</h4><p>Créez votre compte selon votre profil — patient, clinique, pharmacie, optique ou autre</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Profil médical</h4><p>Complétez votre dossier médical : taille, poids, groupe sanguin, maladies chroniques</p></div>
+    <div class="step"><div class="step-num">3</div><h4>MediConnect Card</h4><p>Commandez votre carte et liez les membres de votre famille</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Utilisation</h4><p>RDV, prescriptions, livraisons, remboursements — tout en temps réel</p></div>
+    <div class="step"><div class="step-num">5</div><h4>Croissance</h4><p>Suivez vos statistiques et développez votre activité santé</p></div>
+  </div>
+
+  <div style="margin-top:40px">
+    <h3 style="font-size:16px;font-weight:700;color:var(--muted);margin-bottom:16px">Modes de paiement acceptés</h3>
+    <div class="paiements">
+      <div class="paiement-badge">🌊 Wave</div>
+      <div class="paiement-badge">🟠 Orange Money</div>
+      <div class="paiement-badge">🟡 MTN MoMo</div>
+      <div class="paiement-badge">🔵 Moov Money</div>
+      <div class="paiement-badge">💵 Espèces</div>
+    </div>
+  </div>
+</section>
+
+<!-- SÉCURITÉ -->
+<section id="securite">
+  <div class="section-label">Sécurité & Conformité</div>
+  <h2 class="section-title">Vos données médicales protégées</h2>
+  <p class="section-sub">Infrastructure de sécurité de niveau hospitalier, conforme aux réglementations africaines et internationales.</p>
+
+  <div class="securite-grid">
+    <div class="sec-card"><div class="sec-card-icon">🔒</div><h4>Chiffrement TLS 1.3</h4><p>Toutes les données transitent via un chiffrement de bout en bout. Vos informations médicales ne sont jamais exposées.</p></div>
+    <div class="sec-card"><div class="sec-card-icon">🛡️</div><h4>Conformité RGPD</h4><p>Conforme au RGPD européen et aux législations nationales sur la protection des données de santé en Afrique.</p></div>
+    <div class="sec-card"><div class="sec-card-icon">👁️</div><h4>Contrôle d'accès par rôle</h4><p>Chaque acteur accède uniquement aux données qui le concernent. Aucune fuite de confidentialité possible.</p></div>
+    <div class="sec-card"><div class="sec-card-icon">💾</div><h4>Sauvegardes automatiques</h4><p>Sauvegarde toutes les 24h avec rétention de 90 jours. Zéro perte de données médicales.</p></div>
+    <div class="sec-card"><div class="sec-card-icon">📋</div><h4>Audit trail complet</h4><p>Chaque action sensible est tracée et archivée. Valable comme preuve juridique en cas de litige.</p></div>
+    <div class="sec-card"><div class="sec-card-icon">⚡</div><h4>Disponibilité 99.9%</h4><p>Infrastructure Cloud redondante. La plateforme est disponible 24h/24, 7j/7, 365j/an.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="cta-section">
+    <h2>Commencez dès aujourd'hui</h2>
+    <p>Rejoignez des milliers de patients, cliniques et professionnels de santé qui font confiance à MediConnect Africa.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="https://manager.mediconnect4africa.cloud/register" class="btn btn-primary btn-lg">Créer un compte gratuit →</a>
+      <a href="https://manager.mediconnect4africa.cloud" class="btn btn-ghost btn-lg">Accéder à la plateforme</a>
+    </div>
+    <div class="cta-pills">
+      <span class="cta-pill">Données chiffrées</span>
+      <span class="cta-pill">Sans engagement</span>
+      <span class="cta-pill">Support 7j/7</span>
+      <span class="cta-pill">14 pays couverts</span>
+      <span class="cta-pill">Mobile & tablette</span>
+      <span class="cta-pill">APK Android disponible</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- BLOG/ACTUALITES -->
+<section style="padding:80px 5%; background:var(--bg);">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:60px;">
+      <span style="color:var(--greenL); font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase;">BLOG</span>
+      <h2 style="font-size:42px; font-weight:800; margin:12px 0; color:var(--text);">Actualites & Ressources</h2>
+      <p style="color:var(--muted); font-size:16px; margin-top:12px;">Decouvrez les dernieres actualites, cas d'usage et mises a jour de MediConnect Africa</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px;">
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)';">
+        <div style="height:200px; background:linear-gradient(135deg, rgba(10,143,88,0.2), rgba(52,211,153,0.1)); display:flex; align-items:center; justify-content:center; font-size:48px;">📱</div>
+        <div style="padding:24px;">
+          <span style="color:var(--greenL); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Sante Numerique</span>
+          <h3 style="font-size:18px; font-weight:700; margin:12px 0; color:var(--text);">L'Impact de la Sante Numerique en Afrique</h3>
+          <p style="color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:16px;">Decouvrez comment la sante numerique transforme l'acces aux soins en Afrique de l'Ouest et centrale, ameliorant la qualite de vie des populations.</p>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px;">
+            <a href="#" style="color:var(--greenL); font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">Lire l'article <span>→</span></a>
+            <div style="display:flex; gap:8px; margin-left:auto;">
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mediconnect4africa.com/blog/sante-numerique" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(10,143,88,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--greenL); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(10,143,88,0.2)'; this.style.borderColor='var(--green)';" onmouseout="this.style.background='rgba(10,143,88,0.1)'; this.style.borderColor='var(--border)';">in</a>
+              <a href="https://twitter.com/intent/tweet?url=https://mediconnect4africa.com/blog/sante-numerique&text=L'Impact de la Sante Numerique en Afrique" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(59,130,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.2)'; this.style.borderColor='var(--blue)';" onmouseout="this.style.background='rgba(59,130,246,0.1)'; this.style.borderColor='var(--border)';">𝕏</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://mediconnect4africa.com/blog/sante-numerique" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(59,130,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.2)'; this.style.borderColor='var(--blue)';" onmouseout="this.style.background='rgba(59,130,246,0.1)'; this.style.borderColor='var(--border)';">f</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)';">
+        <div style="height:200px; background:linear-gradient(135deg, rgba(59,130,246,0.2), rgba(99,102,241,0.1)); display:flex; align-items:center; justify-content:center; font-size:48px;">🏥</div>
+        <div style="padding:24px;">
+          <span style="color:var(--blue); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Cas d'Usage</span>
+          <h3 style="font-size:18px; font-weight:700; margin:12px 0; color:var(--text);">Clinique Sante Plus: +40% d'Efficacite</h3>
+          <p style="color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:16px;">Comment une clinique de Dakar a augmente son efficacite de 40% en utilisant MediConnect Africa pour gerer ses patients et specialites.</p>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px;">
+            <a href="#" style="color:var(--blue); font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">Lire l'etude de cas <span>→</span></a>
+            <div style="display:flex; gap:8px; margin-left:auto;">
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mediconnect4africa.com/blog/clinique-sante-plus" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(59,130,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.2)'; this.style.borderColor='var(--blue)';" onmouseout="this.style.background='rgba(59,130,246,0.1)'; this.style.borderColor='var(--border)';">in</a>
+              <a href="https://twitter.com/intent/tweet?url=https://mediconnect4africa.com/blog/clinique-sante-plus&text=Clinique Sante Plus: +40% d'Efficacite" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(59,130,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.2)'; this.style.borderColor='var(--blue)';" onmouseout="this.style.background='rgba(59,130,246,0.1)'; this.style.borderColor='var(--border)';">𝕏</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://mediconnect4africa.com/blog/clinique-sante-plus" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(59,130,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--blue); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.2)'; this.style.borderColor='var(--blue)';" onmouseout="this.style.background='rgba(59,130,246,0.1)'; this.style.borderColor='var(--border)';">f</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)';">
+        <div style="height:200px; background:linear-gradient(135deg, rgba(139,92,246,0.2), rgba(168,85,247,0.1)); display:flex; align-items:center; justify-content:center; font-size:48px;">🚀</div>
+        <div style="padding:24px;">
+          <span style="color:var(--purple); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Mise a Jour</span>
+          <h3 style="font-size:18px; font-weight:700; margin:12px 0; color:var(--text);">MediConnect v2.5.0: Nouvelles Fonctionnalites</h3>
+          <p style="color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:16px;">Decouvrez les nouvelles fonctionnalites de la version 2.5.0: Dashboard Ministere, MediConnect Card, et Compte Famille.</p>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px;">
+            <a href="#" style="color:var(--purple); font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">Voir les details <span>→</span></a>
+            <div style="display:flex; gap:8px; margin-left:auto;">
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mediconnect4africa.com/blog/mediconnect-v2-5" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(139,92,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--purple); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(139,92,246,0.2)'; this.style.borderColor='var(--purple)';" onmouseout="this.style.background='rgba(139,92,246,0.1)'; this.style.borderColor='var(--border)';">in</a>
+              <a href="https://twitter.com/intent/tweet?url=https://mediconnect4africa.com/blog/mediconnect-v2-5&text=MediConnect v2.5.0: Nouvelles Fonctionnalites" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(139,92,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--purple); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(139,92,246,0.2)'; this.style.borderColor='var(--purple)';" onmouseout="this.style.background='rgba(139,92,246,0.1)'; this.style.borderColor='var(--border)';">𝕏</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://mediconnect4africa.com/blog/mediconnect-v2-5" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(139,92,246,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--purple); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(139,92,246,0.2)'; this.style.borderColor='var(--purple)';" onmouseout="this.style.background='rgba(139,92,246,0.1)'; this.style.borderColor='var(--border)';">f</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)';">
+        <div style="height:200px; background:linear-gradient(135deg, rgba(20,184,166,0.2), rgba(45,212,191,0.1)); display:flex; align-items:center; justify-content:center; font-size:48px;">💊</div>
+        <div style="padding:24px;">
+          <span style="color:var(--teal); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Pharmacie</span>
+          <h3 style="font-size:18px; font-weight:700; margin:12px 0; color:var(--text);">Pharmacie Centrale: Gestion Optimisee</h3>
+          <p style="color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:16px;">Comment une pharmacie a Abidjan a reduit ses delais de traitement de 50% grace a MediConnect Africa.</p>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px;">
+            <a href="#" style="color:var(--teal); font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">Lire le temoignage <span>→</span></a>
+            <div style="display:flex; gap:8px; margin-left:auto;">
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mediconnect4africa.com/blog/pharmacie-centrale" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(20,184,166,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--teal); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(20,184,166,0.2)'; this.style.borderColor='var(--teal)';" onmouseout="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='var(--border)';">in</a>
+              <a href="https://twitter.com/intent/tweet?url=https://mediconnect4africa.com/blog/pharmacie-centrale&text=Pharmacie Centrale: Gestion Optimisee" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(20,184,166,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--teal); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(20,184,166,0.2)'; this.style.borderColor='var(--teal)';" onmouseout="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='var(--border)';">𝕏</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://mediconnect4africa.com/blog/pharmacie-centrale" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(20,184,166,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--teal); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(20,184,166,0.2)'; this.style.borderColor='var(--teal)';" onmouseout="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='var(--border)';">f</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)';">
+        <div style="height:200px; background:linear-gradient(135deg, rgba(239,68,68,0.2), rgba(248,113,113,0.1)); display:flex; align-items:center; justify-content:center; font-size:48px;">📊</div>
+        <div style="padding:24px;">
+          <span style="color:var(--red); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Statistiques</span>
+          <h3 style="font-size:18px; font-weight:700; margin:12px 0; color:var(--text);">Dashboard Ministere: Donnees en Temps Reel</h3>
+          <p style="color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:16px;">Le Ministere de la Sante utilise MediConnect pour surveiller les pathologies et optimiser les budgets de sante publique.</p>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px;">
+            <a href="#" style="color:var(--red); font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">En savoir plus <span>→</span></a>
+            <div style="display:flex; gap:8px; margin-left:auto;">
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mediconnect4africa.com/blog/dashboard-ministere" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(239,68,68,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--red); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'; this.style.borderColor='var(--red)';" onmouseout="this.style.background='rgba(239,68,68,0.1)'; this.style.borderColor='var(--border)';">in</a>
+              <a href="https://twitter.com/intent/tweet?url=https://mediconnect4africa.com/blog/dashboard-ministere&text=Dashboard Ministere: Donnees en Temps Reel" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(239,68,68,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--red); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'; this.style.borderColor='var(--red)';" onmouseout="this.style.background='rgba(239,68,68,0.1)'; this.style.borderColor='var(--border)';">𝕏</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://mediconnect4africa.com/blog/dashboard-ministere" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(239,68,68,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--red); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'; this.style.borderColor='var(--red)';" onmouseout="this.style.background='rgba(239,68,68,0.1)'; this.style.borderColor='var(--border)';">f</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; transition:all 0.3s;" onmouseover="this.style.borderColor='var(--green)'; this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)';">
+        <div style="height:200px; background:linear-gradient(135deg, rgba(99,102,241,0.2), rgba(129,140,248,0.1)); display:flex; align-items:center; justify-content:center; font-size:48px;">🔐</div>
+        <div style="padding:24px;">
+          <span style="color:var(--indigo); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Securite</span>
+          <h3 style="font-size:18px; font-weight:700; margin:12px 0; color:var(--text);">Conformite RGPD & Securite des Donnees</h3>
+          <p style="color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:16px;">MediConnect Africa respecte les standards internationaux de securite des donnees medicales et la confidentialite des patients.</p>
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px;">
+            <a href="#" style="color:var(--indigo); font-size:13px; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:8px;">Lire la politique <span>→</span></a>
+            <div style="display:flex; gap:8px; margin-left:auto;">
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mediconnect4africa.com/blog/conformite-rgpd" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(99,102,241,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--indigo); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(99,102,241,0.2)'; this.style.borderColor='var(--indigo)';" onmouseout="this.style.background='rgba(99,102,241,0.1)'; this.style.borderColor='var(--border)';">in</a>
+              <a href="https://twitter.com/intent/tweet?url=https://mediconnect4africa.com/blog/conformite-rgpd&text=Conformite RGPD & Securite des Donnees" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(99,102,241,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--indigo); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(99,102,241,0.2)'; this.style.borderColor='var(--indigo)';" onmouseout="this.style.background='rgba(99,102,241,0.1)'; this.style.borderColor='var(--border)';">𝕏</a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=https://mediconnect4africa.com/blog/conformite-rgpd" target="_blank" style="width:32px; height:32px; border-radius:8px; background:rgba(99,102,241,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--indigo); text-decoration:none; transition:all 0.2s;" onmouseover="this.style.background='rgba(99,102,241,0.2)'; this.style.borderColor='var(--indigo)';" onmouseout="this.style.background='rgba(99,102,241,0.1)'; this.style.borderColor='var(--border)';">f</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo" style="margin-bottom:8px">
+        <div class="logo-icon">+</div>
+        <span><span>Medi</span>Connect Africa</span>
+      </div>
+      <div class="footer-copy">© 2026 MediConnect Africa · UEMOA + CEMAC · Tous droits réservés<br>Powered by <strong>Intelligence Database</strong></div>
+      <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" onclick="openDemoModal()" style="padding:8px 16px; font-size:13px;">📞 Demander une démo</button>
+        <a href="https://manager.mediconnect4africa.cloud/bd" class="btn btn-ghost" style="padding:8px 16px; font-size:13px;">Espace BD</a>
+        <a href="https://manager.mediconnect4africa.cloud/login" class="btn btn-ghost" style="padding:8px 16px; font-size:13px;">Se connecter</a>
+        <a href="https://manager.mediconnect4africa.cloud/register" class="btn btn-primary" style="padding:8px 16px; font-size:13px;">Créer un compte →</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://manager.mediconnect4africa.cloud">Plateforme</a>
+      <a href="https://manager.mediconnect4africa.cloud/register">S'inscrire</a>
+      <a href="https://mediconnect4africa.com/register-bd">Devenir BD</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Conditions</a>
+      <a href="#">Nous Contacter</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/i18n.js"></script>
+<script>
+  // Initialize language on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('mediconnect-lang') || 'fr';
+    setLanguage(savedLang);
+  });
+
+  // FAQ Functions
+  function showFaqProfile(profile) {
+    document.querySelectorAll('.faq-content').forEach(content => content.style.display = 'none');
+    document.getElementById('faq-' + profile).style.display = 'block';
+    document.querySelectorAll('.faq-tab').forEach(tab => {
+      tab.style.color = 'var(--muted)';
+      tab.style.borderBottom = '3px solid transparent';
+    });
+    event.target.style.color = 'var(--text)';
+    event.target.style.borderBottom = '3px solid var(--greenL)';
+  }
+  
+  function toggleFaq(button) {
+    const answer = button.nextElementSibling;
+    const icon = button.querySelector('span:last-child');
+    if (answer.style.display === 'none') {
+      answer.style.display = 'block';
+      icon.style.transform = 'rotate(45deg)';
+    } else {
+      answer.style.display = 'none';
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  // Tab switching for beneficiaries
+  function showBen(tab) {
+    document.querySelectorAll('.ben-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.ben-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + tab)?.classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Counter animation
+  function animateCounters() {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      let current = 0;
+      const increment = Math.ceil(target / 50);
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          el.textContent = target;
+          clearInterval(interval);
+        } else {
+          el.textContent = current;
+        }
+      }, 30);
+    });
+  }
+
+  // Trigger animation when stats are visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.animated) {
+        entry.target.dataset.animated = 'true';
+        animateCounters();
+      }
+    });
+  });
+
+  document.querySelectorAll('.stats-row').forEach(el => observer.observe(el));
+</script>
+
+<!-- CHATBOT WIDGET -->
+<div id="chatbot-widget" style="position:fixed; bottom:20px; right:20px; width:380px; height:500px; background:var(--bg); border:1px solid var(--border); border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.3); display:flex; flex-direction:column; z-index:9999; font-family:'Plus Jakarta Sans',sans-serif;">
+  <!-- Header -->
+  <div style="padding:16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg,#0A8F58 0%,#065F3C 100%); border-radius:16px 16px 0 0;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span style="font-size:20px;">💬</span>
+      <span style="color:#fff; font-weight:700; font-size:14px;">MediConnect AI</span>
+    </div>
+    <button onclick="toggleChatbot()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:20px; padding:0;">−</button>
+  </div>
+  
+  <!-- Messages Area -->
+  <div id="chatbot-messages" style="flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; background:var(--card);">
+    <div style="background:rgba(10,143,88,0.1); border-radius:12px; padding:12px; color:var(--text); font-size:13px; line-height:1.5;">
+      <strong style="color:var(--greenL);">👋 Bienvenue!</strong><br>
+      Je suis l'assistant IA de MediConnect Africa. Je peux vous aider avec:
+      <ul style="margin-top:8px; margin-left:16px;">
+        <li>📋 Informations sur nos services</li>
+        <li>💰 Tarification et plans</li>
+        <li>🏥 Profils utilisateurs</li>
+        <li>🔐 Accès tests et démo</li>
+        <li>❓ FAQ et questions fréquentes</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Quick Actions -->
+  <div style="padding:12px; border-top:1px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:8px; background:var(--card);">
+    <button onclick="sendQuickQuestion('Quels sont vos tarifs?')" style="padding:8px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:8px; color:var(--greenL); cursor:pointer; font-size:11px; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(52,211,153,0.2)'" onmouseout="this.style.background='rgba(52,211,153,0.1)'">💰 Tarifs</button>
+    <button onclick="sendQuickQuestion('Comment s\'inscrire?')" style="padding:8px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:8px; color:var(--greenL); cursor:pointer; font-size:11px; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(52,211,153,0.2)'" onmouseout="this.style.background='rgba(52,211,153,0.1)'">📝 Inscription</button>
+    <button onclick="sendQuickQuestion('Quels sont les profils?')" style="padding:8px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:8px; color:var(--greenL); cursor:pointer; font-size:11px; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(52,211,153,0.2)'" onmouseout="this.style.background='rgba(52,211,153,0.1)'">👥 Profils</button>
+    <button onclick="sendQuickQuestion('Comment tester?')" style="padding:8px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:8px; color:var(--greenL); cursor:pointer; font-size:11px; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='rgba(52,211,153,0.2)'" onmouseout="this.style.background='rgba(52,211,153,0.1)'">🧪 Tests</button>
+  </div>
+  
+  <!-- Error Message Area -->
+  <div id="chatbot-error" style="padding:12px; background:rgba(239,68,68,0.1); border-top:1px solid rgba(239,68,68,0.3); color:#ef4444; font-size:12px; display:none; border-radius:0 0 0 0;">
+    <strong>⚠️ Erreur:</strong> <span id="error-text"></span>
+  </div>
+  
+  <!-- Input Area -->
+  <div style="padding:12px; border-top:1px solid var(--border); display:flex; gap:8px; background:var(--card); border-radius:0 0 16px 16px;">
+    <input id="chatbot-input" type="text" placeholder="Votre question..." style="flex:1; padding:10px 12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:12px; outline:none;" onkeypress="if(event.key==='Enter') sendChatbotMessage()" />
+    <button id="chatbot-send-btn" onclick="sendChatbotMessage()" style="padding:10px 14px; background:var(--green); border:none; border-radius:8px; color:#fff; cursor:pointer; font-weight:600; transition:all 0.2s;" onmouseover="this.style.background='var(--greenD)'" onmouseout="this.style.background='var(--green)'">📤</button>
+  </div>
+</div>
+
+<!-- Chatbot Toggle Button (when minimized) -->
+<button id="chatbot-toggle" onclick="toggleChatbot()" style="position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:var(--green); border:none; color:#fff; font-size:24px; cursor:pointer; box-shadow:0 4px 12px rgba(10,143,88,0.3); display:none; z-index:9998; transition:all 0.2s;" onmouseover="this.style.background='var(--greenD)'" onmouseout="this.style.background='var(--green)'">💬</button>
+
+<script>
+const CHATBOT_KNOWLEDGE = {
+  tarification: {
+    patient: '2 500 FCFA/mois',
+    clinique: '10 000 FCFA/mois',
+    pharmacie: '10 000 FCFA/mois',
+    laboratoire: '5 000 FCFA/mois',
+    imagerie: '5 000 FCFA/mois',
+    medecin: '5 000 FCFA/mois',
+    optique: '10 000 FCFA/mois',
+    assureur: '50 000 FCFA/mois',
+    livreur: '2 500 FCFA/mois'
+  },
+  fonctionnalites: [
+    'Gestion des spécialités cliniques',
+    'Dashboard Ministère de la Santé',
+    'Enregistrement des consultations médicales',
+    'MediConnect Card (carte physique/numérique)',
+    'Compte Famille pour gérer les proches',
+    'Chatbot IA avancé avec notation des réponses',
+    'QR code de téléchargement APK',
+    'Section Changelog avec historique des versions',
+    'Page Accès tests avec 12 comptes de démonstration',
+    'Système multilingue FR/EN'
+  ],
+  profils: [
+    'Patient - Prise de RDV, commande de médicaments, dossier médical',
+    'Clinique - Gestion des rendez-vous, spécialités, facturation',
+    'Pharmacie - Monitoring des commandes, validation devis, débitage',
+    'Laboratoire - Gestion des analyses, prise de RDV',
+    'Imagerie - Gestion des examens, partage d\'images sécurisé',
+    'Médecin Indépendant - Rendez-vous, téléconsultation, ordonnances',
+    'Cabinet Optique - Consultations, prescriptions, facturation',
+    'Compagnie d\'Assurance - Validation dossiers, remboursements',
+    'Livreur - Consultation commandes, livraison, recettes',
+    'Ministère de la Santé - Statistiques épidémiologiques, rapports'
+  ],
+  comptes_demo: [
+    { profil: 'Admin', email: 'admin@demo.ci', mdp: 'demo1234' },
+    { profil: 'Assureur', email: 'assureur@demo.ci', mdp: 'demo1234' },
+    { profil: 'Clinique', email: 'clinique@demo.ci', mdp: 'demo1234' },
+    { profil: 'Imagerie', email: 'imagerie@demo.ci', mdp: 'demo1234' },
+    { profil: 'Laboratoire', email: 'laboratoire@demo.ci', mdp: 'demo1234' },
+    { profil: 'Livreur', email: 'livreur@demo.ci', mdp: 'demo1234' },
+    { profil: 'Médecin Résident', email: 'medecin@demo.ci', mdp: 'demo1234' },
+    { profil: 'Médecin Conseil', email: 'medecin.indep@demo.ci', mdp: 'demo1234' },
+    { profil: 'Ministère Santé', email: 'ministere@sante.ci', mdp: 'MinistereCI2024' },
+    { profil: 'Cabinet Optique', email: 'optique@demo.ci', mdp: 'demo1234' },
+    { profil: 'Patient', email: 'patient@demo.ci', mdp: 'demo1234' },
+    { profil: 'Pharmacie', email: 'pharmacie@demo.ci', mdp: 'demo1234' }
+  ]
+};
+
+let chatbotMessages = [];
+let chatbotMinimized = false;
+let isWaitingForResponse = false;
+
+// Ajouter les styles CSS pour l'animation de frappe
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes typing {
+    0%, 60%, 100% { opacity: 0.3; }
+    30% { opacity: 1; }
+  }
+  .typing-indicator {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .typing-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--greenL);
+    animation: typing 1.4s infinite;
+  }
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+`;
+document.head.appendChild(style);
+
+function toggleChatbot() {
+  const widget = document.getElementById('chatbot-widget');
+  const toggle = document.getElementById('chatbot-toggle');
+  chatbotMinimized = !chatbotMinimized;
+  widget.style.display = chatbotMinimized ? 'none' : 'flex';
+  toggle.style.display = chatbotMinimized ? 'flex' : 'none';
+}
+
+function addChatbotMessage(role, content) {
+  const messagesDiv = document.getElementById('chatbot-messages');
+  const msgEl = document.createElement('div');
+  msgEl.style.cssText = `
+    padding:12px; 
+    border-radius:12px; 
+    font-size:13px; 
+    line-height:1.5;
+    ${role === 'user' ? 'background:var(--green); color:#fff; align-self:flex-end; max-width:80%;' : 'background:rgba(10,143,88,0.1); color:var(--text); align-self:flex-start; max-width:90%;'}
+  `;
+  msgEl.textContent = content;
+  messagesDiv.appendChild(msgEl);
+  
+  // Ajouter les boutons de notation pour les réponses du chatbot
+  if (role === 'assistant') {
+    const ratingDiv = document.createElement('div');
+    ratingDiv.style.cssText = `
+      display:flex;
+      gap:8px;
+      margin-top:8px;
+      align-self:flex-start;
+    `;
+    
+    const thumbsUp = document.createElement('button');
+    thumbsUp.innerHTML = '👍';
+    thumbsUp.style.cssText = `
+      background:transparent;
+      border:1px solid var(--green);
+      border-radius:6px;
+      padding:6px 10px;
+      cursor:pointer;
+      font-size:16px;
+      transition:all 0.2s ease;
+    `;
+    thumbsUp.onmouseover = () => thumbsUp.style.background = 'rgba(10,143,88,0.1)';
+    thumbsUp.onmouseout = () => thumbsUp.style.background = 'transparent';
+    thumbsUp.onclick = () => handleRating('positive', content);
+    
+    const thumbsDown = document.createElement('button');
+    thumbsDown.innerHTML = '👎';
+    thumbsDown.style.cssText = `
+      background:transparent;
+      border:1px solid #e74c3c;
+      border-radius:6px;
+      padding:6px 10px;
+      cursor:pointer;
+      font-size:16px;
+      transition:all 0.2s ease;
+    `;
+    thumbsDown.onmouseover = () => thumbsDown.style.background = 'rgba(231,76,60,0.1)';
+    thumbsDown.onmouseout = () => thumbsDown.style.background = 'transparent';
+    thumbsDown.onclick = () => handleRating('negative', content);
+    
+    ratingDiv.appendChild(thumbsUp);
+    ratingDiv.appendChild(thumbsDown);
+    messagesDiv.appendChild(ratingDiv);
+  }
+  
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function handleRating(rating, content) {
+  // Envoyer la notation au serveur
+  const payload = {
+    json: {
+      rating: rating,
+      responseContent: content,
+      timestamp: new Date().toISOString()
+    }
+  };
+  
+  fetch('/api/trpc/chatbot.rateResponse', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => console.error('Erreur notation:', err));
+  
+  // Afficher un message de confirmation
+  const messagesDiv = document.getElementById('chatbot-messages');
+  const confirmEl = document.createElement('div');
+  confirmEl.style.cssText = `
+    padding:8px 12px;
+    border-radius:8px;
+    background:rgba(10,143,88,0.15);
+    color:var(--text);
+    font-size:12px;
+    align-self:flex-start;
+    margin-top:4px;
+  `;
+  confirmEl.textContent = rating === 'positive' ? '✓ Merci pour votre avis positif!' : '✓ Merci pour votre avis!';
+  messagesDiv.appendChild(confirmEl);
+  setTimeout(() => confirmEl.remove(), 3000);
+}
+
+function addTypingIndicator() {
+  const messagesDiv = document.getElementById('chatbot-messages');
+  const typingEl = document.createElement('div');
+  typingEl.id = 'typing-indicator';
+  typingEl.style.cssText = `
+    padding:12px; 
+    border-radius:12px; 
+    background:rgba(10,143,88,0.1); 
+    color:var(--text); 
+    align-self:flex-start; 
+    max-width:90%;
+    display:flex;
+    gap:4px;
+  `;
+  typingEl.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  messagesDiv.appendChild(typingEl);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const typingEl = document.getElementById('typing-indicator');
+  if (typingEl) typingEl.remove();
+}
+
+function showError(message) {
+  const errorDiv = document.getElementById('chatbot-error');
+  const errorText = document.getElementById('error-text');
+  errorText.textContent = message;
+  errorDiv.style.display = 'block';
+  setTimeout(() => {
+    errorDiv.style.display = 'none';
+  }, 5000);
+}
+
+function hideError() {
+  const errorDiv = document.getElementById('chatbot-error');
+  errorDiv.style.display = 'none';
+}
+
+function updateSendButtonState(disabled) {
+  const btn = document.getElementById('chatbot-send-btn');
+  btn.disabled = disabled;
+  btn.style.opacity = disabled ? '0.6' : '1';
+  btn.style.cursor = disabled ? 'not-allowed' : 'pointer';
+}
+
+async function sendChatbotMessage() {
+  const input = document.getElementById('chatbot-input');
+  const message = input.value.trim();
+  if (!message || isWaitingForResponse) return;
+  
+  addChatbotMessage('user', message);
+  input.value = '';
+  input.disabled = true;
+  isWaitingForResponse = true;
+  
+  // Afficher l'indicateur de frappe
+  addTypingIndicator();
+  
+  try {
+    // Appeler l'API tRPC chatbot.sendMessage
+    const response = await fetch('/api/trpc/chatbot.sendMessage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        json: {
+          message: message,
+          conversationId: null,
+        },
+      }),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    removeTypingIndicator();
+    
+    // Accéder à la réponse correctement: data.result.data.json
+    const responseData = data.result?.data?.json || data.result?.data;
+    if (responseData?.success) {
+      addChatbotMessage('assistant', responseData.message);
+    } else {
+      showError('Erreur: ' + (responseData?.message || 'Réponse invalide'));
+      addChatbotMessage('assistant', 'Désolé, une erreur s\'est produite. Veuillez réessayer.');
+    }
+  } catch (error) {
+    console.error('Chatbot error:', error);
+    removeTypingIndicator();
+    addChatbotMessage('assistant', 'Désolé, une erreur s\'est produite. Veuillez réessayer.');
+  } finally {
+    input.disabled = false;
+    isWaitingForResponse = false;
+  }
+}
+
+function sendQuickQuestion(question) {
+  if (!isWaitingForResponse) {
+    document.getElementById('chatbot-input').value = question;
+    sendChatbotMessage();
+  }
+}
+
+function generateChatbotResponse(question) {
+  const q = question.toLowerCase();
+  
+  if (q.includes('tarif') || q.includes('prix') || q.includes('coût')) {
+    return `📊 **Tarification MediConnect Africa (FCFA/mois)**\n\n` +
+      `👤 Patient: ${CHATBOT_KNOWLEDGE.tarification.patient}\n` +
+      `🏥 Clinique: ${CHATBOT_KNOWLEDGE.tarification.clinique}\n` +
+      `💊 Pharmacie: ${CHATBOT_KNOWLEDGE.tarification.pharmacie}\n` +
+      `🔬 Laboratoire: ${CHATBOT_KNOWLEDGE.tarification.laboratoire}\n` +
+      `📸 Imagerie: ${CHATBOT_KNOWLEDGE.tarification.imagerie}\n` +
+      `👨‍⚕️ Médecin: ${CHATBOT_KNOWLEDGE.tarification.medecin}\n` +
+      `👓 Cabinet Optique: ${CHATBOT_KNOWLEDGE.tarification.optique}\n` +
+      `🛡️ Assureur: ${CHATBOT_KNOWLEDGE.tarification.assureur}\n` +
+      `🚚 Livreur: ${CHATBOT_KNOWLEDGE.tarification.livreur}`;
+  }
+  
+  if (q.includes('profil') || q.includes('acteur') || q.includes('utilisateur')) {
+    return `👥 **Profils Disponibles**\n\n` +
+      CHATBOT_KNOWLEDGE.profils.slice(0, 5).join('\n') + '\n\n' +
+      `... et 5 autres profils. Consultez notre page "Prestataires" pour la liste complète!`;
+  }
+  
+  if (q.includes('test') || q.includes('démo') || q.includes('demo') || q.includes('compte')) {
+    return `🧪 **12 Comptes de Démonstration Disponibles**\n\n` +
+      `Accédez à la page "Accès tests" pour tester chaque profil:\n\n` +
+      `✅ Admin, Assureur, Clinique, Imagerie, Laboratoire, Livreur\n` +
+      `✅ Médecin Résident, Médecin Conseil, Ministère Santé, Cabinet Optique\n` +
+      `✅ Patient, Pharmacie\n\n` +
+      `Tous les mots de passe: **demo1234** (sauf Ministère: **MinistereCI2024**)`;
+  }
+  
+  if (q.includes('inscription') || q.includes('s\'inscrire') || q.includes('créer')) {
+    return `📝 **Comment S\'Inscrire?**\n\n` +
+      `1️⃣ Cliquez sur "S'inscrire" en haut à droite\n` +
+      `2️⃣ Sélectionnez votre profil (Patient, Clinique, etc.)\n` +
+      `3️⃣ Remplissez vos informations\n` +
+      `4️⃣ Validez votre email\n` +
+      `5️⃣ Commencez à utiliser MediConnect!\n\n` +
+      `💡 Vous pouvez aussi tester gratuitement avec nos comptes de démonstration!`;
+  }
+  
+  if (q.includes('fonctionnalité') || q.includes('service') || q.includes('quoi')) {
+    return `✨ **Nos Principales Fonctionnalités**\n\n` +
+      CHATBOT_KNOWLEDGE.fonctionnalites.slice(0, 6).map(f => `✅ ${f}`).join('\n') + '\n\n' +
+      `... et 4 autres! Consultez la section "Fonctionnalités" pour plus de détails.`;
+  }
+  
+  return `👋 Merci pour votre question! Je peux vous aider avec:\n\n` +
+    `💰 **Tarification** - Demandez "Quels sont vos tarifs?"\n` +
+    `👥 **Profils** - Demandez "Quels sont les profils?"\n` +
+    `🧪 **Tests** - Demandez "Comment tester?"\n` +
+    `📝 **Inscription** - Demandez "Comment s'inscrire?"\n` +
+    `✨ **Fonctionnalités** - Demandez "Quels sont vos services?"\n\n` +
+    `Ou consultez notre FAQ pour plus de réponses!`;
+}
+
+// Gestion de la sidebar
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  if (sidebar && overlay) {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+}
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  if (sidebar && overlay) {
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  if (sidebar && overlay) {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+}
+
+// Fermer la sidebar en appuyant sur Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeSidebar();
+});
+
+// Fermer la sidebar en cliquant sur l'overlay
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.querySelector('.sidebar-overlay');
+  if (overlay) {
+    overlay.addEventListener('click', closeSidebar);
+  }
+});
+
+// Formulaire de démonstration
+function openDemoModal() {
+  const modal = document.getElementById('demoModal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeDemoModal() {
+  const modal = document.getElementById('demoModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function submitDemoForm() {
+  const form = document.getElementById('demoForm');
+  const name = form.querySelector('[name="name"]').value;
+  const email = form.querySelector('[name="email"]').value;
+  const phone = form.querySelector('[name="phone"]').value;
+  const organization = form.querySelector('[name="organization"]').value;
+  const profile = form.querySelector('[name="profile"]').value;
+  const message = form.querySelector('[name="message"]').value;
+  
+  if (!name || !email || !organization || !profile) {
+    alert('Veuillez remplir tous les champs obligatoires');
+    return;
+  }
+  
+  // Préparer les données
+  const formData = { name, email, phone, organization, profile, message };
+  
+  // Envoyer au serveur (simulation)
+  console.log('Formulaire de démonstration soumis:', formData);
+  
+  // Afficher un message de succés
+  const successMsg = document.getElementById('demoSuccessMsg');
+  if (successMsg) {
+    successMsg.style.display = 'block';
+    setTimeout(() => {
+      closeDemoModal();
+      successMsg.style.display = 'none';
+      form.reset();
+    }, 2000);
+  }
+}
+
+// Fermer le modal en cliquant en dehors
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('demoModal');
+  if (e.target === modal) modal.style.display = 'none';
+});
+</script>
+
+<!-- MODAL FORMULAIRE DE DÉMO -->
+<div id="demoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
+  <div style="background:var(--card); border:1px solid var(--border); border-radius:16px; padding:40px; max-width:500px; width:90%; max-height:90vh; overflow-y:auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+      <h2 style="font-size:24px; margin:0;">Demander une démonstration</h2>
+      <button onclick="closeDemoModal()" style="background:none; border:none; color:var(--dim); font-size:24px; cursor:pointer;">×</button>
+    </div>
+    
+    <div id="demoSuccessMsg" style="display:none; background:rgba(10,143,88,0.2); border:1px solid var(--green); border-radius:8px; padding:16px; margin-bottom:20px; color:var(--greenL); text-align:center;">
+      ✅ Merci! Nous vous contacterons bientôt.
+    </div>
+    
+    <form id="demoForm" onsubmit="event.preventDefault(); submitDemoForm();" style="display:flex; flex-direction:column; gap:16px;">
+      <div>
+        <label style="display:block; margin-bottom:8px; font-weight:600; color:var(--text);">Nom complet *</label>
+        <input type="text" name="name" placeholder="Votre nom" style="width:100%; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px;" required>
+      </div>
+      
+      <div>
+        <label style="display:block; margin-bottom:8px; font-weight:600; color:var(--text);">Email *</label>
+        <input type="email" name="email" placeholder="votre@email.com" style="width:100%; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px;" required>
+      </div>
+      
+      <div>
+        <label style="display:block; margin-bottom:8px; font-weight:600; color:var(--text);">Téléphone</label>
+        <input type="tel" name="phone" placeholder="+225 XX XX XX XX" style="width:100%; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px;">
+      </div>
+      
+      <div>
+        <label style="display:block; margin-bottom:8px; font-weight:600; color:var(--text);">Organisation/Clinique *</label>
+        <input type="text" name="organization" placeholder="Nom de votre structure" style="width:100%; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px;" required>
+      </div>
+      
+      <div>
+        <label style="display:block; margin-bottom:8px; font-weight:600; color:var(--text);">Profil *</label>
+        <select name="profile" style="width:100%; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px;" required>
+          <option value="">Sélectionnez votre profil</option>
+          <option value="patient">Patient</option>
+          <option value="clinique">Clinique</option>
+          <option value="pharmacie">Pharmacie</option>
+          <option value="medecin">Médecin</option>
+          <option value="assureur">Assureur</option>
+          <option value="laboratoire">Laboratoire</option>
+          <option value="imagerie">Imagerie Médicale</option>
+          <option value="optique">Cabinet Optique</option>
+          <option value="livreur">Livreur</option>
+        </select>
+      </div>
+      
+      <div>
+        <label style="display:block; margin-bottom:8px; font-weight:600; color:var(--text);">Message (optionnel)</label>
+        <textarea name="message" placeholder="Dites-nous comment nous pouvons vous aider..." style="width:100%; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px; resize:vertical; min-height:100px;"></textarea>
+      </div>
+      
+      <button type="submit" style="background:var(--green); color:#fff; border:none; padding:12px; border-radius:8px; font-weight:700; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='var(--greenD)'" onmouseout="this.style.background='var(--green)'">Envoyer la demande</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

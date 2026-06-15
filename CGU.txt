@@ -1,0 +1,48 @@
+CONDITIONS GÉNÉRALES D'UTILISATION
+MediConnect Africa - Plateforme de Santé Numérique
+
+Dernière mise à jour : Mai 2026
+
+1. OBJET
+Les présentes Conditions Générales d'Utilisation (CGU) régissent l'utilisation de la plateforme MediConnect Africa et de tous ses services. En accédant à la plateforme, vous acceptez d'être lié par ces conditions.
+
+2. DÉFINITIONS
+- Plateforme : Site web et application mobile MediConnect Africa
+- Utilisateur : Toute personne physique ou morale accédant à la plateforme
+- Services : Prise de rendez-vous, gestion de dossiers médicaux, facturation, livraison de médicaments, etc.
+- Données personnelles : Informations relatives à l'identification et la santé de l'utilisateur
+
+3. ACCÈS À LA PLATEFORME
+3.1 L'accès à la plateforme est gratuit pour les consultations.
+3.2 Certains services sont payants selon les tarifs affichés.
+3.3 L'utilisateur s'engage à fournir des informations exactes et à jour.
+
+4. RESPONSABILITÉS DE L'UTILISATEUR
+4.1 L'utilisateur est responsable de la confidentialité de ses identifiants.
+4.2 L'utilisateur s'engage à ne pas utiliser la plateforme à des fins illégales.
+4.3 L'utilisateur accepte de respecter les droits d'auteur et les propriétés intellectuelles.
+
+5. PROTECTION DES DONNÉES
+5.1 MediConnect Africa respecte la confidentialité des données médicales.
+5.2 Les données sont chiffrées en TLS 1.3 et stockées de manière sécurisée.
+5.3 Conformité RGPD et réglementations UEMOA/CEMAC.
+
+6. LIMITATION DE RESPONSABILITÉ
+MediConnect Africa ne peut être tenue responsable des :
+- Interruptions de service
+- Pertes de données dues à des cas de force majeure
+- Utilisation abusive de la plateforme
+
+7. MODIFICATIONS DES CGU
+MediConnect Africa se réserve le droit de modifier ces CGU à tout moment. Les modifications seront notifiées aux utilisateurs.
+
+8. RÉSILIATION
+L'utilisateur peut résilier son compte à tout moment. MediConnect Africa peut résilier l'accès en cas de violation des CGU.
+
+9. DROIT APPLICABLE
+Ces CGU sont régies par les lois de l'Afrique de l'Ouest et Centrale (UEMOA/CEMAC).
+
+10. CONTACT
+Pour toute question concernant ces CGU, contactez : support@mediconnect4africa.cloud
+
+© 2026 MediConnect Africa. Tous droits réservés.

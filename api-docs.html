@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation API tRPC - MediConnect Africa</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg:#0a0e27; --card:#111d3d; --text:#e5e7eb; --muted:#9ca3af;
+      --green:#0a8f58; --greenL:#34d399; --border:#1f2937; --blue:#3b82f6;
+      --purple:#8b5cf6; --red:#ef4444; --teal:#14b8a6; --indigo:#6366f1;
+    }
+    body { background:var(--bg); color:var(--text); font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; line-height:1.6; }
+    header { background:linear-gradient(135deg, rgba(10,143,88,0.1), rgba(52,211,153,0.05)); padding:40px 5%; border-bottom:1px solid var(--border); }
+    .header-inner { max-width:1200px; margin:0 auto; }
+    .header-inner h1 { font-size:36px; font-weight:800; margin-bottom:12px; }
+    .header-inner p { color:var(--muted); font-size:16px; }
+    nav { background:var(--card); border-bottom:1px solid var(--border); padding:0 5%; position:sticky; top:0; z-index:100; }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; gap:32px; }
+    nav a { padding:16px 0; color:var(--muted); text-decoration:none; font-size:14px; font-weight:600; border-bottom:2px solid transparent; transition:all 0.2s; }
+    nav a:hover, nav a.active { color:var(--greenL); border-bottom-color:var(--green); }
+    main { max-width:1200px; margin:0 auto; padding:60px 5%; }
+    section { margin-bottom:80px; scroll-margin-top:80px; }
+    h2 { font-size:28px; font-weight:800; margin-bottom:24px; color:var(--greenL); }
+    h3 { font-size:20px; font-weight:700; margin-top:32px; margin-bottom:16px; color:var(--text); }
+    h4 { font-size:16px; font-weight:700; margin-top:24px; margin-bottom:12px; color:var(--text); }
+    p { color:var(--muted); margin-bottom:16px; }
+    code { background:rgba(10,143,88,0.1); padding:2px 6px; border-radius:4px; color:var(--greenL); font-family:'Courier New',monospace; font-size:13px; }
+    pre { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px; overflow-x:auto; margin:16px 0; }
+    pre code { background:none; padding:0; color:var(--text); }
+    .endpoint { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:24px; margin:16px 0; }
+    .endpoint-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .method { display:inline-block; padding:4px 12px; border-radius:4px; font-weight:700; font-size:12px; }
+    .method-get { background:rgba(52,211,153,0.2); color:var(--greenL); }
+    .method-post { background:rgba(59,130,246,0.2); color:var(--blue); }
+    .method-put { background:rgba(139,92,246,0.2); color:var(--purple); }
+    .method-delete { background:rgba(239,68,68,0.2); color:var(--red); }
+    .endpoint-path { font-family:'Courier New',monospace; color:var(--text); font-weight:600; }
+    .params-table { width:100%; border-collapse:collapse; margin:16px 0; }
+    .params-table th { background:rgba(10,143,88,0.1); padding:12px; text-align:left; font-weight:700; border-bottom:1px solid var(--border); }
+    .params-table td { padding:12px; border-bottom:1px solid var(--border); }
+    .params-table tr:hover { background:rgba(10,143,88,0.05); }
+    .type-badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+    .type-string { background:rgba(52,211,153,0.2); color:var(--greenL); }
+    .type-number { background:rgba(59,130,246,0.2); color:var(--blue); }
+    .type-boolean { background:rgba(139,92,246,0.2); color:var(--purple); }
+    .type-object { background:rgba(20,184,166,0.2); color:var(--teal); }
+    .type-array { background:rgba(99,102,241,0.2); color:var(--indigo); }
+    .required { color:var(--red); font-weight:700; }
+    .example-box { background:rgba(10,143,88,0.05); border-left:4px solid var(--green); padding:16px; border-radius:4px; margin:16px 0; }
+    .example-title { font-weight:700; color:var(--greenL); margin-bottom:8px; }
+    footer { background:var(--card); border-top:1px solid var(--border); padding:40px 5%; text-align:center; color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>📚 Documentation API tRPC</h1>
+      <p>Guide complet pour intégrer MediConnect Africa à vos systèmes externes</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#introduction" class="nav-link active">Introduction</a>
+      <a href="#authentication" class="nav-link">Authentification</a>
+      <a href="#endpoints" class="nav-link">Endpoints</a>
+      <a href="#examples" class="nav-link">Exemples</a>
+      <a href="#errors" class="nav-link">Erreurs</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Introduction -->
+    <section id="introduction">
+      <h2>🚀 Introduction</h2>
+      <p>MediConnect Africa expose une API tRPC (TypeScript RPC) permettant aux développeurs d'intégrer les fonctionnalités de la plateforme à leurs systèmes externes. Cette documentation décrit tous les endpoints disponibles et comment les utiliser.</p>
+      
+      <div style="background:rgba(10,143,88,0.1); border:1px solid rgba(10,143,88,0.3); border-radius:8px; padding:20px; margin:24px 0;">
+        <h3 style="margin-top:0; color:var(--greenL);">📮 Importer dans Postman</h3>
+        <p>Téléchargez notre collection Postman préconfigurée avec tous les endpoints pour tester rapidement l'API:</p>
+        <a href="/MediConnect-API-Collection.json" download style="display:inline-block; background:var(--green); color:#fff; padding:12px 24px; border-radius:8px; text-decoration:none; font-weight:700; margin-top:12px; transition:all 0.2s;" onmouseover="this.style.background='var(--greenD)'" onmouseout="this.style.background='var(--green)'">📥 Télécharger Collection Postman</a>
+      </div>
+      
+      <h3>Base URL</h3>
+      <p>Tous les appels API doivent être adressés à:</p>
+      <pre><code>https://mediconnect4africa.com/api/trpc</code></pre>
+
+      <h3>Format des Requêtes</h3>
+      <p>Les requêtes tRPC utilisent un format JSON spécifique. Chaque requête contient:</p>
+      <pre><code>{
+  "0": {
+    "json": {
+      "param1": "value1",
+      "param2": "value2"
+    }
+  }
+}</code></pre>
+
+      <h3>Format des Réponses</h3>
+      <p>Les réponses tRPC sont structurées comme suit:</p>
+      <pre><code>{
+  "result": {
+    "data": {
+      "json": {
+        "success": true,
+        "data": { /* données retournées */ }
+      }
+    }
+  }
+}</code></pre>
+    </section>
+
+    <!-- Authentication -->
+    <section id="authentication">
+      <h2>🔐 Authentification</h2>
+      <p>MediConnect Africa utilise OAuth 2.0 pour l'authentification. Les utilisateurs doivent d'abord se connecter via le portail Manus OAuth, puis les tokens de session sont stockés dans les cookies.</p>
+
+      <h3>Flux d'Authentification</h3>
+      <ol style="color:var(--muted); margin-left:20px; margin-bottom:16px;">
+        <li>L'utilisateur clique sur "Se connecter"</li>
+        <li>Redirection vers le portail Manus OAuth</li>
+        <li>Authentification et consentement</li>
+        <li>Redirection vers le callback avec code d'autorisation</li>
+        <li>Échange du code contre un token de session</li>
+        <li>Cookie de session stocké automatiquement</li>
+      </ol>
+
+      <h3>Endpoints d'Authentification</h3>
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-get">GET</span>
+          <span class="endpoint-path">auth.me</span>
+        </div>
+        <p>Récupère les informations de l'utilisateur actuellement connecté.</p>
+        <h4>Réponse</h4>
+        <pre><code>{
+  "result": {
+    "data": {
+      "json": {
+        "id": "user-123",
+        "email": "user@example.com",
+        "name": "John Doe",
+        "role": "user"
+      }
+    }
+  }
+}</code></pre>
+      </div>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-post">POST</span>
+          <span class="endpoint-path">auth.logout</span>
+        </div>
+        <p>Déconnecte l'utilisateur actuellement connecté.</p>
+        <h4>Réponse</h4>
+        <pre><code>{
+  "result": {
+    "data": {
+      "json": {
+        "success": true
+      }
+    }
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Endpoints -->
+    <section id="endpoints">
+      <h2>📡 Endpoints Disponibles</h2>
+
+      <h3>Chatbot</h3>
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-post">POST</span>
+          <span class="endpoint-path">chatbot.sendMessage</span>
+        </div>
+        <p>Envoie un message au chatbot IA et reçoit une réponse.</p>
+        <h4>Paramètres</h4>
+        <table class="params-table">
+          <thead>
+            <tr>
+              <th>Paramètre</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>message <span class="required">*</span></td>
+              <td><span class="type-badge type-string">string</span></td>
+              <td>Le message à envoyer au chatbot</td>
+            </tr>
+            <tr>
+              <td>conversationId</td>
+              <td><span class="type-badge type-string">string</span></td>
+              <td>ID de la conversation existante (optionnel)</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Exemple de Requête</h4>
+        <pre><code>curl -X POST https://mediconnect4africa.com/api/trpc/chatbot.sendMessage \
+  -H "Content-Type: application/json" \
+  -d '{
+    "0": {
+      "json": {
+        "message": "Quels sont vos tarifs?",
+        "conversationId": null
+      }
+    }
+  }'</code></pre>
+      </div>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-post">POST</span>
+          <span class="endpoint-path">chatbot.rateResponse</span>
+        </div>
+        <p>Envoie une notation (👍/👎) pour une réponse du chatbot.</p>
+        <h4>Paramètres</h4>
+        <table class="params-table">
+          <thead>
+            <tr>
+              <th>Paramètre</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>messageId <span class="required">*</span></td>
+              <td><span class="type-badge type-string">string</span></td>
+              <td>ID du message à noter</td>
+            </tr>
+            <tr>
+              <td>rating <span class="required">*</span></td>
+              <td><span class="type-badge type-boolean">boolean</span></td>
+              <td>true pour 👍, false pour 👎</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Spécialités Cliniques</h3>
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-get">GET</span>
+          <span class="endpoint-path">specialties.list</span>
+        </div>
+        <p>Liste toutes les spécialités médicales disponibles.</p>
+        <h4>Réponse</h4>
+        <pre><code>{
+  "result": {
+    "data": {
+      "json": [
+        {
+          "id": "spec-1",
+          "name": "Cardiologie",
+          "description": "Maladies du cœur et des vaisseaux sanguins"
+        },
+        {
+          "id": "spec-2",
+          "name": "Dermatologie",
+          "description": "Maladies de la peau"
+        }
+      ]
+    }
+  }
+}</code></pre>
+      </div>
+
+      <h3>Consultations Médicales</h3>
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-post">POST</span>
+          <span class="endpoint-path">consultations.record</span>
+        </div>
+        <p>Enregistre une nouvelle consultation médicale avec pathologie.</p>
+        <h4>Paramètres</h4>
+        <table class="params-table">
+          <thead>
+            <tr>
+              <th>Paramètre</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>patientId <span class="required">*</span></td>
+              <td><span class="type-badge type-string">string</span></td>
+              <td>ID du patient</td>
+            </tr>
+            <tr>
+              <td>pathologyName <span class="required">*</span></td>
+              <td><span class="type-badge type-string">string</span></td>
+              <td>Nom de la pathologie/affection</td>
+            </tr>
+            <tr>
+              <td>consultationDate <span class="required">*</span></td>
+              <td><span class="type-badge type-string">string</span></td>
+              <td>Date de consultation (ISO 8601)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Dashboard Ministère</h3>
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-get">GET</span>
+          <span class="endpoint-path">health.pathologyStats</span>
+        </div>
+        <p>Récupère les statistiques des pathologies par mois.</p>
+        <h4>Paramètres</h4>
+        <table class="params-table">
+          <thead>
+            <tr>
+              <th>Paramètre</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>year <span class="required">*</span></td>
+              <td><span class="type-badge type-number">number</span></td>
+              <td>Année (ex: 2026)</td>
+            </tr>
+            <tr>
+              <td>month</td>
+              <td><span class="type-badge type-number">number</span></td>
+              <td>Mois (1-12, optionnel)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method method-get">GET</span>
+          <span class="endpoint-path">health.medicationStats</span>
+        </div>
+        <p>Récupère les statistiques des médicaments les plus vendus.</p>
+        <h4>Paramètres</h4>
+        <table class="params-table">
+          <thead>
+            <tr>
+              <th>Paramètre</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>year <span class="required">*</span></td>
+              <td><span class="type-badge type-number">number</span></td>
+              <td>Année (ex: 2026)</td>
+            </tr>
+            <tr>
+              <td>country</td>
+              <td><span class="type-badge type-string">string</span></td>
+              <td>Code pays (optionnel)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Examples -->
+    <section id="examples">
+      <h2>💡 Exemples d'Intégration</h2>
+
+      <h3>Exemple 1: Appel au Chatbot avec JavaScript</h3>
+      <div class="example-box">
+        <div class="example-title">JavaScript/Node.js</div>
+        <pre><code>const message = "Comment s'inscrire?";
+const response = await fetch('https://mediconnect4africa.com/api/trpc/chatbot.sendMessage', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Cookie': 'session=...' // Session cookie
+  },
+  body: JSON.stringify({
+    "0": {
+      "json": {
+        "message": message,
+        "conversationId": null
+      }
+    }
+  })
+});
+
+const data = await response.json();
+const botResponse = data.result.data.json.response;
+console.log(botResponse);</code></pre>
+      </div>
+
+      <h3>Exemple 2: Récupérer les Statistiques du Ministère</h3>
+      <div class="example-box">
+        <div class="example-title">Python</div>
+        <pre><code>import requests
+import json
+
+url = 'https://mediconnect4africa.com/api/trpc/health.pathologyStats'
+params = {
+  "0": {
+    "json": {
+      "year": 2026,
+      "month": 6
+    }
+  }
+}
+
+response = requests.get(url, json=params)
+stats = response.json()['result']['data']['json']
+
+for pathology in stats:
+    print(f"{pathology['name']}: {pathology['count']} cas")</code></pre>
+      </div>
+
+      <h3>Exemple 3: Enregistrer une Consultation</h3>
+      <div class="example-box">
+        <div class="example-title">cURL</div>
+        <pre><code>curl -X POST https://mediconnect4africa.com/api/trpc/consultations.record \
+  -H "Content-Type: application/json" \
+  -H "Cookie: session=..." \
+  -d '{
+    "0": {
+      "json": {
+        "patientId": "patient-123",
+        "pathologyName": "Hypertension",
+        "consultationDate": "2026-06-08T10:30:00Z"
+      }
+    }
+  }'</code></pre>
+      </div>
+    </section>
+
+    <!-- Errors -->
+    <section id="errors">
+      <h2>⚠️ Gestion des Erreurs</h2>
+      <p>Les erreurs API sont retournées avec un code HTTP approprié et un message d'erreur détaillé.</p>
+
+      <h3>Codes d'Erreur Courants</h3>
+      <table class="params-table">
+        <thead>
+          <tr>
+            <th>Code HTTP</th>
+            <th>Erreur tRPC</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>400</td>
+            <td>BAD_REQUEST</td>
+            <td>Paramètres invalides ou manquants</td>
+          </tr>
+          <tr>
+            <td>401</td>
+            <td>UNAUTHORIZED</td>
+            <td>Session expirée ou non authentifié</td>
+          </tr>
+          <tr>
+            <td>403</td>
+            <td>FORBIDDEN</td>
+            <td>Permissions insuffisantes</td>
+          </tr>
+          <tr>
+            <td>404</td>
+            <td>NOT_FOUND</td>
+            <td>Ressource non trouvée</td>
+          </tr>
+          <tr>
+            <td>500</td>
+            <td>INTERNAL_SERVER_ERROR</td>
+            <td>Erreur serveur interne</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Exemple de Réponse d'Erreur</h3>
+      <pre><code>{
+  "error": {
+    "json": {
+      "code": "UNAUTHORIZED",
+      "message": "Please login (10001)"
+    }
+  }
+}</code></pre>
+    </section>
+
+    <!-- Support -->
+    <section>
+      <h2>📞 Support et Contact</h2>
+      <p>Pour toute question ou problème avec l'API, veuillez contacter notre équipe de support:</p>
+      <ul style="color:var(--muted); margin-left:20px; margin-bottom:16px;">
+        <li>Email: <a href="mailto:support@mediconnect4africa.com" style="color:var(--greenL); text-decoration:none;">support@mediconnect4africa.com</a></li>
+        <li>Documentation: <a href="https://mediconnect4africa.com" style="color:var(--greenL); text-decoration:none;">https://mediconnect4africa.com</a></li>
+        <li>Status Page: <a href="https://status.mediconnect4africa.com" style="color:var(--greenL); text-decoration:none;">https://status.mediconnect4africa.com</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 MediConnect Africa · Documentation API tRPC · Tous droits réservés</p>
+  </footer>
+
+  <script>
+    // Navigation active
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      });
+    });
+  </script>
+</body>
+</html>

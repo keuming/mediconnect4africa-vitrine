@@ -1,0 +1,74 @@
+POLITIQUE DE CONFIDENTIALITÉ
+MediConnect Africa - Plateforme de Santé Numérique
+
+Dernière mise à jour : Mai 2026
+
+1. INTRODUCTION
+MediConnect Africa s'engage à protéger votre vie privée et vos données personnelles. Cette politique explique comment nous collectons, utilisons et protégeons vos informations.
+
+2. DONNÉES COLLECTÉES
+2.1 Données d'identification : Nom, prénom, email, téléphone
+2.2 Données médicales : Dossier médical, antécédents, prescriptions
+2.3 Données de localisation : Adresse, coordonnées GPS pour livraison
+2.4 Données de paiement : Informations de transaction (pas de stockage de carte bancaire)
+
+3. UTILISATION DES DONNÉES
+Les données sont utilisées pour :
+- Fournir les services demandés
+- Améliorer la qualité des services
+- Communiquer avec vous
+- Respecter les obligations légales
+- Prévenir la fraude
+
+4. SÉCURITÉ DES DONNÉES
+4.1 Chiffrement TLS 1.3 pour toutes les transmissions
+4.2 Stockage sécurisé sur serveurs AWS avec redondance
+4.3 Audit trail complet de tous les accès aux données
+4.4 Contrôle d'accès par rôle (RBAC)
+4.5 Sauvegardes automatiques quotidiennes
+
+5. PARTAGE DES DONNÉES
+Vos données peuvent être partagées avec :
+- Prestataires de santé (cliniques, pharmacies, laboratoires)
+- Compagnies d'assurance (pour tiers-payant)
+- Livreurs (adresse et commande uniquement)
+- Autorités légales (si requis par la loi)
+
+Les données ne sont jamais vendues à des tiers.
+
+6. DROITS DE L'UTILISATEUR
+Vous avez le droit de :
+- Accéder à vos données personnelles
+- Corriger vos données
+- Supprimer votre compte et vos données
+- Exporter vos données
+- Retirer votre consentement
+
+7. CONSERVATION DES DONNÉES
+- Données actives : Conservées pendant toute la durée de votre compte
+- Données après suppression : Conservées 90 jours pour récupération
+- Données archivées : Conservées 7 ans pour conformité légale
+
+8. COOKIES
+La plateforme utilise des cookies pour :
+- Maintenir votre session
+- Améliorer l'expérience utilisateur
+- Analyser l'utilisation
+
+Vous pouvez désactiver les cookies dans les paramètres de votre navigateur.
+
+9. CONFORMITÉ LÉGALE
+- RGPD (Règlement Général sur la Protection des Données)
+- CIMA (Conférence Interafricaine des Marchés d'Assurances)
+- Lois nationales de protection des données (UEMOA/CEMAC)
+
+10. MODIFICATIONS DE LA POLITIQUE
+MediConnect Africa peut modifier cette politique à tout moment. Les modifications seront notifiées par email.
+
+11. CONTACT
+Pour toute question concernant vos données :
+- Email : privacy@mediconnect4africa.cloud
+- Téléphone : +XXX XXX XXX XXX
+- Adresse : MediConnect Africa, Dakar, Sénégal
+
+© 2026 MediConnect Africa. Tous droits réservés.

@@ -1,0 +1,96 @@
+GUIDE D'UTILISATION - PATIENTS
+MediConnect Africa - Plateforme de Santé Numérique
+
+1. CRÉER VOTRE COMPTE
+1.1 Allez sur mediconnect4africa.cloud
+1.2 Cliquez sur "Créer un compte"
+1.3 Sélectionnez "Patient" comme profil
+1.4 Remplissez vos informations personnelles
+1.5 Confirmez votre email
+1.6 Complétez votre profil médical
+
+2. ACCÉDER À VOTRE DOSSIER MÉDICAL
+2.1 Connectez-vous à votre compte
+2.2 Cliquez sur "Mon Dossier" dans le menu
+2.3 Consultez vos antécédents médicaux
+2.4 Téléchargez vos documents médicaux
+2.5 Mettez à jour vos informations de santé
+
+3. PRENDRE UN RENDEZ-VOUS
+3.1 Cliquez sur "Prendre un RDV"
+3.2 Sélectionnez une clinique ou un médecin
+3.3 Choisissez la date et l'heure disponibles
+3.4 Confirmez votre rendez-vous
+3.5 Recevez une confirmation par SMS et email
+
+4. CONSULTER UN MÉDECIN PRIVÉ
+4.1 Allez dans "Médecins Privés"
+4.2 Parcourez les profils disponibles
+4.3 Cliquez sur "Demander comme médecin de famille"
+4.4 Attendez la validation du médecin
+4.5 Une fois accepté, vous pouvez prendre des RDV ou faire une téléconsultation
+
+5. GÉRER VOS ORDONNANCES
+5.1 Cliquez sur "Mes Ordonnances"
+5.2 Consultez vos ordonnances numériques
+5.3 Téléchargez en PDF
+5.4 Partagez avec une pharmacie
+5.5 Commandez la livraison de médicaments
+
+6. COMMANDER UNE LIVRAISON DE MÉDICAMENTS
+6.1 Allez dans "Livraison"
+6.2 Sélectionnez votre ordonnance
+6.3 Choisissez une pharmacie partenaire
+6.4 Confirmez votre adresse de livraison
+6.5 Payez via Wave, Orange Money, MTN ou espèces
+6.6 Recevez votre commande en moins de 2h
+
+7. GÉRER VOS PAIEMENTS
+7.1 Cliquez sur "Facturation"
+7.2 Consultez vos factures
+7.3 Téléchargez vos reçus
+7.4 Demandez un remboursement assurance
+7.5 Suivez le statut de vos remboursements
+
+8. UTILISER LA TÉLÉCONSULTATION
+8.1 Allez dans "Téléconsultation"
+8.2 Sélectionnez un médecin disponible
+8.3 Cliquez sur "Démarrer l'appel"
+8.4 Connectez votre caméra et microphone
+8.5 Consultez le médecin en vidéo
+8.6 Recevez votre ordonnance numérique
+
+9. GÉRER VOS PARAMÈTRES
+9.1 Cliquez sur "Paramètres"
+9.2 Modifiez vos informations personnelles
+9.3 Changez votre mot de passe
+9.4 Gérez vos notifications
+9.5 Configurez vos préférences de communication
+
+10. SÉCURITÉ ET CONFIDENTIALITÉ
+10.1 Vos données médicales sont chiffrées
+10.2 Seuls les prestataires autorisés y ont accès
+10.3 Vous pouvez révoquer l'accès à tout moment
+10.4 Consultez notre politique de confidentialité
+
+11. SUPPORT CLIENT
+Pour toute aide :
+- Chat en direct : Cliquez sur le bouton 💬 en bas à droite
+- Email : support@mediconnect4africa.cloud
+- Téléphone : +XXX XXX XXX XXX
+- Horaires : 24h/24, 7j/7
+
+12. TARIFS
+- Abonnement Patient : 300 FCFA/mois
+- Abonnement Patient + Médecin Privé : 500 FCFA/mois
+- Livraison de médicaments : 1 500 FCFA
+- Téléconsultation : Incluse dans l'abonnement
+
+13. CONSEILS PRATIQUES
+- Mettez à jour régulièrement votre dossier médical
+- Gardez vos ordonnances numériques à jour
+- Utilisez la téléconsultation pour les consultations urgentes
+- Activez les notifications pour ne pas oublier vos RDV
+- Sauvegardez vos documents importants
+
+© 2026 MediConnect Africa. Tous droits réservés.

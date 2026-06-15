@@ -1,0 +1,318 @@
+{
+  "info": {
+    "_postman_id": "mediconnect-africa-api",
+    "name": "MediConnect Africa API",
+    "description": "Collection complète des endpoints tRPC de MediConnect Africa pour tester et intégrer la plateforme.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trpc/auth.me",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "auth.me"]
+            },
+            "description": "Récupère les informations de l'utilisateur actuellement connecté"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trpc/auth.logout",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "auth.logout"]
+            },
+            "description": "Déconnecte l'utilisateur actuellement connecté"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chatbot",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"0\": {\n    \"json\": {\n      \"message\": \"Quels sont vos tarifs?\",\n      \"conversationId\": null\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trpc/chatbot.sendMessage",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "chatbot.sendMessage"]
+            },
+            "description": "Envoie un message au chatbot IA et reçoit une réponse"
+          }
+        },
+        {
+          "name": "Rate Response",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"0\": {\n    \"json\": {\n      \"messageId\": \"msg-123\",\n      \"rating\": true\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trpc/chatbot.rateResponse",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "chatbot.rateResponse"]
+            },
+            "description": "Envoie une notation (👍/👎) pour une réponse du chatbot"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Specialties",
+      "item": [
+        {
+          "name": "List All Specialties",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trpc/specialties.list",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "specialties.list"]
+            },
+            "description": "Liste toutes les spécialités médicales disponibles"
+          }
+        },
+        {
+          "name": "Create Specialty",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"0\": {\n    \"json\": {\n      \"name\": \"Cardiologie\",\n      \"description\": \"Maladies du cœur et des vaisseaux sanguins\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trpc/specialties.create",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "specialties.create"]
+            },
+            "description": "Crée une nouvelle spécialité médicale"
+          }
+        },
+        {
+          "name": "Link Specialty to Clinic",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"0\": {\n    \"json\": {\n      \"clinicId\": \"clinic-123\",\n      \"specialtyId\": \"spec-1\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trpc/specialties.linkToClinic",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "specialties.linkToClinic"]
+            },
+            "description": "Lie une spécialité à une clinique"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Consultations",
+      "item": [
+        {
+          "name": "Record Consultation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"0\": {\n    \"json\": {\n      \"patientId\": \"patient-123\",\n      \"pathologyName\": \"Hypertension\",\n      \"consultationDate\": \"2026-06-08T10:30:00Z\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trpc/consultations.record",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "consultations.record"]
+            },
+            "description": "Enregistre une nouvelle consultation médicale avec pathologie"
+          }
+        },
+        {
+          "name": "Get Consultations by Patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trpc/consultations.getByPatient?patientId=patient-123",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "consultations.getByPatient"],
+              "query": [
+                {
+                  "key": "patientId",
+                  "value": "patient-123"
+                }
+              ]
+            },
+            "description": "Récupère toutes les consultations d'un patient"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Ministry Dashboard",
+      "item": [
+        {
+          "name": "Get Pathology Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trpc/health.pathologyStats?year=2026&month=6",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "health.pathologyStats"],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                },
+                {
+                  "key": "month",
+                  "value": "6"
+                }
+              ]
+            },
+            "description": "Récupère les statistiques des pathologies par mois"
+          }
+        },
+        {
+          "name": "Get Medication Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trpc/health.medicationStats?year=2026&country=CI",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "health.medicationStats"],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                },
+                {
+                  "key": "country",
+                  "value": "CI"
+                }
+              ]
+            },
+            "description": "Récupère les statistiques des médicaments les plus vendus"
+          }
+        },
+        {
+          "name": "Get Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/trpc/health.getDashboardSummary?year=2026&month=6",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trpc", "health.getDashboardSummary"],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                },
+                {
+                  "key": "month",
+                  "value": "6"
+                }
+              ]
+            },
+            "description": "Récupère le résumé complet du dashboard du Ministère de la Santé"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://mediconnect4africa.com",
+      "type": "string"
+    }
+  ]
+}

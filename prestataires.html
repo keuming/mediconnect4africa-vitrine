@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prestataires - MediConnect Africa</title>
+  <meta name="description" content="Découvrez les solutions MediConnect Africa pour chaque acteur de l'écosystème de santé" />
+  <link rel="icon" href="https://mediconnect4africa.com/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green:   #0A8F58;
+      --greenL:  #34D399;
+      --greenD:  #065F3C;
+      --bg:      #060E18;
+      --card:    #0D1B2A;
+      --border:  #1a2d42;
+      --text:    #F0F6FF;
+      --muted:   #8BA3B8;
+      --dim:     #5A7A94;
+      --amber:   #F59E0B;
+      --blue:    #3B82F6;
+      --purple:  #8B5CF6;
+      --teal:    #14B8A6;
+      --red:     #EF4444;
+      --indigo:  #6366F1;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; margin-left:160px; }
+
+    /* NAV */
+    nav { position:sticky; top:0; z-index:100; background:rgba(6,14,24,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 5%; }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:64px; gap:32px; }
+    .logo { display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:var(--text); text-decoration:none; }
+    .logo-icon { width:36px; height:36px; border-radius:10px; background:rgba(10,143,88,0.2); border:1.5px solid var(--green); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:var(--greenL); }
+    .logo span { color:var(--greenL); }
+    .nav-links { display:flex; gap:24px; flex:1; }
+    .nav-links a { color:var(--dim); font-size:14px; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-actions { display:flex; gap:10px; align-items:center; }
+    .btn { padding:8px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:all .2s; display:inline-block; }
+    .btn-ghost { background:transparent; border:1px solid var(--border); color:var(--muted); }
+    .btn-ghost:hover { border-color:var(--green); color:var(--greenL); }
+    .btn-primary { background:var(--green); border:none; color:#fff; }
+    .btn-primary:hover { background:var(--greenL); }
+
+    /* SIDEBAR */
+    .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; background:var(--card); border-right:2px solid var(--border); z-index:99; overflow-y:auto; padding:20px 0; display:flex; flex-direction:column; align-items:center; gap:30px; }
+    .sidebar-overlay { display:none; }
+    .sidebar-header { display:none; }
+    .sidebar-content { display:flex; flex-direction:column; gap:30px; align-items:center; width:100%; padding:0; }
+    .sidebar-item { display:flex; flex-direction:column; align-items:center; gap:8px; padding:15px 12px; color:rgba(255,255,255,0.8); text-decoration:none; transition:all 0.3s ease; border:none; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+    .sidebar-item:hover { color:#fff; transform:scale(1.05); }
+    .sidebar-item-icon { font-size:24px; }
+    .sidebar-item-text { font-size:11px; text-align:center; line-height:1.3; max-width:120px; word-break:break-word; }
+    .sidebar-toggle { display:none; position:fixed; top:20px; left:20px; z-index:102; background:var(--card); border:2px solid var(--border); color:var(--text); font-size:24px; cursor:pointer; padding:8px 12px; border-radius:8px; transition:all 0.3s ease; }
+    .sidebar-toggle:hover { background:rgba(10,143,88,0.2); border-color:var(--green); }
+
+    /* MAIN CONTENT */
+    .container { max-width:1200px; margin:0 auto; padding:60px 5%; }
+    .page-header { text-align:center; margin-bottom:60px; }
+    .page-title { font-size:48px; font-weight:800; margin-bottom:16px; background:linear-gradient(135deg, var(--greenL), var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-subtitle { font-size:18px; color:var(--dim); max-width:600px; margin:0 auto; }
+
+    /* PROFILS GRID */
+    .profils-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-bottom:60px; }
+    .profil-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; transition:all 0.3s ease; position:relative; overflow:hidden; }
+    .profil-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent); }
+    .profil-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 12px 24px rgba(0,0,0,0.2); }
+    .profil-header { display:flex; gap:12px; margin-bottom:16px; align-items:flex-start; }
+    .profil-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; }
+    .profil-title { font-weight:700; font-size:16px; color:var(--text); }
+    .profil-price { font-size:12px; color:var(--greenL); font-weight:600; }
+    .profil-desc { font-size:14px; color:var(--muted); margin-bottom:16px; line-height:1.6; }
+    .profil-features { list-style:none; margin-bottom:16px; }
+    .profil-features li { font-size:13px; color:var(--dim); margin-bottom:8px; padding-left:20px; position:relative; }
+    .profil-features li::before { content:'✓'; position:absolute; left:0; color:var(--greenL); font-weight:700; }
+    .new-badge { background:rgba(52,211,153,0.2); color:var(--greenL); font-size:10px; font-weight:700; padding:2px 7px; border-radius:20px; margin-left:6px; }
+
+    /* FOOTER */
+    footer { background:var(--card); border-top:1px solid var(--border); padding:40px 5%; margin-top:80px; }
+    .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; gap:40px; }
+    .footer-copy { font-size:12px; color:var(--dim); margin-top:16px; }
+    .footer-links { display:flex; gap:24px; flex-wrap:wrap; }
+    .footer-links a { color:var(--dim); font-size:14px; text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--greenL); }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      body { margin-left:0; padding-top:70px; }
+      nav { padding:0 10px; }
+      .nav-inner { gap:12px; padding:0 10px; height:56px; }
+      .logo { font-size:16px; gap:6px; }
+      .logo-icon { width:32px; height:32px; font-size:16px; }
+      .logo span { display:none; }
+      .sidebar-toggle { display:block; position:fixed; top:12px; left:12px; z-index:102; padding:6px 10px; font-size:20px; }
+      .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; flex-direction:column; border-right:2px solid var(--border); border-bottom:none; padding:20px 0; gap:30px; transform:translateX(-100%); transition:transform 0.3s ease; z-index:100; }
+      .sidebar.active { transform:translateX(0); }
+      .sidebar-overlay { display:none; }
+      .sidebar-overlay.active { display:block; }
+      .page-title { font-size:32px; }
+      .page-subtitle { font-size:16px; }
+      .profils-grid { grid-template-columns:1fr; }
+      .footer-inner { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BOUTON HAMBURGER POUR MOBILE -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- SIDEBAR LATÉRALE -->
+<div class="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>Navigation</h3>
+  </div>
+  <div class="sidebar-content">
+    <a href="/prestataires.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">👥</span>
+      <span class="sidebar-item-text">Prestataires</span>
+    </a>
+    <a href="/mediconnect.html#carte" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💳</span>
+      <span class="sidebar-item-text">Card</span>
+    </a>
+    <a href="/mediconnect.html#tarifs" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💰</span>
+      <span class="sidebar-item-text">Tarifs</span>
+    </a>
+    <a href="/mediconnect.html#securite" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🔒</span>
+      <span class="sidebar-item-text">Sécurité</span>
+    </a>
+    <a href="/demo.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🧪</span>
+      <span class="sidebar-item-text">Tests</span>
+    </a>
+    <a href="/api-docs.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">📚</span>
+      <span class="sidebar-item-text">API</span>
+    </a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">+</div>
+      <span><span>Medi</span>Connect</span>
+    </a>
+    <div class="nav-links">
+      <a href="/mediconnect.html">Comment ça marche</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-ghost">📞 Demander une démo</button>
+      <a href="https://manager.mediconnect4africa.cloud/bd" class="btn btn-ghost">Espace BD</a>
+      <a href="https://manager.mediconnect4africa.cloud/login" class="btn btn-ghost">Se connecter</a>
+      <a href="https://manager.mediconnect4africa.cloud/register" class="btn btn-primary">Créer un compte →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">Une solution pour chaque acteur</h1>
+    <p class="page-subtitle">Chaque profil dispose d'un espace dédié, connecté en temps réel à l'ensemble de l'écosystème.</p>
+  </div>
+
+  <div class="profils-grid">
+
+    <!-- Patient -->
+    <div class="profil-card" style="--accent:var(--green)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(10,143,88,0.15)">👤</div>
+        <div><div class="profil-title">Patient</div><div class="profil-price">dès 2 500 FCFA / mois</div></div>
+      </div>
+      <p class="profil-desc">Accédez à des soins de qualité depuis votre domicile. Prenez des RDV, gérez ordonnances, dossier médical et carte famille.</p>
+      <ul class="profil-features">
+        <li>Prise de RDV en ligne 24h/24 — cliniques et médecins</li>
+        <li>Dossier médical électronique sécurisé</li>
+        <li>MediConnect Card + compte famille</li>
+        <li>Profil médical : taille, poids, IMC, groupe sanguin</li>
+        <li>Ordonnances numériques téléchargeables</li>
+        <li>Livraison médicaments à domicile — 1 500 FCFA</li>
+        <li>Médecin conseil attitré pour suivi continu</li>
+        <li>Pharmacies de garde par pays et ville</li>
+      </ul>
+    </div>
+
+    <!-- Médecin Conseil -->
+    <div class="profil-card" style="--accent:#7C3AED">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(124,58,237,0.15)">⭐</div>
+        <div>
+          <div class="profil-title">Médecin Conseil <span style="background:rgba(124,58,237,0.2);color:#A78BFA;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:6px">MC</span></div>
+          <div class="profil-price">5 000 FCFA / mois</div>
+        </div>
+      </div>
+      <p class="profil-desc">Médecin indépendant, médecin de famille. Suivi privé, consultations directes sans passer par une clinique.</p>
+      <ul class="profil-features">
+        <li>Profil public visible par les patients</li>
+        <li>Gestion de planning et disponibilités</li>
+        <li>Suivi médical continu de patients attitrés</li>
+        <li>Facturation intégrée — Wave, Orange Money</li>
+        <li>Dossiers patients partagés en temps réel</li>
+      </ul>
+    </div>
+
+    <!-- Médecin Résident -->
+    <div class="profil-card" style="--accent:var(--teal)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(20,184,166,0.15)">🩺</div>
+        <div>
+          <div class="profil-title">Médecin Résident <span style="background:rgba(20,184,166,0.2);color:#2DD4BF;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:6px">MR</span></div>
+          <div class="profil-price">Inclus dans la clinique</div>
+        </div>
+      </div>
+      <p class="profil-desc">Médecin employé d'une clinique ou d'un hôpital. Agenda géré par l'établissement employeur.</p>
+      <ul class="profil-features">
+        <li>Agenda intégré à la clinique employeur</li>
+        <li>Accès dossiers patients de la clinique</li>
+        <li>Prescriptions et consultations numériques</li>
+        <li>Workflow labo, imagerie et pharmacie</li>
+      </ul>
+    </div>
+
+    <!-- Clinique -->
+    <div class="profil-card" style="--accent:var(--blue)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(59,130,246,0.15)">🏥</div>
+        <div><div class="profil-title">Clinique / Hôpital</div><div class="profil-price">10 000 FCFA / mois</div></div>
+      </div>
+      <p class="profil-desc">Digitalisez votre établissement. Gérez agenda, dossiers patients, facturation et caisse en un seul outil.</p>
+      <ul class="profil-features">
+        <li>Agenda multi-praticiens avec réservation en ligne</li>
+        <li>Dossier médical centralisé entre praticiens</li>
+        <li>Facturation intégrée — Wave, Orange Money, MTN</li>
+        <li>Gestion de caisse avec rapports financiers</li>
+        <li>Workflow labo, imagerie et pharmacie intégré</li>
+        <li>Tiers-payant électronique — remboursement 72h</li>
+      </ul>
+    </div>
+
+    <!-- Pharmacie -->
+    <div class="profil-card" style="--accent:var(--teal)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(20,184,166,0.15)">💊</div>
+        <div><div class="profil-title">Pharmacie</div><div class="profil-price">10 000 FCFA / mois</div></div>
+      </div>
+      <p class="profil-desc">Recevez les ordonnances numériquement, gérez votre stock et bénéficiez d'un nouveau canal de vente.</p>
+      <ul class="profil-features">
+        <li>Ordonnances numériques sécurisées</li>
+        <li>Catalogue médicaments avec prix en FCFA</li>
+        <li>Pharmacies de garde — inscription au réseau</li>
+        <li>Livraison à domicile intégrée</li>
+        <li>Gestion de stock avec alertes de rupture</li>
+      </ul>
+    </div>
+
+    <!-- Cabinet Optique — NOUVEAU -->
+    <div class="profil-card" style="--accent:#6366F1">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(99,102,241,0.15)">🔭</div>
+        <div>
+          <div class="profil-title">Cabinet Optique <span class="new-badge">Nouveau</span></div>
+          <div class="profil-price">5 000 FCFA / mois</div>
+        </div>
+      </div>
+      <p class="profil-desc">Gestion complète de votre cabinet optique — stock montures et verres, ventes, ordonnances et assurances optiques.</p>
+      <ul class="profil-features">
+        <li>Gestion stock montures, verres, accessoires</li>
+        <li>Ordonnances ophtalmologiques numériques</li>
+        <li>Dossiers patients optiques complets</li>
+        <li>Facturation et gestion assurances optiques</li>
+        <li>Fournisseurs et gestion des commandes</li>
+      </ul>
+    </div>
+
+    <!-- Livreur -->
+    <div class="profil-card" style="--accent:var(--amber)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(245,158,11,0.15)">🛵</div>
+        <div><div class="profil-title">Livreur</div><div class="profil-price">1 000 FCFA / livraison</div></div>
+      </div>
+      <p class="profil-desc">Rejoignez le réseau de livraison santé certifié MediConnect. Recevez vos missions et soyez payé instantanément.</p>
+      <ul class="profil-features">
+        <li>Missions attribuées automatiquement</li>
+        <li>Adresse et contact patient toujours visibles</li>
+        <li>Rémunération fixe garantie de 1 000 FCFA</li>
+        <li>Paiement instantané via Wave ou Orange Money</li>
+      </ul>
+    </div>
+
+    <!-- Imagerie -->
+    <div class="profil-card" style="--accent:#8B5CF6">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(139,92,246,0.15)">🩻</div>
+        <div><div class="profil-title">Imagerie Médicale</div><div class="profil-price">5 000 FCFA / mois</div></div>
+      </div>
+      <p class="profil-desc">Recevez les demandes d'examens électroniquement et transmettez vos comptes-rendus directement dans le dossier patient.</p>
+      <ul class="profil-features">
+        <li>Radio, IRM, Scanner, Échographie</li>
+        <li>Comptes-rendus PDF et DICOM sécurisés</li>
+        <li>Traçabilité complète de chaque examen</li>
+      </ul>
+    </div>
+
+    <!-- Laboratoire -->
+    <div class="profil-card" style="--accent:var(--teal)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(20,184,166,0.15)">🧪</div>
+        <div><div class="profil-title">Laboratoire</div><div class="profil-price">5 000 FCFA / mois</div></div>
+      </div>
+      <p class="profil-desc">Recevez les demandes d'analyses numériquement et transmettez les résultats au médecin prescripteur.</p>
+      <ul class="profil-features">
+        <li>NFS, glycémie, biochimie, PCR, sérologie</li>
+        <li>Résultats envoyés directement au médecin</li>
+        <li>Archivage automatique dans le dossier patient</li>
+      </ul>
+    </div>
+
+    <!-- Assureur -->
+    <div class="profil-card" style="--accent:var(--amber)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(245,158,11,0.15)">🛡️</div>
+        <div><div class="profil-title">Compagnie d'Assurance</div><div class="profil-price">50 000 FCFA / mois</div></div>
+      </div>
+      <p class="profil-desc">Réduisez vos coûts opérationnels, luttez contre la fraude et traitez les dossiers tiers-payant en 72h.</p>
+      <ul class="profil-features">
+        <li>Dossiers tiers-payant électroniques — 72h</li>
+        <li>Réception des demandes de quotation patients</li>
+        <li>Détection automatique fraudes — 70-80%</li>
+        <li>Dashboard dédié supervision portefeuille</li>
+        <li>Conformité CIMA et UEMOA/CEMAC</li>
+      </ul>
+    </div>
+
+    <!-- Ministère -->
+    <div class="profil-card" style="--accent:var(--blue)">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(59,130,246,0.15)">🏛️</div>
+        <div><div class="profil-title">Ministère de la Santé</div><div class="profil-price">Partenariat institutionnel</div></div>
+      </div>
+      <p class="profil-desc">Dashboard épidémiologique national — suivi des pathologies, démographie médicale et geo-morbidité en temps réel.</p>
+      <ul class="profil-features">
+        <li>Suivi épidémiologique par pays et région</li>
+        <li>Top pathologies et évolution mensuelle</li>
+        <li>Démographie médicale par tranche d'âge</li>
+        <li>Statistiques médicaments les plus prescrits</li>
+      </ul>
+    </div>
+
+    <!-- BD -->
+    <div class="profil-card" style="--accent:#10B981">
+      <div class="profil-header">
+        <div class="profil-icon" style="background:rgba(16,185,129,0.15)">💼</div>
+        <div><div class="profil-title">Business Developer</div><div class="profil-price">Commission attractive</div></div>
+      </div>
+      <p class="profil-desc">Développez notre réseau de prestataires de santé et générez des revenus en commission dans 14 pays.</p>
+      <ul class="profil-features">
+        <li>25 000 FCFA par prestataire recruté</li>
+        <li>2 000 FCFA / mois par prestataire actif</li>
+        <li>50 FCFA par patient adhérant via vos prestataires</li>
+        <li>Dashboard de suivi des performances</li>
+      </ul>
+      <div style="margin-top:16px">
+        <a href="https://mediconnect4africa.com/register-bd" class="btn btn-primary" style="display:inline-block;font-size:13px">Rejoindre l'équipe →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo" style="margin-bottom:8px">
+        <div class="logo-icon">+</div>
+        <span><span>Medi</span>Connect Africa</span>
+      </div>
+      <div class="footer-copy">© 2026 MediConnect Africa · UEMOA + CEMAC · Tous droits réservés<br>Powered by <strong>Intelligence Database</strong></div>
+    </div>
+    <div class="footer-links">
+      <a href="https://manager.mediconnect4africa.cloud">Plateforme</a>
+      <a href="https://manager.mediconnect4africa.cloud/register">S'inscrire</a>
+      <a href="https://mediconnect4africa.com/register-bd">Devenir BD</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Conditions</a>
+      <a href="#">Nous Contacter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
+  function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+
+  // Close sidebar on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSidebar();
+  });
+</script>
+
+</body>
+</html>

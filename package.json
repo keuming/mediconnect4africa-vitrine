@@ -1,0 +1,10 @@
+{
+  "name": "mediconnect4africa-vitrine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site vitrine statique MediConnect Africa — www.mediconnect4africa.cloud",
+  "scripts": {
+    "build": "echo 'Static site — no build step required'",
+    "dev": "npx serve . -p 3000"
+  }
+}

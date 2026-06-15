@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offres Assurance - MediConnect Africa</title>
+  <meta name="description" content="Découvrez les offres d'assurance santé disponibles sur MediConnect Africa" />
+  <link rel="icon" href="https://mediconnect4africa.com/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green:   #0A8F58;
+      --greenL:  #34D399;
+      --greenD:  #065F3C;
+      --bg:      #060E18;
+      --card:    #0D1B2A;
+      --border:  #1a2d42;
+      --text:    #F0F6FF;
+      --muted:   #8BA3B8;
+      --dim:     #5A7A94;
+      --amber:   #F59E0B;
+      --blue:    #3B82F6;
+      --purple:  #8B5CF6;
+      --teal:    #14B8A6;
+      --red:     #EF4444;
+      --indigo:  #6366F1;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; margin-left:160px; }
+
+    /* NAV */
+    nav { position:sticky; top:0; z-index:100; background:rgba(6,14,24,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 5%; }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:64px; gap:32px; }
+    .logo { display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:var(--text); text-decoration:none; }
+    .logo-icon { width:36px; height:36px; border-radius:10px; background:rgba(10,143,88,0.2); border:1.5px solid var(--green); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:var(--greenL); }
+    .logo span { color:var(--greenL); }
+    .nav-links { display:flex; gap:24px; flex:1; }
+    .nav-links a { color:var(--dim); font-size:14px; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-actions { display:flex; gap:10px; align-items:center; }
+    .btn { padding:8px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:all .2s; display:inline-block; border:none; }
+    .btn-ghost { background:transparent; border:1px solid var(--border); color:var(--muted); }
+    .btn-ghost:hover { border-color:var(--green); color:var(--greenL); }
+    .btn-primary { background:var(--green); border:none; color:#fff; }
+    .btn-primary:hover { background:var(--greenL); }
+    .btn-secondary { background:rgba(10,143,88,0.1); border:1px solid var(--green); color:var(--greenL); }
+    .btn-secondary:hover { background:rgba(10,143,88,0.2); }
+
+    /* SIDEBAR */
+    .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; background:var(--card); border-right:2px solid var(--border); z-index:99; overflow-y:auto; padding:20px 0; display:flex; flex-direction:column; align-items:center; gap:30px; }
+    .sidebar-overlay { display:none; }
+    .sidebar-header { display:none; }
+    .sidebar-content { display:flex; flex-direction:column; gap:30px; align-items:center; width:100%; padding:0; }
+    .sidebar-item { display:flex; flex-direction:column; align-items:center; gap:8px; padding:15px 12px; color:rgba(255,255,255,0.8); text-decoration:none; transition:all 0.3s ease; border:none; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+    .sidebar-item:hover { color:#fff; transform:scale(1.05); }
+    .sidebar-item-icon { font-size:24px; }
+    .sidebar-item-text { font-size:11px; text-align:center; line-height:1.3; max-width:120px; word-break:break-word; }
+    .sidebar-toggle { display:none; position:fixed; top:20px; left:20px; z-index:102; background:var(--card); border:2px solid var(--border); color:var(--text); font-size:24px; cursor:pointer; padding:8px 12px; border-radius:8px; transition:all 0.3s ease; }
+    .sidebar-toggle:hover { background:rgba(10,143,88,0.2); border-color:var(--green); }
+
+    /* MAIN CONTENT */
+    .container { max-width:1200px; margin:0 auto; padding:60px 5%; }
+    .page-header { text-align:center; margin-bottom:60px; }
+    .page-title { font-size:48px; font-weight:800; margin-bottom:16px; background:linear-gradient(135deg, var(--greenL), var(--green)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-subtitle { font-size:18px; color:var(--dim); max-width:600px; margin:0 auto; }
+
+    /* OFFRES GRID */
+    .offres-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:24px; margin-bottom:60px; }
+    .offre-card { background:var(--card); border:2px solid var(--border); border-radius:16px; padding:24px; transition:all 0.3s ease; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+    .offre-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--amber), var(--greenL)); }
+    .offre-card:hover { border-color:var(--amber); transform:translateY(-8px); box-shadow:0 16px 32px rgba(245,158,11,0.15); }
+    
+    .offre-header { margin-bottom:16px; }
+    .offre-company { font-size:12px; color:var(--greenL); font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px; }
+    .offre-title { font-size:18px; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .offre-price { font-size:24px; font-weight:800; color:var(--amber); margin-bottom:16px; }
+    .offre-price-label { font-size:12px; color:var(--dim); font-weight:500; }
+
+    .offre-details { margin-bottom:20px; flex:1; }
+    .offre-description { font-size:14px; color:var(--muted); margin-bottom:16px; line-height:1.6; }
+    
+    .offre-coverage { margin-bottom:16px; }
+    .coverage-title { font-size:12px; color:var(--greenL); font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px; }
+    .coverage-badges { display:flex; flex-wrap:wrap; gap:8px; }
+    .coverage-badge { background:rgba(52,211,153,0.15); border:1px solid var(--greenL); color:var(--greenL); padding:6px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+
+    .offre-info { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; padding:12px; background:rgba(10,143,88,0.05); border-radius:10px; }
+    .info-item { font-size:12px; }
+    .info-label { color:var(--dim); font-weight:600; margin-bottom:4px; }
+    .info-value { color:var(--greenL); font-weight:700; }
+
+    .offre-actions { display:flex; gap:12px; }
+    .offre-actions .btn { flex:1; padding:10px 14px; font-size:12px; }
+
+    .empty-state { text-align:center; padding:60px 20px; }
+    .empty-icon { font-size:64px; margin-bottom:16px; }
+    .empty-title { font-size:24px; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .empty-text { font-size:14px; color:var(--dim); margin-bottom:24px; }
+
+    .loading { text-align:center; padding:60px 20px; }
+    .spinner { display:inline-block; width:40px; height:40px; border:4px solid var(--border); border-top-color:var(--greenL); border-radius:50%; animation:spin 1s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* FOOTER */
+    footer { background:var(--card); border-top:1px solid var(--border); padding:40px 5%; margin-top:80px; }
+    .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-start; gap:40px; }
+    .footer-copy { font-size:12px; color:var(--dim); margin-top:16px; }
+    .footer-links { display:flex; gap:24px; flex-wrap:wrap; }
+    .footer-links a { color:var(--dim); font-size:14px; text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--greenL); }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      body { margin-left:0; padding-top:70px; }
+      nav { padding:0 10px; }
+      .nav-inner { gap:12px; padding:0 10px; height:56px; }
+      .logo { font-size:16px; gap:6px; }
+      .logo-icon { width:32px; height:32px; font-size:16px; }
+      .logo span { display:none; }
+      .sidebar-toggle { display:block; position:fixed; top:12px; left:12px; z-index:102; padding:6px 10px; font-size:20px; }
+      .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; flex-direction:column; border-right:2px solid var(--border); border-bottom:none; padding:20px 0; gap:30px; transform:translateX(-100%); transition:transform 0.3s ease; z-index:100; }
+      .sidebar.active { transform:translateX(0); }
+      .sidebar-overlay { display:none; }
+      .sidebar-overlay.active { display:block; }
+      .page-title { font-size:32px; }
+      .page-subtitle { font-size:16px; }
+      .offres-grid { grid-template-columns:1fr; }
+      .footer-inner { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BOUTON HAMBURGER POUR MOBILE -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<!-- SIDEBAR LATÉRALE -->
+<div class="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>Navigation</h3>
+  </div>
+  <div class="sidebar-content">
+    <a href="#comment" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-text">❓ Comment<br>Marche</span>
+    </a>
+    <a href="/prestataires.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">👥</span>
+      <span class="sidebar-item-text">Prestataires</span>
+    </a>
+    <a href="#carte" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💳</span>
+      <span class="sidebar-item-text">Card</span>
+    </a>
+    <a href="#tarifs" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💰</span>
+      <span class="sidebar-item-text">Tarifs</span>
+    </a>
+    <a href="#securite" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🔒</span>
+      <span class="sidebar-item-text">Sécurité</span>
+    </a>
+    <a href="/demo.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🧪</span>
+      <span class="sidebar-item-text">Tests</span>
+    </a>
+    <a href="#api" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">📚</span>
+      <span class="sidebar-item-text">API</span>
+    </a>
+    <a href="/offres-assurance.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🛡️</span>
+      <span class="sidebar-item-text">Offres Assurance</span>
+    </a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">+</div>
+      <span><span>Medi</span>Connect</span>
+    </a>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  </div>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">Offres Assurance Santé</h1>
+    <p class="page-subtitle">Découvrez les meilleures offres d'assurance santé adaptées à vos besoins et souscrivez en quelques clics.</p>
+  </div>
+
+  <div id="offres-container">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p style="margin-top:16px; color:var(--dim);">Chargement des offres...</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo" style="margin-bottom:8px">
+        <div class="logo-icon">+</div>
+        <span><span>Medi</span>Connect Africa</span>
+      </div>
+      <div class="footer-copy">© 2026 MediConnect Africa · UEMOA + CEMAC · Tous droits réservés<br>Powered by <strong>Intelligence Database</strong></div>
+      <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;">
+        <button class="btn btn-ghost" onclick="openDemoModal()" style="padding:8px 16px; font-size:13px;">📞 Demander une démo</button>
+        <a href="https://manager.mediconnect4africa.cloud/bd" class="btn btn-ghost" style="padding:8px 16px; font-size:13px;">Espace BD</a>
+        <a href="https://manager.mediconnect4africa.cloud/login" class="btn btn-ghost" style="padding:8px 16px; font-size:13px;">Se connecter</a>
+        <a href="https://manager.mediconnect4africa.cloud/register" class="btn btn-primary" style="padding:8px 16px; font-size:13px;">Créer un compte →</a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://manager.mediconnect4africa.cloud">Plateforme</a>
+      <a href="https://manager.mediconnect4africa.cloud/register">S'inscrire</a>
+      <a href="https://mediconnect4africa.com/register-bd">Devenir BD</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Conditions</a>
+      <a href="#">Nous Contacter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    if (sidebar && overlay) {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+  }
+
+  function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    if (sidebar && overlay) {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+  }
+
+  // Close sidebar on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSidebar();
+  });
+
+  // Fonction pour charger les offres depuis l'API
+  async function loadOffres() {
+    try {
+      const response = await fetch('https://mediconnect-backend-v2.vercel.app/api/assurance/offres');
+      const data = await response.json();
+      
+      if (data.success && data.offres) {
+        renderOffres(data.offres);
+      } else {
+        showError('Erreur lors du chargement des offres');
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement des offres:', error);
+      showError('Impossible de charger les offres. Veuillez réessayer plus tard.');
+    }
+  }
+
+  // Fonction pour afficher les offres
+  function renderOffres(offres) {
+    const container = document.getElementById('offres-container');
+    
+    if (!offres || offres.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🛡️</div>
+          <h2 class="empty-title">Aucune offre disponible</h2>
+          <p class="empty-text">Les offres d'assurance santé seront bientôt disponibles. Revenez nous voir pour découvrir les meilleures couvertures.</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = `<div class="offres-grid">${offres.map(offre => `
+      <div class="offre-card">
+        <div class="offre-header">
+          <div class="offre-company">${offre.assureur_nom || 'Compagnie Assurance'}</div>
+          <h3 class="offre-title">${offre.nom || 'Offre Assurance'}</h3>
+          <div class="offre-price">
+            ${offre.prix_mensuel ? `${offre.prix_mensuel.toLocaleString('fr-FR')} FCFA` : 'Sur demande'}
+            <div class="offre-price-label">par mois</div>
+          </div>
+        </div>
+
+        <div class="offre-details">
+          ${offre.description ? `<p class="offre-description">${offre.description}</p>` : ''}
+          
+          ${offre.couverture_details ? `
+            <div class="offre-coverage">
+              <div class="coverage-title">Couvertures</div>
+              <div class="coverage-badges">
+                ${Object.entries(offre.couverture_details).map(([key, value]) => `
+                  <span class="coverage-badge">${key.replace(/_/g, ' ')}: ${value}%</span>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
+          ${offre.franchise || offre.plafond_annuel ? `
+            <div class="offre-info">
+              ${offre.franchise ? `
+                <div class="info-item">
+                  <div class="info-label">Franchise</div>
+                  <div class="info-value">${offre.franchise.toLocaleString('fr-FR')} FCFA</div>
+                </div>
+              ` : ''}
+              ${offre.plafond_annuel ? `
+                <div class="info-item">
+                  <div class="info-label">Plafond Annuel</div>
+                  <div class="info-value">${offre.plafond_annuel.toLocaleString('fr-FR')} FCFA</div>
+                </div>
+              ` : ''}
+              ${offre.delai_remboursement ? `
+                <div class="info-item">
+                  <div class="info-label">Délai Remboursement</div>
+                  <div class="info-value">${offre.delai_remboursement}h</div>
+                </div>
+              ` : ''}
+            </div>
+          ` : ''}
+        </div>
+
+        <div class="offre-actions">
+          <a href="/offre-details.html?id=${offre.id}" class="btn btn-ghost">Voir détails</a>
+          <a href="/offre-details.html?id=${offre.id}" class="btn btn-primary">Souscrire</a>
+        </div>
+      </div>
+    `).join('')}</div>`;
+  }
+
+  // Fonction pour afficher les erreurs
+  function showError(message) {
+    const container = document.getElementById('offres-container');
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⚠️</div>
+        <h2 class="empty-title">Erreur de chargement</h2>
+        <p class="empty-text">${message}</p>
+      </div>
+    `;
+  }
+
+  // Fonction pour voir les détails
+  function voirDetails(offerId) {
+    alert(`Détails de l'offre #${offerId} - Fonctionnalité à développer`);
+  }
+
+  // Charger les offres au chargement de la page
+  document.addEventListener('DOMContentLoaded', loadOffres);
+</script>
+
+</body>
+</html>
