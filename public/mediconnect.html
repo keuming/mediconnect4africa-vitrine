@@ -294,7 +294,6 @@
       <div class="logo-icon">+</div>
       <span><span>Medi</span>Connect</span>
     </a>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
   </div>
 </nav>
 
@@ -869,7 +868,7 @@
 </script>
 
 <!-- CHATBOT WIDGET -->
-<div id="chatbot-widget" style="position:fixed; bottom:20px; right:20px; width:380px; height:500px; background:var(--bg); border:1px solid var(--border); border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.3); display:flex; flex-direction:column; z-index:9999; font-family:'Plus Jakarta Sans',sans-serif;">
+<div id="chatbot-widget" style="position:fixed; bottom:20px; right:20px; width:min(380px, calc(100vw - 20px)); height:500px; display:none; background:var(--bg); border:1px solid var(--border); border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.3); display:flex; flex-direction:column; z-index:9999; font-family:'Plus Jakarta Sans',sans-serif;">
   <!-- Header -->
   <div style="padding:16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg,#0A8F58 0%,#065F3C 100%); border-radius:16px 16px 0 0;">
     <div style="display:flex; align-items:center; gap:10px;">
@@ -915,7 +914,7 @@
 </div>
 
 <!-- Chatbot Toggle Button (when minimized) -->
-<button id="chatbot-toggle" onclick="toggleChatbot()" style="position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:var(--green); border:none; color:#fff; font-size:24px; cursor:pointer; box-shadow:0 4px 12px rgba(10,143,88,0.3); display:none; z-index:9998; transition:all 0.2s;" onmouseover="this.style.background='var(--greenD)'" onmouseout="this.style.background='var(--green)'">💬</button>
+<button id="chatbot-toggle" onclick="toggleChatbot()" style="position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:50%; background:var(--green); border:none; color:#fff; font-size:24px; cursor:pointer; box-shadow:0 4px 12px rgba(10,143,88,0.3); display:flex; z-index:9998; transition:all 0.2s;" onmouseover="this.style.background='var(--greenD)'" onmouseout="this.style.background='var(--green)'">💬</button>
 
 <script>
 const CHATBOT_KNOWLEDGE = {
@@ -1009,6 +1008,15 @@ function toggleChatbot() {
   widget.style.display = chatbotMinimized ? 'none' : 'flex';
   toggle.style.display = chatbotMinimized ? 'flex' : 'none';
 }
+
+// Initialisation : chatbot ferme par defaut
+document.addEventListener('DOMContentLoaded', function() {
+  chatbotMinimized = true;
+  document.getElementById('chatbot-widget').style.display = 'none';
+  document.getElementById('chatbot-toggle').style.display = 'flex';
+  document.getElementById('chatbot-toggle').style.alignItems = 'center';
+  document.getElementById('chatbot-toggle').style.justifyContent = 'center';
+});
 
 function addChatbotMessage(role, content) {
   const messagesDiv = document.getElementById('chatbot-messages');
