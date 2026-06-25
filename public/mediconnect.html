@@ -674,8 +674,9 @@ async function registerPatient() {
       document.getElementById('reg-pin').value = '';
       document.getElementById('reg-email').value = '';
     } else {
-      errEl.textContent = d.message || 'Erreur lors de la creation du compte';
+      errEl.textContent = d.message || 'Ce numero est deja utilise. Essayez de vous connecter.';
       errEl.style.display = 'block';
+      errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   } catch(e) {
     errEl.textContent = 'Erreur reseau. Veuillez reessayer.';
