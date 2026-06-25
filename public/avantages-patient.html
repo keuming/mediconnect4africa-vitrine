@@ -3,45 +3,104 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Avantages Patient — MediConnect Africa</title>
+<title>MediConnect Card — Votre bouclier de sante en Afrique</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
-:root{--green:#0A8F58;--greenL:#34D399;--greenD:#065F3C;--bg:#060E18;--card:#0D1B2A;--border:#1a2d42;--text:#F0F6FF;--muted:#8BA3B8;--dim:#5A7A94}
+:root{--green:#0A8F58;--greenL:#34D399;--greenD:#065F3C;--bg:#060E18;--card:#0D1B2A;--border:#1a2d42;--text:#F0F6FF;--muted:#8BA3B8;--dim:#5A7A94;--red:#EF4444;--amber:#F59E0B}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-nav{position:sticky;top:0;z-index:100;background:rgba(6,14,24,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%}
-.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;height:60px;gap:16px}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;color:var(--text);text-decoration:none}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(6,14,24,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5%}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;height:60px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:17px;color:var(--text);text-decoration:none}
 .logo-icon{width:34px;height:34px;border-radius:9px;background:rgba(10,143,88,0.2);border:1.5px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--greenL)}
-.hero{background:linear-gradient(135deg,#0A3D2E 0%,#065F3C 100%);padding:48px 5% 40px;text-align:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);border-radius:30px;padding:5px 14px;font-size:11px;color:var(--greenL);font-weight:700;margin-bottom:18px}
-.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:700;color:#fff;margin-bottom:12px;line-height:1.2}
-.hero p{font-size:15px;color:rgba(255,255,255,0.75);max-width:580px;margin:0 auto;line-height:1.7}
-main{max-width:900px;margin:0 auto;padding:40px 5% 60px}
-.section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px}
-.section-title{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--greenL);margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.section-title::before{content:"";display:block;width:4px;height:20px;background:var(--green);border-radius:2px;flex-shrink:0}
-.items{display:flex;flex-direction:column;gap:10px}
-.item{display:flex;gap:12px;align-items:flex-start}
-.check{color:var(--greenL);font-weight:700;font-size:14px;flex-shrink:0;margin-top:1px}
-.item-text{font-size:14px;color:var(--muted);line-height:1.6}
-.tarif-box{background:linear-gradient(135deg,#0A3D2E,#065F3C);border-radius:16px;padding:28px;margin-bottom:20px;border:1px solid rgba(52,211,153,0.2)}
-.tarif-box h3{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:#fff;margin-bottom:16px}
-.tarif-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(52,211,153,0.15)}
-.tarif-row:last-child{border-bottom:none}
-.tarif-label{font-size:13px;color:rgba(255,255,255,0.75)}
-.tarif-val{font-size:14px;font-weight:700;color:var(--greenL)}
-.cta-section{text-align:center;padding:32px;background:var(--card);border:1px solid var(--border);border-radius:16px}
-.cta-section h3{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:10px}
-.cta-section p{font-size:14px;color:var(--muted);margin-bottom:24px}
-.btn{display:inline-block;padding:13px 28px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;cursor:pointer;border:none}
-.btn-primary{background:var(--green);color:#fff}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);margin-left:10px}
-.note{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:14px 16px;margin-top:10px}
-.note-text{font-size:13px;color:#F59E0B;line-height:1.6}
+.nav-cta{margin-left:auto;padding:8px 20px;background:var(--green);border:none;border-radius:8px;color:#fff;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none}
+
+/* HERO URGENCE */
+.hero-urgence{background:linear-gradient(135deg,#1a0808 0%,#2d0a0a 50%,#0A3D2E 100%);padding:64px 5% 48px;text-align:center;position:relative;overflow:hidden}
+.hero-urgence::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,68,68,0.15) 0%,transparent 70%)}
+.urgence-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);border-radius:30px;padding:6px 16px;font-size:12px;color:#FCA5A5;font-weight:700;margin-bottom:20px;letter-spacing:0.5px}
+.hero-urgence h1{font-family:"Space Grotesk",sans-serif;font-size:clamp(26px,4.5vw,48px);font-weight:700;color:#fff;margin-bottom:16px;line-height:1.2}
+.hero-urgence h1 span{color:var(--greenL)}
+.hero-urgence p{font-size:clamp(14px,1.8vw,17px);color:rgba(255,255,255,0.75);max-width:640px;margin:0 auto 32px;line-height:1.8}
+
+/* STATS CHOC */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;max-width:800px;margin:0 auto 0}
+.stat-choc{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px;text-align:center}
+.stat-choc-num{font-family:"Space Grotesk",sans-serif;font-size:32px;font-weight:700;color:var(--red);line-height:1}
+.stat-choc-label{font-size:12px;color:rgba(255,255,255,0.6);margin-top:6px;line-height:1.4}
+
+/* VIDEO */
+.video-section{max-width:800px;margin:0 auto;padding:48px 5% 0}
+.video-label{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;text-align:center}
+.video-wrapper{position:relative;width:100%;padding-bottom:56.25%;border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--border)}
+.video-wrapper iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0D1B2A,#0A3D2E);cursor:pointer}
+.video-play-btn{width:72px;height:72px;border-radius:50%;background:rgba(10,143,88,0.3);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:12px;transition:transform 0.2s}
+.video-placeholder p{font-size:14px;color:var(--muted);text-align:center;padding:0 20px}
+.video-admin-note{font-size:11px;color:var(--dim);text-align:center;margin-top:10px;font-style:italic}
+
+/* MESSAGE URGENCE */
+.urgence-message{max-width:800px;margin:40px auto 0;padding:0 5%}
+.urgence-card{background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(245,158,11,0.05));border:1px solid rgba(239,68,68,0.3);border-radius:16px;padding:28px}
+.urgence-icon{font-size:36px;margin-bottom:16px}
+.urgence-card h2{font-family:"Space Grotesk",sans-serif;font-size:20px;font-weight:700;color:#FCA5A5;margin-bottom:14px;line-height:1.3}
+.urgence-card p{font-size:15px;color:rgba(255,255,255,0.8);line-height:1.9;margin-bottom:14px}
+.urgence-card p strong{color:var(--greenL)}
+.contacts-note{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:14px 16px;margin-top:14px}
+.contacts-note p{font-size:13px;color:#FCD34D;line-height:1.7;margin:0}
+
+/* CARTE SECTION */
+.carte-section{max-width:800px;margin:40px auto 0;padding:0 5%}
+.carte-label{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;text-align:center}
+.carte-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.carte-face{display:flex;flex-direction:column;gap:8px}
+.carte-face-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;text-align:center}
+
+/* CARD CSS */
+.mc-card{width:100%;aspect-ratio:1.586;border-radius:14px;position:relative;overflow:hidden;font-family:"Space Grotesk",sans-serif}
+.card-front{background:#050E18;border:1px solid rgba(29,158,117,0.25)}
+.card-back{background:#040B14;border:1px solid rgba(29,158,117,0.25)}
+.card-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(29,158,117,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(29,158,117,0.05) 1px,transparent 1px);background-size:22px 22px}
+.card-stripe{position:absolute;bottom:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,#065F3C,#1D9E75,#34D399,#1D9E75,#065F3C)}
+
+/* AVANTAGES */
+.avantages-section{max-width:800px;margin:48px auto 0;padding:0 5%}
+.avantages-title{font-family:"Space Grotesk",sans-serif;font-size:22px;font-weight:700;margin-bottom:20px;text-align:center}
+.avantage-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px}
+.avantage-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.avantage-icon{width:40px;height:40px;border-radius:10px;background:rgba(10,143,88,0.15);border:1px solid rgba(10,143,88,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.avantage-title{font-family:"Space Grotesk",sans-serif;font-size:15px;font-weight:700;color:var(--greenL)}
+.avantage-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.avantage-list li{font-size:13.5px;color:var(--muted);display:flex;gap:10px;align-items:flex-start;line-height:1.6}
+.avantage-list li::before{content:"✓";color:var(--greenL);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* TARIF */
+.tarif-section{max-width:800px;margin:40px auto 0;padding:0 5%}
+.tarif-box{background:linear-gradient(135deg,#0A3D2E,#065F3C);border-radius:16px;padding:28px;border:1px solid rgba(52,211,153,0.2);text-align:center}
+.tarif-box h3{font-family:"Space Grotesk",sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:20px}
+.tarif-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(52,211,153,0.15)}
+.tarif-row:last-child{border:none}
+.tarif-label{font-size:14px;color:rgba(255,255,255,0.75)}
+.tarif-val{font-size:15px;font-weight:700;color:var(--greenL)}
+
+/* CTA */
+.cta-section{max-width:800px;margin:40px auto 60px;padding:0 5%}
+.cta-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;text-align:center}
+.cta-box h3{font-family:"Space Grotesk",sans-serif;font-size:22px;font-weight:700;margin-bottom:10px}
+.cta-box p{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7}
+.btn-primary{display:inline-block;padding:14px 32px;background:var(--green);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;margin:6px}
+.btn-ghost{display:inline-block;padding:14px 32px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;margin:6px}
+
 footer{border-top:1px solid var(--border);padding:24px 5%;text-align:center;font-size:12px;color:var(--dim)}
-@media(max-width:600px){.nav-inner{padding:0}.hero{padding:36px 5% 30px}.section{padding:20px}}
+
+@media(max-width:600px){
+  .carte-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .cta-box{padding:24px}
+}
 </style>
 </head>
 <body>
@@ -52,87 +111,353 @@ footer{border-top:1px solid var(--border);padding:24px 5%;text-align:center;font
       <div class="logo-icon">+</div>
       <span>Medi<span style="color:var(--greenL)">Connect</span></span>
     </a>
-    <span style="margin-left:auto;font-size:12px;color:var(--dim)">Profil 1 / 8</span>
+    <a href="/#patient" class="nav-cta">Creer mon compte →</a>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="hero-badge">&#128203; Espace Patient</div>
-  <h1>Le Patient<br><span style="color:var(--greenL)">Acces a des soins de qualite,<br>ou que vous soyez en Afrique</span></h1>
-  <p>MediConnect Africa place le patient au coeur de son ecosysteme. Chaque service est concu pour simplifier l'acces aux soins, securiser les donnees medicales et eliminer les deplacements inutiles.</p>
+<!-- HERO -->
+<div class="hero-urgence">
+  <div class="urgence-badge">🚨 Sensibilisation — Prevention medicale en Afrique</div>
+  <h1>Votre vie peut basculer<br>en <span>quelques secondes</span></h1>
+  <p>Accident de la route, AVC, infarctus, perte de conscience... En Afrique, des milliers de vies sont perdues chaque annee faute d'une prise en charge rapide et d'informations accessibles sur les lieux du drame. MediConnect Card change cela.</p>
+
+  <div class="stats-row">
+    <div class="stat-choc">
+      <div class="stat-choc-num">72%</div>
+      <div class="stat-choc-label">des deces evitables surviennent dans les 2 premieres heures</div>
+    </div>
+    <div class="stat-choc">
+      <div class="stat-choc-num">3min</div>
+      <div class="stat-choc-label">Le temps moyen avant qu'un organe commence a souffrir d'un manque d'oxygene</div>
+    </div>
+    <div class="stat-choc">
+      <div class="stat-choc-num">1/4</div>
+      <div class="stat-choc-label">des victimes n'ont aucun contact d'urgence accessible sur elles</div>
+    </div>
+    <div class="stat-choc">
+      <div class="stat-choc-num">100%</div>
+      <div class="stat-choc-label">des frais pris en charge par MediConnect en cas d'urgence</div>
+    </div>
+  </div>
 </div>
 
-<main>
-
-  <div class="section">
-    <div class="section-title">Trouver le bon medecin avant de se deplacer</div>
-    <div class="items">
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Consultez les specialites disponibles dans chaque clinique depuis votre telephone</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Verifiez si le medecin de votre choix est disponible avant de sortir de chez vous</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Acces aux horaires de tous les medecins en temps reel</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Fini les deplacements inutiles : vous savez exactement ce que vous allez trouver</span></div>
+<!-- VIDEO -->
+<div class="video-section">
+  <p class="video-label">Message de sensibilisation</p>
+  <div class="video-wrapper" id="video-wrapper">
+    <div class="video-placeholder" id="video-placeholder" onclick="loadVideo()">
+      <div class="video-play-btn">&#9654;</div>
+      <p>Cliquez pour voir le message de sensibilisation MediConnect Africa</p>
     </div>
   </div>
+  <p class="video-admin-note">Video disponible prochainement · Lien YouTube configurable par l'administrateur</p>
+</div>
 
-  <div class="section">
-    <div class="section-title">Prise de rendez-vous en ligne, 24h/24 et 7j/7</div>
-    <div class="items">
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Reservez votre creneau depuis votre telephone, a toute heure</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Choisissez votre medecin, votre clinique et votre horaire en quelques clics</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Confirmation instantanee : le medecin est notifie automatiquement</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Rappel automatique avant le rendez-vous</span></div>
+<!-- MESSAGE URGENCE -->
+<div class="urgence-message">
+  <div class="urgence-card">
+    <div class="urgence-icon">⚡</div>
+    <h2>Ce qui se passe quand vous perdez conscience</h2>
+    <p>
+      En cas d'accident, d'AVC, d'infarctus ou de toute situation ou vous perdez conscience,
+      les personnes qui vous trouvent ne savent pas qui vous etes, qui appeler, ni comment
+      vous aider. Chaque minute compte. Chaque seconde perdue peut etre fatale.
+    </p>
+    <p>
+      Le <strong>QR Code de votre MediConnect Card</strong> permet aux urgentistes, medecins
+      ou toute personne presente sur les lieux de contacter immediatement vos proches et
+      de declencher votre prise en charge medicale — <strong>tous frais payes par MediConnect</strong>
+      en attendant votre retablissement total — sans acceder a votre dossier medical.
+    </p>
+    <div class="contacts-note">
+      <p>
+        👨‍👩‍👧 <strong style="color:#FCD34D">Renseignez jusqu'a 5 contacts de confiance</strong>
+        (parents, conjoint, enfants majeurs...) qui seront alertes en priorite.
+        Ces contacts sont stockes de facon securisee et accessibles uniquement via le QR Code
+        de votre carte, en cas d'urgence verifiee.
+      </p>
     </div>
   </div>
+</div>
 
-  <div class="section">
-    <div class="section-title">File d'attente digitalisee a la clinique</div>
-    <div class="items">
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">A votre arrivee, scannez le QR Code affiche a l'accueil de la clinique</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Votre rang dans la file d'attente s'affiche immediatement sur votre ecran</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Suivez l'evolution en temps reel (1re position, 4e position...)</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Quand votre tour arrive, la secretaire vous appelle — plus de stress ni d'incertitude</span></div>
+<!-- CARTES RECTO/VERSO -->
+<div class="carte-section">
+  <p class="carte-label">La MediConnect Card — votre carte de sante numerique</p>
+  <div class="carte-grid">
+
+    <!-- RECTO -->
+    <div class="carte-face">
+      <p class="carte-face-label">Recto — Paiement digital</p>
+      <div class="mc-card card-front">
+        <div class="card-grid-bg"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 320 202" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="glow" cx="75%" cy="25%" r="50%">
+              <stop offset="0%" stop-color="#0A8F58" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#0A8F58" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#C8A84B"/>
+              <stop offset="50%" stop-color="#F5D98B"/>
+              <stop offset="100%" stop-color="#B8943E"/>
+            </linearGradient>
+          </defs>
+          <rect width="320" height="202" fill="url(#glow)"/>
+          <!-- Chip -->
+          <rect x="16" y="16" width="34" height="26" rx="4" fill="url(#chip)"/>
+          <rect x="18" y="22" width="30" height="1.5" rx="1" fill="#9A7A3025"/>
+          <rect x="18" y="27" width="22" height="1.5" rx="1" fill="#9A7A3025"/>
+          <rect x="18" y="32" width="28" height="1.5" rx="1" fill="#9A7A3025"/>
+          <!-- Brand -->
+          <text x="60" y="28" fill="white" font-size="11" font-weight="700" font-family="Space Grotesk">Medi</text>
+          <text x="88" y="28" fill="#34D399" font-size="11" font-weight="700" font-family="Space Grotesk">Connect</text>
+          <text x="60" y="39" fill="#34D39960" font-size="6" font-family="Space Grotesk" letter-spacing="1">AFRICA HEALTH CARD</text>
+          <!-- NFC -->
+          <path d="M302 16 Q308 22 302 28" fill="none" stroke="#34D39950" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M298 13 Q308 22 298 31" fill="none" stroke="#34D39935" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M294 10 Q308 22 294 34" fill="none" stroke="#34D39920" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Numéro -->
+          <text x="16" y="132" fill="white" font-size="11" font-weight="500" font-family="Space Grotesk" letter-spacing="2">MC-CI  2026  4821</text>
+          <!-- Titulaire -->
+          <text x="16" y="148" fill="#34D39975" font-size="6" font-family="Space Grotesk" letter-spacing="1">TITULAIRE</text>
+          <text x="16" y="162" fill="white" font-size="10" font-weight="600" font-family="Space Grotesk">PATIENT TEST</text>
+          <!-- Validité -->
+          <text x="16" y="180" fill="#34D39960" font-size="5.5" font-family="Space Grotesk" letter-spacing="1">VALIDE JUSQU'AU</text>
+          <text x="16" y="192" fill="white" font-size="9" font-weight="600" font-family="Space Grotesk" letter-spacing="1.5">06 / 28</text>
+          <!-- QR -->
+          <rect x="246" y="120" width="60" height="60" rx="5" fill="white"/>
+          <rect x="250" y="124" width="16" height="16" rx="1" fill="none" stroke="#065F3C" stroke-width="1.2"/>
+          <rect x="252" y="126" width="12" height="12" rx="0.5" fill="#065F3C"/>
+          <rect x="278" y="124" width="16" height="16" rx="1" fill="none" stroke="#065F3C" stroke-width="1.2"/>
+          <rect x="280" y="126" width="12" height="12" rx="0.5" fill="#065F3C"/>
+          <rect x="250" y="152" width="16" height="16" rx="1" fill="none" stroke="#065F3C" stroke-width="1.2"/>
+          <rect x="252" y="154" width="12" height="12" rx="0.5" fill="#065F3C"/>
+          <rect x="270" y="124" width="3" height="3" fill="#065F3C"/>
+          <rect x="274" y="128" width="3" height="3" fill="#065F3C"/>
+          <rect x="270" y="132" width="3" height="3" fill="#065F3C"/>
+          <rect x="270" y="140" width="3" height="3" fill="#065F3C"/>
+          <rect x="274" y="144" width="3" height="3" fill="#065F3C"/>
+          <rect x="270" y="148" width="3" height="3" fill="#065F3C"/>
+          <rect x="278" y="140" width="3" height="3" fill="#065F3C"/>
+          <rect x="282" y="144" width="3" height="3" fill="#065F3C"/>
+          <rect x="278" y="148" width="3" height="3" fill="#065F3C"/>
+          <rect x="270" y="156" width="3" height="3" fill="#065F3C"/>
+          <rect x="274" y="160" width="3" height="3" fill="#065F3C"/>
+          <rect x="270" y="164" width="3" height="3" fill="#065F3C"/>
+          <text x="276" y="186" fill="#0A8F58" font-size="5" font-weight="700" font-family="Space Grotesk" text-anchor="middle" letter-spacing="0.3">SCAN &amp; PAY</text>
+        </svg>
+        <div class="card-stripe"></div>
+      </div>
+    </div>
+
+    <!-- VERSO -->
+    <div class="carte-face">
+      <p class="carte-face-label">Verso — Acces dossier medical</p>
+      <div class="mc-card card-back">
+        <div class="card-grid-bg"></div>
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 320 202" preserveAspectRatio="xMidYMid slice">
+          <!-- Bande magnétique -->
+          <rect x="0" y="22" width="320" height="28" fill="#111111"/>
+          <rect x="0" y="22" width="320" height="0.8" fill="#2a2a2a"/>
+          <rect x="0" y="49.2" width="320" height="0.8" fill="#2a2a2a"/>
+          <!-- Infos médicales -->
+          <text x="16" y="70" fill="#34D399bb" font-size="7" font-family="Space Grotesk">
+            <tspan font-weight="600">Groupe sanguin :</tspan>
+            <tspan fill="#34D39975"> O+</tspan>
+          </text>
+          <text x="16" y="82" fill="#34D399bb" font-size="7" font-family="Space Grotesk">
+            <tspan font-weight="600">Allergies :</tspan>
+            <tspan fill="#34D39975"> Penicilline</tspan>
+          </text>
+          <text x="16" y="94" fill="#34D399bb" font-size="7" font-family="Space Grotesk">
+            <tspan font-weight="600">Contact urgence 1 :</tspan>
+            <tspan fill="#34D39975"> +225 07 XX XX XX</tspan>
+          </text>
+          <text x="16" y="106" fill="#34D399bb" font-size="7" font-family="Space Grotesk">
+            <tspan font-weight="600">Contact urgence 2 :</tspan>
+            <tspan fill="#34D39975"> +225 05 XX XX XX</tspan>
+          </text>
+          <!-- Brand verso -->
+          <text x="304" y="70" fill="#ffffff20" font-size="8" font-weight="700" font-family="Space Grotesk" text-anchor="end">Medi<tspan fill="#34D39920">Connect</tspan></text>
+          <text x="304" y="80" fill="#34D39925" font-size="5.5" font-family="Space Grotesk" text-anchor="end">mediconnect4africa.cloud</text>
+          <!-- Diviseur -->
+          <line x1="16" y1="118" x2="304" y2="118" stroke="#1D9E7428" stroke-width="0.6"/>
+          <!-- Label barcode -->
+          <text x="160" y="130" fill="#34D39965" font-size="5.5" font-weight="600" font-family="Space Grotesk" text-anchor="middle" letter-spacing="1">ACCES DOSSIER MEDICAL — SCANNER POUR AUTHENTIFIER</text>
+          <!-- Barcode -->
+          <rect x="16" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="19" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="21" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="25" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="27" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="30" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="32" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="36" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="38" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="41" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="45" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="47" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="50" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="54" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="56" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="59" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="61" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="65" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="68" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="70" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="74" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="76" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="79" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="81" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="85" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="87" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="90" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="94" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="96" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="99" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="101" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="105" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="108" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="110" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="114" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="116" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="119" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="123" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="125" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="128" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="130" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="134" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="137" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="139" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="143" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="145" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="148" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="150" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="154" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="156" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="159" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="161" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="165" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="168" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="170" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="174" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="176" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="179" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="183" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="185" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="188" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="190" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="194" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="196" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="199" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="201" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="205" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="208" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="210" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="214" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="216" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="219" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="223" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="225" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="228" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="230" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="234" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="237" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="239" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="243" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="245" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="248" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="250" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="254" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="256" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="259" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="261" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="265" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="268" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="270" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="274" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="276" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="279" y="135" width="3" height="36" fill="#34D399"/>
+          <rect x="283" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="285" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="288" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="290" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="294" y="135" width="1.5" height="36" fill="#34D399"/>
+          <rect x="297" y="135" width="1" height="36" fill="#34D399"/>
+          <rect x="299" y="135" width="2.5" height="36" fill="#34D399"/>
+          <rect x="303" y="135" width="1" height="36" fill="#34D399"/>
+          <!-- Numéro série -->
+          <text x="160" y="180" fill="#34D39960" font-size="5.5" font-family="Space Grotesk" text-anchor="middle" letter-spacing="1.5">MC-CI-2026-000001  |  TEST-2026-0A8F58</text>
+        </svg>
+        <div class="card-stripe"></div>
+      </div>
     </div>
   </div>
+</div>
 
-  <div class="section">
-    <div class="section-title">Dossier medical digitalise et securise</div>
-    <div class="items">
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Vos donnees medicales sont accessibles depuis n'importe quelle ville ou pays</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Diagnostics, ordonnances, constantes vitales, antecedents, allergies reunis en un seul endroit</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Partagez votre dossier avec un nouveau medecin en lui communiquant votre code secret</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Confidentialite totale : seul vous decidez qui accede a vos donnees</span></div>
+<!-- AVANTAGES -->
+<div class="avantages-section">
+  <h2 class="avantages-title">Ce que MediConnect fait pour vous</h2>
+
+  <div class="avantage-item">
+    <div class="avantage-header">
+      <div class="avantage-icon">🔍</div>
+      <div class="avantage-title">Trouver le bon medecin avant de se deplacer</div>
     </div>
+    <ul class="avantage-list">
+      <li>Consultez les specialites disponibles dans chaque clinique depuis votre telephone</li>
+      <li>Verifiez les disponibilites et les horaires des medecins en temps reel</li>
+      <li>Fini les deplacements inutiles : vous savez exactement ce que vous allez trouver</li>
+      <li>Prise de RDV en ligne, 24h/24 et 7j/7, confirmation instantanee</li>
+    </ul>
   </div>
 
-  <div class="section">
-    <div class="section-title">Livraison de medicaments a domicile</div>
-    <div class="items">
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Envoyez votre ordonnance electronique a la pharmacie depuis votre telephone</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Recevez un devis accompagne d'un lien de paiement direct</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Payez via Wave, Orange Money, MTN MoMo ou Moov Money</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Le livreur MediConnect est alerte automatiquement et livre les medicaments a votre domicile</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Vous ne vous deplacez plus — tout se gere depuis votre telephone</span></div>
+  <div class="avantage-item">
+    <div class="avantage-header">
+      <div class="avantage-icon">🗂️</div>
+      <div class="avantage-title">Dossier medical numerique et securise</div>
     </div>
+    <ul class="avantage-list">
+      <li>Vos donnees medicales accessibles depuis n'importe quelle ville ou pays</li>
+      <li>Diagnostics, ordonnances, constantes vitales, antecedents, allergies reunis en un seul endroit</li>
+      <li>Partagez votre dossier avec un nouveau medecin via votre code secret</li>
+      <li>Confidentialite totale : seul vous decidez qui accede a vos donnees</li>
+    </ul>
   </div>
 
-  <div class="section">
-    <div class="section-title">La MediConnect Card — votre carte de sante numerique</div>
-    <div class="items">
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Carte prepayee physique (verte ou noire) pour payer vos soins chez les prestataires du reseau</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Prise en charge immediate et sans condition a 100% dans n'importe quelle clinique ou hopital en cas d'accident de circulation, AVC, infarctus ou tout autre accident entrainant la perte de conscience</span></div>
+  <div class="avantage-item">
+    <div class="avantage-header">
+      <div class="avantage-icon">💊</div>
+      <div class="avantage-title">Livraison de medicaments a domicile</div>
     </div>
-    <div class="note">
-      <p class="note-text">&#9888; NB : Le patient rembourse les frais a hauteur de 20% apres son retablissement.</p>
-    </div>
-    <div class="items" style="margin-top:12px">
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">En cas d'urgence : les urgentistes ou toute personne presente sur les lieux peut scanner le QR Code pour acceder aux contacts d'urgence et alerter la famille du patient — sans acceder au dossier medical</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Rechargeable via Wave, Orange Money, MTN MoMo ou en especes</span></div>
-      <div class="item"><span class="check">&#10003;</span><span class="item-text">Compte famille : pere, mere et enfants (18 ans maximum), jusqu'a 10 membres par carte</span></div>
-    </div>
+    <ul class="avantage-list">
+      <li>Envoyez votre ordonnance electronique a la pharmacie depuis votre telephone</li>
+      <li>Recevez un devis avec lien de paiement direct (Wave, Orange Money, MTN MoMo)</li>
+      <li>Le livreur MediConnect est alerte automatiquement et livre a votre domicile</li>
+      <li>Vous ne vous deplacez plus — tout se gere depuis votre telephone</li>
+    </ul>
   </div>
 
+  <div class="avantage-item" style="border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04)">
+    <div class="avantage-header">
+      <div class="avantage-icon" style="background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.3)">💳</div>
+      <div class="avantage-title" style="color:#FCA5A5">MediConnect Card — prise en charge immediate</div>
+    </div>
+    <ul class="avantage-list">
+      <li>Carte prepayee physique pour payer vos soins chez les prestataires du reseau</li>
+      <li>Prise en charge immediate et sans condition a 100% en cas d'accident, AVC ou infarctus entrainant une perte de conscience</li>
+      <li>Le patient rembourse les frais a hauteur de 20% apres son retablissement</li>
+      <li>QR Code urgence : vos proches alertes en quelques secondes, sans acceder a votre dossier medical</li>
+      <li>Compte famille : parents + enfants (18 ans max), jusqu'a 10 membres par carte</li>
+      <li>Rechargeable via Wave, Orange Money, MTN MoMo ou en especes</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TARIF -->
+<div class="tarif-section">
   <div class="tarif-box">
-    <h3>&#128176; Tarification</h3>
+    <h3>&#128176; Tarification Patient</h3>
     <div class="tarif-row">
       <span class="tarif-label">Frais de mise en service (unique)</span>
       <span class="tarif-val">1 000 FCFA</span>
@@ -145,20 +470,42 @@ footer{border-top:1px solid var(--border);padding:24px 5%;text-align:center;font
       <span class="tarif-label">MediConnect Card</span>
       <span class="tarif-val">Generee automatiquement</span>
     </div>
+    <div class="tarif-row">
+      <span class="tarif-label">Prise en charge urgence</span>
+      <span class="tarif-val">100% des frais</span>
+    </div>
+    <div class="tarif-row">
+      <span class="tarif-label">Remboursement apres retablissement</span>
+      <span class="tarif-val">20% seulement</span>
+    </div>
   </div>
+</div>
 
-  <div class="cta-section">
-    <h3>Pret a rejoindre MediConnect Africa ?</h3>
-    <p>Creez votre compte en moins de 5 minutes et acces a tous vos services de sante en ligne.</p>
-    <a href="/#patient" class="btn btn-primary">Creer mon compte →</a>
-    <a href="https://manager.mediconnect4africa.cloud" class="btn btn-ghost">Acceder au dashboard</a>
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-box">
+    <h3>Ne laissez pas le hasard decider de votre vie</h3>
+    <p>Rejoignez MediConnect Africa aujourd'hui. Creez votre compte en moins de 5 minutes, renseignez vos contacts d'urgence et recevez votre MediConnect Card. Parce que la prevention vaut mieux que la guerison.</p>
+    <a href="/#patient" class="btn-primary">Creer mon compte gratuitement →</a>
+    <a href="https://manager.mediconnect4africa.cloud" class="btn-ghost">Acces dashboard</a>
   </div>
-
-</main>
+</div>
 
 <footer>
-  MediConnect Africa · NEXOVA · Tous droits reserves 2026 · info@nexova.com
+  MediConnect Africa · NEXOVA · Tous droits reserves 2026 · info@nexova.com · +225 05 07 10 86 48
 </footer>
+
+<script>
+function loadVideo() {
+  var youtubeId = "VOTRE_ID_YOUTUBE";
+  var wrapper = document.getElementById("video-wrapper");
+  if(youtubeId === "VOTRE_ID_YOUTUBE") {
+    alert("Video YouTube non encore configuree. Contactez l'administrateur NEXOVA.");
+    return;
+  }
+  wrapper.innerHTML = '<iframe src="https://www.youtube.com/embed/' + youtubeId + '?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+}
+</script>
 
 </body>
 </html>
