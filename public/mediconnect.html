@@ -593,7 +593,7 @@ async function registerPatient() {
     if (d.success) {
       localStorage.setItem('mc_patient_token', d.token);
       localStorage.setItem('mc_patient_data', JSON.stringify(d.data));
-      sucEl.innerHTML = '✅ Compte cree avec succes !<br>Votre MediConnect Card : <strong>' + d.data.numero_carte + '</strong><br>Vous pouvez maintenant vous connecter sur l'application mobile.';
+      sucEl.innerHTML = "Compte cree ! MediConnect Card : " + d.data.numero_carte + " - Connectez-vous sur l'application mobile.";
       sucEl.style.display = 'block';
       document.getElementById('reg-prenom').value = '';
       document.getElementById('reg-nom').value = '';
