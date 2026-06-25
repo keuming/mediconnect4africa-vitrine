@@ -553,7 +553,21 @@ async function createAccountAP() {
         pays_code: "CI"
       })
     });
-    var d = await r.json();
+    var d;
+    try { d = await r.json(); } catch(jsonErr) {
+      errEl.textContent = "Erreur serveur (code " + r.status + "). Veuillez réessayer.";
+      errEl.style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "Créer mon compte et commander ma carte maintenant →";
+      return;
+    }
+    if (!r.ok && !d) {
+      errEl.textContent = "Erreur serveur " + r.status + ". Veuillez réessayer.";
+      errEl.style.display = "block";
+      btn.disabled = false;
+      btn.textContent = "Créer mon compte et commander ma carte maintenant →";
+      return;
+    }
     if (d.success) {
       sucEl.innerHTML = "<strong>✅ Compte créé avec succès !</strong><br>Votre MediConnect Card : <strong>" + d.data.numero_carte + "</strong><br><br>Connectez-vous maintenant sur l'application mobile MediConnect Africa ou sur votre <a href='https://manager.mediconnect4africa.cloud/login?token=" + d.token + "' style='color:var(--greenL);font-weight:700'>tableau de bord patient →</a>";
       sucEl.style.display = "block";

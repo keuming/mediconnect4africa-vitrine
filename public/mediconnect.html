@@ -655,7 +655,14 @@ async function registerPatient() {
         contact_urgence_4, telephone_urgence_4,
         contact_urgence_5, telephone_urgence_5 })
     });
-    const d = await r.json();
+    let d;
+    try { d = await r.json(); } catch(je) {
+      errEl.textContent = 'Erreur serveur (' + r.status + '). Veuillez réessayer.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Créer mon compte →';
+      return;
+    }
     if (d.success) {
       localStorage.setItem('mc_patient_token', d.token);
       localStorage.setItem('mc_patient_data', JSON.stringify(d.data));
