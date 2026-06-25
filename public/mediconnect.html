@@ -484,9 +484,60 @@
           <input id="reg-allergies" type="text" placeholder="Penicilline, aspirine..." style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
         </div>
 
-        <div style="margin-bottom:10px">
-          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CONTACT D'URGENCE</label>
-          <input id="reg-urgence" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+        <!-- Avertissement contacts urgence -->
+        <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:12px 14px;margin-bottom:12px">
+          <p style="font-size:11px;font-weight:700;color:#F59E0B;margin-bottom:6px">🚨 Contacts d'urgence (jusqu'a 5 personnes)</p>
+          <p style="font-size:11px;color:#8BA3B8;line-height:1.6">En cas d'accident, AVC, infarctus ou perte de conscience, le QR Code de votre MediConnect Card permet aux urgentistes ou toute personne presente de contacter immediatement vos proches — sans acceder a votre dossier medical. Renseignez jusqu'a 5 contacts de confiance (parents, conjoint, enfants majeurs...).</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CONTACT 1 (NOM) *</label>
+            <input id="reg-urgence-nom-1" type="text" placeholder="Ex: Kouassi Jean" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">TELEPHONE 1 *</label>
+            <input id="reg-urgence-tel-1" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CONTACT 2 (NOM)</label>
+            <input id="reg-urgence-nom-2" type="text" placeholder="Ex: Adjoua Marie" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">TELEPHONE 2</label>
+            <input id="reg-urgence-tel-2" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CONTACT 3 (NOM)</label>
+            <input id="reg-urgence-nom-3" type="text" placeholder="Ex: Kone Seydou" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">TELEPHONE 3</label>
+            <input id="reg-urgence-tel-3" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CONTACT 4 (NOM)</label>
+            <input id="reg-urgence-nom-4" type="text" placeholder="Optionnel" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">TELEPHONE 4</label>
+            <input id="reg-urgence-tel-4" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CONTACT 5 (NOM)</label>
+            <input id="reg-urgence-nom-5" type="text" placeholder="Optionnel" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">TELEPHONE 5</label>
+            <input id="reg-urgence-tel-5" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
@@ -567,12 +618,21 @@ async function registerPatient() {
   const groupe_sanguin = document.getElementById('reg-gs').value;
   const ville = document.getElementById('reg-ville').value.trim();
   const allergies = document.getElementById('reg-allergies').value.trim();
-  const contact_urgence = document.getElementById('reg-urgence').value.trim();
+  const contact_urgence_1 = document.getElementById('reg-urgence-nom-1').value.trim();
+  const telephone_urgence_1 = document.getElementById('reg-urgence-tel-1').value.trim();
+  const contact_urgence_2 = document.getElementById('reg-urgence-nom-2').value.trim();
+  const telephone_urgence_2 = document.getElementById('reg-urgence-tel-2').value.trim();
+  const contact_urgence_3 = document.getElementById('reg-urgence-nom-3').value.trim();
+  const telephone_urgence_3 = document.getElementById('reg-urgence-tel-3').value.trim();
+  const contact_urgence_4 = document.getElementById('reg-urgence-nom-4').value.trim();
+  const telephone_urgence_4 = document.getElementById('reg-urgence-tel-4').value.trim();
+  const contact_urgence_5 = document.getElementById('reg-urgence-nom-5').value.trim();
+  const telephone_urgence_5 = document.getElementById('reg-urgence-tel-5').value.trim();
   const taille = document.getElementById('reg-taille').value.trim();
   const poids = document.getElementById('reg-poids').value.trim();
 
-  if (!prenom || !nom || !telephone || !pin) {
-    errEl.textContent = 'Prenom, nom, telephone et PIN sont obligatoires';
+  if (!prenom || !nom || !telephone || !pin || !contact_urgence_1 || !telephone_urgence_1) {
+    errEl.textContent = 'Prenom, nom, telephone, PIN et au moins 1 contact urgence sont obligatoires';
     errEl.style.display = 'block'; return;
   }
   if (!/^\d{4}$/.test(pin)) {
@@ -588,7 +648,12 @@ async function registerPatient() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prenom, nom, telephone, pin, email, date_naissance,
-        groupe_sanguin, ville, allergies, contact_urgence, taille, poids, pays_code: 'CI' })
+        groupe_sanguin, ville, allergies, taille, poids, pays_code: 'CI',
+        contact_urgence_1, telephone_urgence_1,
+        contact_urgence_2, telephone_urgence_2,
+        contact_urgence_3, telephone_urgence_3,
+        contact_urgence_4, telephone_urgence_4,
+        contact_urgence_5, telephone_urgence_5 })
     });
     const d = await r.json();
     if (d.success) {
