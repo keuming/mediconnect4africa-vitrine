@@ -257,6 +257,10 @@
       <span class="sidebar-item-icon">👥</span>
       <span class="sidebar-item-text">Prestataires</span>
     </a>
+    <a href="#patient" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">👤</span>
+      <span class="sidebar-item-text">Espace Patient</span>
+    </a>
     <a href="#carte" class="sidebar-item" onclick="closeSidebar()">
       <span class="sidebar-item-icon">💳</span>
       <span class="sidebar-item-text">Card</span>
@@ -382,6 +386,273 @@
 
 
 <!-- TARIFS -->
+
+<!-- ══ SECTION AVANTAGES PATIENT ══════════════════════════════════ -->
+<section id="patient" style="padding:60px 5%">
+  <div style="max-width:1200px;margin:0 auto">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:48px">
+      <span style="font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:2px">Espace Patient</span>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:700;margin:12px 0 16px">Rejoignez MediConnect Africa</h2>
+      <p style="font-size:16px;color:var(--muted);max-width:540px;margin:0 auto;line-height:1.7">Creez votre compte patient en quelques minutes et acces a tous vos services de sante en ligne.</p>
+    </div>
+
+    <!-- Avantages cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:48px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center">
+        <div style="font-size:28px;margin-bottom:10px">📅</div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">RDV en ligne</h4>
+        <p style="font-size:12px;color:var(--dim);line-height:1.5">Prenez rendez-vous avec n'importe quel medecin, 24h/24 et 7j/7</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center">
+        <div style="font-size:28px;margin-bottom:10px">🗂️</div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">Dossier medical</h4>
+        <p style="font-size:12px;color:var(--dim);line-height:1.5">Votre dossier medical numerique accessible depuis partout via code secret</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center">
+        <div style="font-size:28px;margin-bottom:10px">💊</div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">Livraison medicaments</h4>
+        <p style="font-size:12px;color:var(--dim);line-height:1.5">Envoyez votre ordonnance et recevez vos medicaments a domicile</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center">
+        <div style="font-size:28px;margin-bottom:10px">💳</div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">MediConnect Card</h4>
+        <p style="font-size:12px;color:var(--dim);line-height:1.5">Carte prepayee avec QR Code urgence, generee automatiquement a votre inscription</p>
+      </div>
+    </div>
+
+    <!-- Formulaires inscription / connexion -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px;margin:0 auto">
+
+      <!-- INSCRIPTION -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px">
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px">Creer mon compte</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px">Connexion via telephone + code PIN 4 chiffres</p>
+
+        <div id="reg-error" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#EF4444;font-size:13px"></div>
+        <div id="reg-success" style="display:none;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#34D399;font-size:13px"></div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">PRENOM *</label>
+            <input id="reg-prenom" type="text" placeholder="Kouame" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">NOM *</label>
+            <input id="reg-nom" type="text" placeholder="Yao" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">TELEPHONE * (identifiant de connexion)</label>
+          <input id="reg-tel" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CODE PIN * (4 chiffres)</label>
+          <input id="reg-pin" type="password" maxlength="4" placeholder="••••" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:18px;outline:none;letter-spacing:8px" inputmode="numeric"/>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">EMAIL</label>
+          <input id="reg-email" type="email" placeholder="votre@email.com" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">DATE DE NAISSANCE</label>
+            <input id="reg-ddn" type="date" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">GROUPE SANGUIN</label>
+            <select id="reg-gs" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none">
+              <option value="">-- Choisir --</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">VILLE</label>
+          <input id="reg-ville" type="text" placeholder="Abidjan" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">ALLERGIES</label>
+          <input id="reg-allergies" type="text" placeholder="Penicilline, aspirine..." style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+        </div>
+
+        <div style="margin-bottom:10px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CONTACT D'URGENCE</label>
+          <input id="reg-urgence" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">TAILLE (cm)</label>
+            <input id="reg-taille" type="number" placeholder="170" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">POIDS (kg)</label>
+            <input id="reg-poids" type="number" placeholder="65" style="width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none"/>
+          </div>
+        </div>
+
+        <button onclick="registerPatient()" id="reg-btn" style="width:100%;padding:13px;background:var(--green);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:14px;cursor:pointer">
+          Creer mon compte →
+        </button>
+        <p style="font-size:11px;color:var(--dim);text-align:center;margin-top:10px">Une MediConnect Card sera generee automatiquement</p>
+      </div>
+
+      <!-- CONNEXION -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px">
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px">Se connecter</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:20px">Acces au dashboard patient</p>
+
+        <div id="login-error" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#EF4444;font-size:13px"></div>
+
+        <div style="margin-bottom:14px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">NUMERO DE TELEPHONE</label>
+          <input id="login-tel" type="tel" placeholder="+225 07 XX XX XX" style="width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none"/>
+        </div>
+
+        <div style="margin-bottom:24px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:5px">CODE PIN (4 chiffres)</label>
+          <input id="login-pin" type="password" maxlength="4" placeholder="••••" style="width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:24px;outline:none;letter-spacing:12px;text-align:center" inputmode="numeric"/>
+        </div>
+
+        <button onclick="loginPatient()" id="login-btn" style="width:100%;padding:13px;background:var(--green);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:12px">
+          Se connecter →
+        </button>
+
+        <a href="https://manager.mediconnect4africa.cloud" style="display:block;width:100%;padding:13px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-weight:600;font-size:14px;cursor:pointer;text-align:center;text-decoration:none;box-sizing:border-box">
+          Acces dashboard complet →
+        </a>
+
+        <!-- Info avantages connexion -->
+        <div style="margin-top:24px;padding:16px;background:rgba(10,143,88,0.05);border-radius:10px;border:1px solid rgba(10,143,88,0.15)">
+          <p style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px">Avec votre compte patient :</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+            <li style="font-size:12px;color:var(--dim);display:flex;gap:8px"><span style="color:var(--greenL);font-weight:700">✓</span>RDV en ligne avec n'importe quel medecin</li>
+            <li style="font-size:12px;color:var(--dim);display:flex;gap:8px"><span style="color:var(--greenL);font-weight:700">✓</span>Acces a votre dossier medical partout</li>
+            <li style="font-size:12px;color:var(--dim);display:flex;gap:8px"><span style="color:var(--greenL);font-weight:700">✓</span>Commander vos medicaments en ligne</li>
+            <li style="font-size:12px;color:var(--dim);display:flex;gap:8px"><span style="color:var(--greenL);font-weight:700">✓</span>MediConnect Card generee automatiquement</li>
+            <li style="font-size:12px;color:var(--dim);display:flex;gap:8px"><span style="color:var(--greenL);font-weight:700">✓</span>Meme compte sur app mobile et dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const MC_API = 'https://mediconnect-backend-v2.vercel.app';
+
+async function registerPatient() {
+  const btn = document.getElementById('reg-btn');
+  const errEl = document.getElementById('reg-error');
+  const sucEl = document.getElementById('reg-success');
+  errEl.style.display = 'none';
+  sucEl.style.display = 'none';
+
+  const prenom = document.getElementById('reg-prenom').value.trim();
+  const nom = document.getElementById('reg-nom').value.trim();
+  const telephone = document.getElementById('reg-tel').value.trim();
+  const pin = document.getElementById('reg-pin').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const date_naissance = document.getElementById('reg-ddn').value;
+  const groupe_sanguin = document.getElementById('reg-gs').value;
+  const ville = document.getElementById('reg-ville').value.trim();
+  const allergies = document.getElementById('reg-allergies').value.trim();
+  const contact_urgence = document.getElementById('reg-urgence').value.trim();
+  const taille = document.getElementById('reg-taille').value.trim();
+  const poids = document.getElementById('reg-poids').value.trim();
+
+  if (!prenom || !nom || !telephone || !pin) {
+    errEl.textContent = 'Prenom, nom, telephone et PIN sont obligatoires';
+    errEl.style.display = 'block'; return;
+  }
+  if (!/^\d{4}$/.test(pin)) {
+    errEl.textContent = 'Le PIN doit etre exactement 4 chiffres';
+    errEl.style.display = 'block'; return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Creation en cours...';
+
+  try {
+    const r = await fetch(MC_API + '/api/auth/register-patient', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prenom, nom, telephone, pin, email, date_naissance,
+        groupe_sanguin, ville, allergies, contact_urgence, taille, poids, pays_code: 'CI' })
+    });
+    const d = await r.json();
+    if (d.success) {
+      localStorage.setItem('mc_patient_token', d.token);
+      localStorage.setItem('mc_patient_data', JSON.stringify(d.data));
+      sucEl.innerHTML = '✅ Compte cree avec succes !<br>Votre MediConnect Card : <strong>' + d.data.numero_carte + '</strong><br>Vous pouvez maintenant vous connecter sur l'application mobile.';
+      sucEl.style.display = 'block';
+      document.getElementById('reg-prenom').value = '';
+      document.getElementById('reg-nom').value = '';
+      document.getElementById('reg-tel').value = '';
+      document.getElementById('reg-pin').value = '';
+      document.getElementById('reg-email').value = '';
+    } else {
+      errEl.textContent = d.message || 'Erreur lors de la creation du compte';
+      errEl.style.display = 'block';
+    }
+  } catch(e) {
+    errEl.textContent = 'Erreur reseau. Veuillez reessayer.';
+    errEl.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Creer mon compte →';
+}
+
+async function loginPatient() {
+  const btn = document.getElementById('login-btn');
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+
+  const telephone = document.getElementById('login-tel').value.trim();
+  const pin = document.getElementById('login-pin').value.trim();
+
+  if (!telephone || !pin) {
+    errEl.textContent = 'Telephone et PIN requis';
+    errEl.style.display = 'block'; return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Connexion...';
+
+  try {
+    const r = await fetch(MC_API + '/api/auth/login-patient', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ telephone, pin })
+    });
+    const d = await r.json();
+    if (d.success) {
+      localStorage.setItem('mc_patient_token', d.token);
+      localStorage.setItem('mc_patient_data', JSON.stringify(d.user));
+      window.location.href = 'https://manager.mediconnect4africa.cloud/login?token=' + d.token;
+    } else {
+      errEl.textContent = d.message || 'Telephone ou PIN incorrect';
+      errEl.style.display = 'block';
+    }
+  } catch(e) {
+    errEl.textContent = 'Erreur reseau. Veuillez reessayer.';
+    errEl.style.display = 'block';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Se connecter →';
+}
+</script>
+<!-- ══ FIN SECTION AVANTAGES PATIENT ══════════════════════════════ -->
+
 <section id="tarifs">
   <div class="section-label">Tarification</div>
   <h2 class="section-title">Des tarifs accessibles pour tous</h2>
