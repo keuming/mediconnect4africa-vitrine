@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prestations - MediConnect Africa</title>
-  <meta name="description" content="Recherchez un prestataire de sante (clinique, hopital, laboratoire, imagerie, assurance, pharmacie) et prenez rendez-vous en ligne" />
+  <meta name="description" content="Recherchez un prestataire de sante par pays, ville, type et specialite, et prenez rendez-vous en ligne" />
   <link rel="icon" href="https://mediconnect4africa.com/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,23 +65,25 @@
     .page-title { font-family:'Space Grotesk',sans-serif; font-size:36px; font-weight:700; margin-bottom:12px; }
     .page-subtitle { color:var(--muted); font-size:16px; max-width:640px; }
 
-    /* FILTRES */
     .filters-box { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:24px; margin-bottom:32px; }
     .filters-title { font-size:14px; font-weight:800; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-    .filters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:16px; }
+    .filters-step { display:flex; align-items:center; gap:8px; font-size:11px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+    .filters-step .num { width:18px; height:18px; border-radius:50%; background:rgba(10,143,88,0.2); color:var(--greenL); display:inline-flex; align-items:center; justify-content:center; font-size:10px; }
+    .filters-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-bottom:18px; }
     .form-group { display:flex; flex-direction:column; gap:6px; }
     .form-label { font-size:11px; font-weight:700; color:var(--dim); text-transform:uppercase; letter-spacing:.5px; }
     .form-input, .form-select { background:#0A1520; border:1px solid var(--border); border-radius:10px; padding:11px 13px; color:var(--text); font-size:14px; outline:none; font-family:inherit; }
     .form-input:focus, .form-select:focus { border-color:var(--green); }
+    .form-input:disabled { opacity:.5; cursor:not-allowed; }
     .search-submit-btn { background:var(--green); color:#fff; border:none; border-radius:10px; padding:13px 28px; font-weight:800; font-size:14px; cursor:pointer; transition:background .2s; }
     .search-submit-btn:hover { background:var(--greenL); }
-    .search-submit-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .search-submit-btn:disabled { opacity:.5; cursor:not-allowed; }
+    .divider-line { height:1px; background:var(--border); margin:18px 0; }
     .type-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px; }
     .type-chip { background:#0A1520; border:1.5px solid var(--border); color:var(--muted); font-size:12px; font-weight:700; padding:8px 16px; border-radius:20px; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:6px; }
     .type-chip:hover { border-color:var(--green); color:var(--greenL); }
     .type-chip.active { background:rgba(10,143,88,0.18); border-color:var(--green); color:var(--greenL); }
 
-    /* RESULTATS */
     .results-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap; gap:10px; }
     .results-count { font-size:14px; font-weight:700; color:var(--muted); }
     .results-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:16px; }
@@ -104,7 +106,6 @@
     .empty-state .ic { font-size:40px; margin-bottom:14px; display:block; }
     .loading-state { color:var(--dim); font-size:14px; padding:60px 20px; text-align:center; }
 
-    /* MODAL */
     .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:200; align-items:center; justify-content:center; padding:20px; }
     .modal-overlay.active { display:flex; }
     .modal-box { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:28px; max-width:440px; width:100%; max-height:90vh; overflow-y:auto; position:relative; }
@@ -177,11 +178,28 @@
 <div class="container">
   <div class="page-header">
     <h1 class="page-title">Nos prestations</h1>
-    <p class="page-subtitle">Recherchez un prestataire de santé par type, ville et pays, puis prenez rendez-vous en quelques clics.</p>
+    <p class="page-subtitle">Sélectionnez un pays, une ville, puis un type de prestataire pour trouver et réserver un rendez-vous.</p>
   </div>
 
   <div class="filters-box">
     <div class="filters-title">🔍 Rechercher un prestataire</div>
+
+    <div class="filters-grid">
+      <div class="form-group">
+        <div class="filters-step"><span class="num">1</span> Pays</div>
+        <input type="text" class="form-input" id="f-pays-input" list="pays-datalist" placeholder="Tapez le nom du pays…" autocomplete="off" />
+        <datalist id="pays-datalist"></datalist>
+      </div>
+      <div class="form-group">
+        <div class="filters-step"><span class="num">2</span> Ville / Commune</div>
+        <input type="text" class="form-input" id="f-ville-input" list="villes-datalist" placeholder="Sélectionnez d'abord un pays…" autocomplete="off" disabled />
+        <datalist id="villes-datalist"></datalist>
+      </div>
+    </div>
+
+    <div class="divider-line"></div>
+
+    <div class="filters-step" style="margin-bottom:12px"><span class="num">3</span> Type de prestataire</div>
     <div class="type-chips" id="type-chips">
       <div class="type-chip active" data-type="clinique">🏥 Clinique</div>
       <div class="type-chip" data-type="hopital">🏛️ Hôpital public</div>
@@ -190,30 +208,15 @@
       <div class="type-chip" data-type="assurance">🛡️ Assurance maladie</div>
       <div class="type-chip" data-type="pharmacie">💊 Pharmacie</div>
     </div>
-    <div class="filters-grid">
+
+    <div class="filters-grid" style="margin-top:14px">
       <div class="form-group" id="specialite-group">
-        <label class="form-label">Spécialité (optionnel)</label>
+        <label class="form-label">Spécialité ou prestation (optionnel)</label>
         <input type="text" class="form-input" id="f-specialite" placeholder="Ex : cardiologie, pédiatrie…" />
       </div>
-      <div class="form-group">
-        <label class="form-label">Ville / Commune</label>
-        <input type="text" class="form-input" id="f-ville" placeholder="Ex : Cocody, Abidjan…" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Pays</label>
-        <select class="form-select" id="f-pays">
-          <option value="CI">🇨🇮 Côte d'Ivoire</option>
-          <option value="SN">🇸🇳 Sénégal</option>
-          <option value="BF">🇧🇫 Burkina Faso</option>
-          <option value="GH">🇬🇭 Ghana</option>
-          <option value="ML">🇲🇱 Mali</option>
-          <option value="TG">🇹🇬 Togo</option>
-          <option value="BJ">🇧🇯 Bénin</option>
-          <option value="GN">🇬🇳 Guinée</option>
-        </select>
-      </div>
     </div>
-    <button class="search-submit-btn" id="search-btn" onclick="doSearch()">Rechercher →</button>
+
+    <button class="search-submit-btn" id="search-btn" onclick="doSearch()" disabled>Rechercher →</button>
   </div>
 
   <div class="results-head" id="results-head" style="display:none">
@@ -221,8 +224,8 @@
   </div>
   <div id="results-container">
     <div class="empty-state">
-      <span class="ic">🔍</span>
-      Choisissez un type de prestataire et lancez une recherche pour afficher les résultats.
+      <span class="ic">🌍</span>
+      Choisissez un pays puis une ville pour commencer votre recherche.
     </div>
   </div>
 </div>
@@ -266,15 +269,129 @@
   const MC_API = 'https://mediconnect-backend-v2.vercel.app';
   let selectedType = 'clinique';
   let selectedProviderId = null;
-  let selectedProviderName = '';
+  let selectedPaysCode = null;
 
   const TYPE_LABELS = {
     clinique: 'Clinique', hopital: 'Hôpital public', laboratoire: 'Laboratoire',
-    imagerie: 'Centre d\\'imagerie médicale', assurance: 'Assurance maladie', pharmacie: 'Pharmacie'
+    imagerie: "Centre d'imagerie médicale", assurance: 'Assurance maladie', pharmacie: 'Pharmacie'
   };
-  const TYPE_ICONS = {
-    clinique: '🏥', hopital: '🏛️', laboratoire: '🧪', imagerie: '🩻', assurance: '🛡️', pharmacie: '💊'
+  const TYPE_ICONS = { clinique:'🏥', hopital:'🏛️', laboratoire:'🧪', imagerie:'🩻', assurance:'🛡️', pharmacie:'💊' };
+
+  // ── Referentiel geographique (54 pays africains) ──────────────
+  const PAYS_AFRIQUE = {
+    "CI":{nom:"🇨🇮 Côte d'Ivoire"},"SN":{nom:"🇸🇳 Sénégal"},"BF":{nom:"🇧🇫 Burkina Faso"},"ML":{nom:"🇲🇱 Mali"},
+    "GN":{nom:"🇬🇳 Guinée"},"TG":{nom:"🇹🇬 Togo"},"BJ":{nom:"🇧🇯 Bénin"},"NE":{nom:"🇳🇪 Niger"},"NG":{nom:"🇳🇬 Nigéria"},
+    "GH":{nom:"🇬🇭 Ghana"},"SL":{nom:"🇸🇱 Sierra Leone"},"LR":{nom:"🇱🇷 Libéria"},"MR":{nom:"🇲🇷 Mauritanie"},
+    "GM":{nom:"🇬🇲 Gambie"},"GW":{nom:"🇬🇼 Guinée-Bissau"},"CV":{nom:"🇨🇻 Cap-Vert"},"CM":{nom:"🇨🇲 Cameroun"},
+    "GA":{nom:"🇬🇦 Gabon"},"CD":{nom:"🇨🇩 RD Congo"},"CG":{nom:"🇨🇬 Congo-Brazzaville"},"CF":{nom:"🇨🇫 Centrafrique"},
+    "TD":{nom:"🇹🇩 Tchad"},"GQ":{nom:"🇬🇶 Guinée Équatoriale"},"ST":{nom:"🇸🇹 São Tomé-et-Príncipe"},"MA":{nom:"🇲🇦 Maroc"},
+    "DZ":{nom:"🇩🇿 Algérie"},"TN":{nom:"🇹🇳 Tunisie"},"LY":{nom:"🇱🇾 Libye"},"EG":{nom:"🇪🇬 Égypte"},"SD":{nom:"🇸🇩 Soudan"},
+    "ET":{nom:"🇪🇹 Éthiopie"},"KE":{nom:"🇰🇪 Kenya"},"TZ":{nom:"🇹🇿 Tanzanie"},"UG":{nom:"🇺🇬 Ouganda"},"RW":{nom:"🇷🇼 Rwanda"},
+    "BI":{nom:"🇧🇮 Burundi"},"SS":{nom:"🇸🇸 Soudan du Sud"},"SO":{nom:"🇸🇴 Somalie"},"DJ":{nom:"🇩🇯 Djibouti"},
+    "ER":{nom:"🇪🇷 Érythrée"},"MG":{nom:"🇲🇬 Madagascar"},"MU":{nom:"🇲🇺 Maurice"},"SC":{nom:"🇸🇨 Seychelles"},
+    "KM":{nom:"🇰🇲 Comores"},"ZA":{nom:"🇿🇦 Afrique du Sud"},"ZM":{nom:"🇿🇲 Zambie"},"ZW":{nom:"🇿🇼 Zimbabwe"},
+    "MZ":{nom:"🇲🇿 Mozambique"},"MW":{nom:"🇲🇼 Malawi"},"AO":{nom:"🇦🇴 Angola"},"NA":{nom:"🇳🇦 Namibie"},
+    "BW":{nom:"🇧🇼 Botswana"},"SZ":{nom:"🇸🇿 Eswatini"},"LS":{nom:"🇱🇸 Lesotho"}
   };
+
+  const VILLES_PAR_PAYS = {
+    "CI":["Abidjan","Yamoussoukro","Bouaké","Daloa","San-Pédro","Korhogo","Man","Gagnoa","Abengourou","Divo","Duekoué","Odienné","Bondoukou","Agboville","Grand-Bassam","Sassandra","Soubré","Séguéla","Ferkessédougou","Touba","Issia","Lakota","Bangolo","Bingerville","Grand-Lahou","Aboisso","Adzopé","Anyama","Tiassalé","Dimbokro"],
+    "SN":["Dakar","Thiès","Kaolack","Ziguinchor","Saint-Louis","Touba","Mbour","Diourbel","Louga","Tambacounda","Kolda","Fatick","Kafrine","Sédhiou","Kaffrine","Matam","Kédougou","Pikine","Guédiawaye","Rufisque","Tivaouane","Mbacké"],
+    "BF":["Ouagadougou","Bobo-Dioulasso","Koudougou","Ouahigouya","Banfora","Manga","Kaya","Fada N'Gourma","Tenkodogo","Dédougou","Kongoussi","Po","Réo","Gaoua","Diapaga","Titao","Tougan","Nouna","Dori","Ziniaré","Léo"],
+    "ML":["Bamako","Sikasso","Mopti","Koutiala","Kayes","Ségou","Gao","Kidal","Tombouctou","Bougouni","Kati","San","Niono","Markala","Bla","Kolondiéba","Yorosso","Diéma","Nioro du Sahel","Douentza","Kita","Djenné"],
+    "GN":["Conakry","Nzérékoré","Kindia","Kankan","Labé","Guéckédou","Mamou","Macenta","Faranah","Kissidougou","Dalaba","Pita","Siguiri","Kérouané","Beyla","Télimélé","Coyah","Dubréka","Forécariah","Fria"],
+    "TG":["Lomé","Sokodé","Kara","Kpalimé","Atakpamé","Tsévié","Aného","Sotouboua","Mango","Bassar","Dapango","Notsé","Vogan","Tabligbo","Badou","Blitta","Tchamba","Kandé","Pagouda","Dapaong"],
+    "BJ":["Cotonou","Porto-Novo","Djougou","Parakou","Lokossa","Ouidah","Abomey","Kandi","Natitingou","Bohicon","Malanville","Nikki","Save","Comé","Dassa-Zoumé","Tchaourou","Bassila","Banikoara","Abomey-Calavi","Sakété"],
+    "NE":["Niamey","Zinder","Maradi","Agadez","Tahoua","Dosso","Diffa","Tillabéri","Arlit","Birni N'Konni","Tessaoua","Dakoro","Mirriah","Madarounfa","Mayahi","Gaya","Dogondoutchi","Filingué","Illéla","Tchintabaraden"],
+    "NG":["Lagos","Kano","Ibadan","Abuja","Port Harcourt","Benin City","Maiduguri","Zaria","Aba","Onitsha","Enugu","Kaduna","Ilorin","Warri","Jos","Abeokuta","Calabar","Owerri","Asaba","Uyo","Akure","Sokoto","Bauchi","Minna","Makurdi"],
+    "GH":["Accra","Kumasi","Tamale","Sekondi-Takoradi","Ashaiman","Sunyani","Cape Coast","Koforidua","Tema","Obuasi","Techiman","Nkawkaw","Wa","Bolgatanga","Ho","Hohoe","Prestea","Tarkwa","Winneba","Berekum"],
+    "SL":["Freetown","Bo","Kenema","Koidu","Makeni","Lunsar","Port Loko","Kabala","Magburaka","Kailahun","Bonthe","Moyamba","Pujehun","Kambia","Segbwema","Waterloo"],
+    "LR":["Monrovia","Gbarnga","Kakata","Bensonville","Harper","Voinjama","Buchanan","Zwedru","Sanniquellie","Greenville","Tubmanburg","Robertsport","Fish Town","Barclayville","Ganta"],
+    "MR":["Nouakchott","Nouadhibou","Rosso","Kaédi","Zouerate","Kiffa","Tidjikja","Atar","Sélibabi","Aleg","Akjoujt","Nema","Bassikounou","Boutilimit","Aïoun el-Atrouss"],
+    "GM":["Banjul","Serekunda","Brikama","Bakau","Farafenni","Lamin","Basse Santa Su","Kerewan","Mansa Konko","Janjanbureh","Bansang","Soma"],
+    "GW":["Bissau","Bafatá","Gabú","Bissorã","Bolama","Cacheu","Catió","Mansôa","Bubaque","Farim","Buba","Quinhamel"],
+    "CV":["Praia","Mindelo","Santa Maria","Assomada","São Filipe","Espargos","Pedra Badejo","Tarrafal","Sal Rei","Ribeira Grande","Porto Novo","São Domingos"],
+    "CM":["Yaoundé","Douala","Garoua","Bamenda","Maroua","Bafoussam","Ngaoundéré","Bertoua","Kumba","Loum","Nkongsamba","Mbouda","Dschang","Edéa","Kribi","Ebolowa","Sangmélima","Foumban","Buea","Mbalmayo"],
+    "GA":["Libreville","Port-Gentil","Franceville","Oyem","Moanda","Mouila","Lambaréné","Tchibanga","Koulamoutou","Makokou","Bitam","Gamba","Lastoursville","Booué","Mitzic","Ndjolé"],
+    "CD":["Kinshasa","Lubumbashi","Mbuji-Mayi","Kananga","Kisangani","Bukavu","Tshikapa","Kolwezi","Likasi","Bunia","Uvira","Goma","Matadi","Boma","Kikwit","Mbandaka","Mwene-Ditu","Kalemie","Butembo","Kabinda"],
+    "CG":["Brazzaville","Pointe-Noire","Dolisie","Nkayi","Impfondo","Owando","Ouesso","Mossendjo","Madingou","Kinkala","Sibiti","Djambala","Gamboma","Makoua","Ewo","Boundji"],
+    "CF":["Bangui","Bimbo","Mbaïki","Berberati","Kaga-Bandoro","Bambari","Bangassou","Bossangoa","Bria","Bouar","Carnot","Nola","Sibut","Ndélé","Mobaye"],
+    "TD":["N'Djamena","Moundou","Sarh","Abéché","Kélo","Koumra","Pala","Am Timan","Bongor","Doba","Mongo","Ati","Faya-Largeau","Biltine","Massakory","Moussoro","Kyabé"],
+    "GQ":["Malabo","Bata","Ebebiyín","Aconibe","Añisoc","Luba","Evinayong","Mongomo","Mbini","Riaba"],
+    "ST":["São Tomé","Trindade","Santana","Neves","Santo António","São João dos Angolares"],
+    "MA":["Casablanca","Rabat","Fès","Marrakech","Agadir","Tanger","Meknès","Oujda","Kenitra","Témara","Salé","Nador","Tétouan","Safi","El Jadida","Béni Mellal","Khouribga","Berrechid","Khémisset","Larache","Mohammedia","Settat"],
+    "DZ":["Alger","Oran","Constantine","Annaba","Blida","Batna","Djelfa","Sétif","Sidi Bel Abbès","Biskra","Tébessa","El Oued","Skikda","Tiaret","Béjaïa","Tlemcen","Béchar","Mostaganem","Médéa","Ouargla","Boumerdès","Ghardaïa","Tamanrasset"],
+    "TN":["Tunis","Sfax","Sousse","Ettadhamen","Kairouan","Bizerte","Gabès","Ariana","Gafsa","La Marsa","Monastir","Ben Arous","Nabeul","Tataouine","Kasserine","Médenine","Hammam-Lif","Hammamet","Djerba","Zarzis"],
+    "LY":["Tripoli","Benghazi","Misrata","Tarhuna","Zawiya","Zliten","Al Khums","Ajdabiya","Derna","Sabha","Tobruk","Surt","Murzuq","Zintan","Sebha"],
+    "EG":["Le Caire","Alexandrie","Gizeh","Suez","Louxor","Assouan","Ismaïlia","Fayoum","Zagazig","Asyout","Port-Saïd","Tanta","Mansourah","Hurghada","Charm el-Cheikh","Sohag","Qena","Minya","Damanhour","Shibin el-Kom"],
+    "SD":["Khartoum","Omdurman","Khartoum Nord","Port Soudan","Kassala","El Obeid","Wad Medani","El Fasher","Atbara","Nyala","Gedaref","El Geneina","Kosti","Rabak","Sennar","Singa","Dongola"],
+    "ET":["Addis-Abeba","Dire Dawa","Mekele","Gondar","Awash","Adama","Jimma","Dessie","Bahir Dar","Shashamane","Bishoftu","Harar","Arba Minch","Hawassa","Wolkite","Nekemte","Gambela","Axoum"],
+    "KE":["Nairobi","Mombasa","Kisumu","Nakuru","Eldoret","Thika","Malindi","Kitale","Garissa","Nyeri","Meru","Embu","Kericho","Kisii","Migori","Naivasha","Machakos","Kakamega","Bungoma"],
+    "TZ":["Dar es Salaam","Mwanza","Arusha","Moshi","Tanga","Dodoma","Morogoro","Zanzibar","Kigoma","Tabora","Mbeya","Musoma","Shinyanga","Iringa","Mtwara","Lindi","Singida","Sumbawanga","Bukoba"],
+    "UG":["Kampala","Gulu","Lira","Mbarara","Jinja","Bwizibwera","Mbale","Mukono","Kasese","Masaka","Entebbe","Soroti","Kabale","Arua","Hoima","Tororo","Iganga","Fort Portal","Masindi"],
+    "RW":["Kigali","Butare","Gitarama","Ruhengeri","Gisenyi","Byumba","Cyangugu","Kibungo","Rwamagana","Nyanza","Kibuye","Gikongoro","Musanze","Rubavu","Huye","Muhanga"],
+    "BI":["Bujumbura","Gitega","Muyinga","Ngozi","Rumonge","Bururi","Kayanza","Mwaro","Cibitoke","Makamba","Bubanza","Cankuzo","Karuzi","Kirundo","Muramvya","Rutana","Ruyigi"],
+    "SS":["Juba","Malakal","Wau","Yei","Bor","Torit","Rumbek","Aweil","Bentiu","Kuajok","Nimule","Maridi"],
+    "SO":["Mogadiscio","Hargeisa","Bosasso","Berbera","Kismayo","Marka","Baidoa","Beledweyne","Jawhar","Galkayo"],
+    "DJ":["Djibouti","Ali Sabieh","Dikhil","Tadjourah","Obock","Arta"],
+    "ER":["Asmara","Keren","Massawa","Assab","Mendefera","Dekemhare","Adi Keyh","Barentu","Teseney","Nakfa"],
+    "MG":["Antananarivo","Toamasina","Antsirabe","Fianarantsoa","Mahajanga","Toliara","Antsiranana","Ambovombe","Ambatondrazaka","Morondava","Manakara","Moramanga","Ambanja","Nosy Be","Sambava","Ambilobe"],
+    "MU":["Port-Louis","Beau Bassin-Rose Hill","Vacoas-Phoenix","Curepipe","Quatre Bornes","Triolet","Goodlands","Centre de Flacq","Mahébourg","Bambous","Pamplemousses"],
+    "SC":["Victoria","Anse Boileau","Beau Vallon","Bel Ombre","Cascade","Glacis","Mont Fleuri","Plaisance"],
+    "KM":["Moroni","Mutsamudu","Fomboni","Domoni","Tsémbéhou","Mitsamiouli","Foumbouni","Itsandra"],
+    "ZA":["Johannesburg","Le Cap","Durban","Pretoria","Port Elizabeth","Bloemfontein","Soweto","Pietermaritzburg","Benoni","Tembisa","East London","Vereeniging","Boksburg","Welkom","Newcastle","Krugersdorp","Midrand","Polokwane","Nelspruit"],
+    "ZM":["Lusaka","Ndola","Kitwe","Kabwe","Chipata","Livingstone","Mufulira","Luanshya","Solwezi","Mansa","Kasama","Chingola","Mongu","Mazabuka","Choma","Kafue","Kapiri Mposhi"],
+    "ZW":["Harare","Bulawayo","Chitungwiza","Mutare","Epworth","Gweru","Kwekwe","Kadoma","Masvingo","Chinhoyi","Norton","Marondera","Ruwa","Chegutu","Zvishavane","Bindura","Redcliff","Hwange"],
+    "MZ":["Maputo","Matola","Nampula","Beira","Chimoio","Nacala","Quelimane","Tete","Lichinga","Pemba","Moatize","Inhambane","Xai-Xai","Maxixe","Mocuba","Cuamba","Montepuez","Dondo"],
+    "MW":["Lilongwe","Blantyre","Mzuzu","Zomba","Kasungu","Mangochi","Karonga","Salima","Nkhotakota","Nsanje","Balaka","Liwonde","Dedza","Ntcheu","Chiradzulu","Mulanje","Thyolo","Mchinji"],
+    "AO":["Luanda","Huambo","Lobito","Benguela","Kuito","Lubango","Malanje","Namibe","Soyo","Cabinda","Uíge","Saurimo","Menongue","Ndalatando","Sumbe","Caxito","Ondjiva","Luena","Dundo"],
+    "NA":["Windhoek","Swakopmund","Rundu","Walvis Bay","Oshakati","Katima Mulilo","Gobabis","Keetmanshoop","Otjiwarongo","Tsumeb","Okahandja","Mariental","Lüderitz","Outapi","Opuwo","Rehoboth"],
+    "BW":["Gaborone","Francistown","Molepolole","Selebi-Phikwe","Maun","Kanye","Serowe","Lobatse","Mahalapye","Palapye","Mogoditshane","Mochudi","Ramotswa","Tlokweng","Thamaga","Kasane"],
+    "SZ":["Mbabane","Manzini","Lobamba","Big Bend","Malkerns","Nhlangano","Siteki","Piggs Peak","Mankayane"],
+    "LS":["Maseru","Teyateyaneng","Mafeteng","Hlotse","Mohale's Hoek","Quthing","Qacha's Nek","Butha-Buthe","Thaba-Tseka"]
+  };
+
+  // Construire la datalist des pays
+  const paysDatalist = document.getElementById('pays-datalist');
+  const paysNomVersCode = {};
+  Object.entries(PAYS_AFRIQUE).forEach(([code, info]) => {
+    paysNomVersCode[info.nom] = code;
+    const opt = document.createElement('option');
+    opt.value = info.nom;
+    paysDatalist.appendChild(opt);
+  });
+
+  const paysInput = document.getElementById('f-pays-input');
+  const villeInput = document.getElementById('f-ville-input');
+  const villesDatalist = document.getElementById('villes-datalist');
+  const searchBtn = document.getElementById('search-btn');
+
+  function updateSearchBtnState() {
+    searchBtn.disabled = !(selectedPaysCode && villeInput.value.trim());
+  }
+
+  paysInput.addEventListener('input', () => {
+    const code = paysNomVersCode[paysInput.value];
+    if (code) {
+      selectedPaysCode = code;
+      villeInput.disabled = false;
+      villeInput.value = '';
+      villesDatalist.innerHTML = '';
+      (VILLES_PAR_PAYS[code] || []).forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v;
+        villesDatalist.appendChild(opt);
+      });
+      villeInput.placeholder = 'Tapez le nom de la ville…';
+    } else {
+      selectedPaysCode = null;
+      villeInput.disabled = true;
+      villeInput.value = '';
+      villeInput.placeholder = "Sélectionnez d'abord un pays…";
+    }
+    updateSearchBtnState();
+  });
+  villeInput.addEventListener('input', updateSearchBtnState);
 
   function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('active');
@@ -296,12 +413,12 @@
   });
 
   async function doSearch() {
-    const btn = document.getElementById('search-btn');
+    if (!selectedPaysCode || !villeInput.value.trim()) return;
+    const btn = searchBtn;
     const resultsHead = document.getElementById('results-head');
     const resultsCount = document.getElementById('results-count');
     const container = document.getElementById('results-container');
-    const ville = document.getElementById('f-ville').value.trim();
-    const pays = document.getElementById('f-pays').value;
+    const ville = villeInput.value.trim();
     const specialite = document.getElementById('f-specialite').value.trim();
 
     btn.disabled = true;
@@ -310,8 +427,7 @@
     resultsHead.style.display = 'none';
 
     try {
-      let url = MC_API + '/api/public/prestataires?type=' + encodeURIComponent(selectedType) + '&pays=' + encodeURIComponent(pays);
-      if (ville) url += '&ville=' + encodeURIComponent(ville);
+      let url = MC_API + '/api/public/prestataires?type=' + encodeURIComponent(selectedType) + '&pays=' + encodeURIComponent(selectedPaysCode) + '&ville=' + encodeURIComponent(ville);
       if (specialite && (selectedType === 'clinique' || selectedType === 'hopital')) url += '&specialite=' + encodeURIComponent(specialite);
 
       const r = await fetch(url);
@@ -322,18 +438,18 @@
       btn.textContent = 'Rechercher →';
 
       if (!results.length) {
-        container.innerHTML = '<div class="empty-state"><span class="ic">😕</span>Aucun ' + TYPE_LABELS[selectedType].toLowerCase() + ' trouvé' + (ville ? ' à ' + escapeHtml(ville) : '') + '. Essayez une autre ville ou un autre type.</div>';
+        container.innerHTML = '<div class="empty-state"><span class="ic">😕</span>Aucun ' + TYPE_LABELS[selectedType].toLowerCase() + ' trouvé à ' + escapeHtml(ville) + '. Essayez une autre ville ou un autre type.</div>';
         return;
       }
 
       resultsHead.style.display = 'flex';
-      resultsCount.textContent = results.length + ' résultat' + (results.length > 1 ? 's' : '') + ' — ' + TYPE_ICONS[selectedType] + ' ' + TYPE_LABELS[selectedType];
+      resultsCount.textContent = results.length + ' résultat' + (results.length > 1 ? 's' : '') + ' — ' + TYPE_ICONS[selectedType] + ' ' + TYPE_LABELS[selectedType] + ' à ' + escapeHtml(ville);
 
       container.innerHTML = '<div class="results-grid">' + results.map(p => `
         <div class="result-card">
           <div class="result-type-badge">${TYPE_ICONS[selectedType]} ${escapeHtml(TYPE_LABELS[selectedType])}</div>
           <div class="result-name">${escapeHtml(p.nom)}</div>
-          <div class="result-meta">📍 ${escapeHtml(p.ville || 'Ville non renseignée')}</div>
+          <div class="result-meta">📍 ${escapeHtml(p.ville || ville)}</div>
           ${p.specialite ? `<div class="result-spec">🩺 ${escapeHtml(p.specialite)}</div>` : ''}
           ${p.tarif_consultation ? `<div class="result-tarif">${Number(p.tarif_consultation).toLocaleString('fr-CI')} FCFA / consultation</div>` : ''}
           <div class="result-actions">
@@ -356,7 +472,6 @@
 
   function openRdvModal(providerId, providerName) {
     selectedProviderId = providerId;
-    selectedProviderName = providerName;
     document.getElementById('rdv-provider-name').textContent = TYPE_ICONS[selectedType] + ' ' + providerName;
     document.getElementById('rdv-error').style.display = 'none';
     document.getElementById('rdv-success').style.display = 'none';
