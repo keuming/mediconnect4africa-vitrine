@@ -678,7 +678,13 @@ async function registerPatient() {
       document.getElementById('reg-pin').value = '';
       document.getElementById('reg-email').value = '';
     } else {
-      errEl.textContent = d.message || 'Ce numero est deja utilise. Essayez de vous connecter.';
+      const dejaUtilise = /deja utilise/i.test(d.message || '');
+      if (dejaUtilise) {
+        errEl.innerHTML = (d.message || 'Ce numero est deja utilise.') +
+          ' <button onclick="allerVersConnexion(\'' + telephone.replace(/'/g,"") + '\')" style="background:none;border:none;color:#34D399;text-decoration:underline;cursor:pointer;font-size:13px;font-weight:700;padding:0;margin-left:4px">Se connecter avec ce numero →</button>';
+      } else {
+        errEl.textContent = d.message || 'Une erreur est survenue.';
+      }
       errEl.style.display = 'block';
       errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -688,6 +694,17 @@ async function registerPatient() {
   }
   btn.disabled = false;
   btn.textContent = 'Creer mon compte →';
+}
+
+function allerVersConnexion(tel) {
+  const loginTel = document.getElementById('login-tel');
+  if (loginTel) {
+    loginTel.value = tel;
+    loginTel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    loginTel.focus();
+    const loginPin = document.getElementById('login-pin');
+    if (loginPin) setTimeout(() => loginPin.focus(), 400);
+  }
 }
 
 async function loginPatient() {
