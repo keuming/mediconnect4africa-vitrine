@@ -145,12 +145,17 @@ footer{border-top:1px solid var(--border);padding:24px 5%;text-align:center;font
 <div class="video-section">
   <p class="video-label">Message de sensibilisation</p>
   <div class="video-wrapper" id="video-wrapper">
-    <div class="video-placeholder" id="video-placeholder" onclick="loadVideo()">
-      <div class="video-play-btn">&#9654;</div>
-      <p>Cliquez pour voir le message de sensibilisation MediConnect Africa</p>
-    </div>
+    <video
+      id="mc-video"
+      controls
+      preload="metadata"
+      playsinline
+      poster=""
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000">
+      <source src="/videos/video-telephone-verrouille.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la lecture video.
+    </video>
   </div>
-  <p class="video-admin-note">Video disponible prochainement · Lien YouTube configurable par l'administrateur</p>
 </div>
 
 <!-- MESSAGE URGENCE -->
@@ -697,18 +702,6 @@ async function createAccountAP() {
 <footer>
   MediConnect Africa · NEXOVA · Tous droits réservés 2026 · info@nexova.com · +225 05 07 10 86 48
 </footer>
-
-<script>
-function loadVideo() {
-  var youtubeId = "VOTRE_ID_YOUTUBE";
-  var wrapper = document.getElementById("video-wrapper");
-  if(youtubeId === "VOTRE_ID_YOUTUBE") {
-    alert("Video YouTube non encore configuree. Contactez l'administrateur NEXOVA.");
-    return;
-  }
-  wrapper.innerHTML = '<iframe src="https://www.youtube.com/embed/' + youtubeId + '?autoplay=1" allow="autoplay; encrypted-media" allowfullscréén></iframe>';
-}
-</script>
 
 </body>
 </html>
