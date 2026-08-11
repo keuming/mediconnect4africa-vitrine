@@ -223,6 +223,43 @@ footer .contact-block p{margin-bottom:4px;}
   footer .contact-block{text-align:left;}
   .cta-band{padding:40px 26px;}
 }
+
+/* ---------- CARROUSEL PREVENTION / VIGIECARD ---------- */
+.prevention{background:#0D1B14;color:#fff;}
+.prevention .section-head h2{color:#fff;}
+.prevention .section-head p{color:#B9CCC2;}
+.prevention .kicker{color:#F87171;}
+.carousel{position:relative;max-width:880px;margin:0 auto;}
+.carousel-track{overflow:hidden;border-radius:20px;}
+.carousel-slides{display:flex;transition:transform .45s ease;}
+.slide{flex:0 0 100%;padding:44px 48px;display:flex;align-items:center;gap:40px;background:#12241C;min-height:280px;}
+.slide-visual{flex-shrink:0;width:180px;display:flex;justify-content:center;}
+.slide-body{flex:1;}
+.slide-eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:#FCA5A5;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:6px 14px;border-radius:100px;margin-bottom:16px;}
+.slide-body h3{font-family:'Space Grotesk';font-size:24px;color:#fff;margin-bottom:12px;line-height:1.3;}
+.slide-body p{color:#B9CCC2;font-size:15px;line-height:1.6;margin-bottom:8px;}
+.slide-body strong{color:#fff;}
+.slide-stats{display:flex;gap:28px;margin-top:18px;}
+.slide-stats b{display:block;font-family:'IBM Plex Mono';font-size:28px;color:#F87171;}
+.slide-stats span{font-size:12px;color:#8BA3B8;}
+.compare-mini{display:flex;align-items:center;gap:14px;}
+.compare-mini .box{width:64px;height:88px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;}
+.compare-mini .bad{background:#1a0f0f;border:2px solid #EF4444;}
+.compare-mini .good{background:linear-gradient(135deg,#0A3D2E,#071A12);border:2px solid #0A6847;}
+.compare-mini .vs{font-family:'IBM Plex Mono';font-size:11px;color:#5A7A94;font-weight:700;}
+.carousel-nav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:22px;}
+.carousel-arrow{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.carousel-arrow:hover{background:rgba(255,255,255,.18);}
+.carousel-dots{display:flex;gap:8px;}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);border:none;cursor:pointer;padding:0;transition:background .15s,width .2s;}
+.carousel-dot.active{background:#F87171;width:22px;border-radius:5px;}
+.prevention-cta{text-align:center;margin-top:32px;}
+.prevention-cta a{background:#EF4444;color:#fff;}
+.prevention-cta a:hover{background:#DC2626;}
+@media (max-width:720px){
+  .slide{flex-direction:column;padding:32px 26px;text-align:center;gap:22px;}
+  .slide-stats{justify-content:center;}
+}
 </style>
 </head>
 <body>
@@ -637,6 +674,72 @@ footer .contact-block p{margin-bottom:4px;}
   </div>
 </section>
 
+<!-- PREVENTION / VIGIECARD -->
+<section class="prevention">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Prévention</span>
+      <h2>Qui préviendra votre famille en cas d'urgence ?</h2>
+      <p>Accident de la route, AVC, infarctus — ça peut arriver à vous, aujourd'hui.</p>
+    </div>
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-slides" id="preventionSlides">
+
+          <div class="slide">
+            <div class="slide-visual">
+              <div class="compare-mini">
+                <div><div class="box bad">🔒</div></div>
+                <span class="vs">VS</span>
+                <div><div class="box good">▦</div></div>
+              </div>
+            </div>
+            <div class="slide-body">
+              <span class="slide-eyebrow">Le constat</span>
+              <h3>Votre téléphone verrouillé ne pourra pas prévenir votre famille</h3>
+              <p>Si l'accident vous arrive — à vous, à votre conjoint, à un de vos enfants — <strong>qui pourra prévenir le reste de la famille ?</strong> Un téléphone verrouillé, c'est une famille non prévenue.</p>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="slide-visual">
+              <span style="font-size:64px;">🛡️</span>
+            </div>
+            <div class="slide-body">
+              <span class="slide-eyebrow">Les chiffres</span>
+              <h3>Chaque minute compte dans les premières heures</h3>
+              <div class="slide-stats">
+                <div><b>72%</b><span>des décès évitables surviennent dans les 2 premières heures</span></div>
+                <div><b>1/4</b><span>des victimes n'ont aucun contact d'urgence accessible sur elles</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="slide-visual">
+              <span style="font-size:64px;">🚨</span>
+            </div>
+            <div class="slide-body">
+              <span class="slide-eyebrow">La solution</span>
+              <h3>Un simple scan du QR code alerte toute la famille</h3>
+              <p>Avec un compte MediConnect, vous et votre famille bénéficiez d'une <strong>prise en charge médicale d'urgence gratuite</strong> — sans rien avancer, en attendant votre rétablissement. Commandez une VigieCard pour chaque membre de votre famille.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow" id="prevPrev" aria-label="Diapositive précédente">‹</button>
+        <div class="carousel-dots" id="prevDots"></div>
+        <button class="carousel-arrow" id="prevNext" aria-label="Diapositive suivante">›</button>
+      </div>
+    </div>
+    <div class="prevention-cta">
+      <a href="https://www.mediconnect4africa.cloud/telephone-verrouille" class="btn-primary">🚨 Protéger ma famille — En savoir plus</a>
+    </div>
+  </div>
+</section>
+
 <!-- TARIFS -->
 <section id="tarifs" class="section-soft">
   <div class="wrap">
@@ -709,6 +812,32 @@ document.getElementById('tabsBar').addEventListener('click', function(e){
   btn.classList.add('active');
   document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
 });
+
+(function(){
+  var track = document.getElementById('preventionSlides');
+  var dotsWrap = document.getElementById('prevDots');
+  if(!track || !dotsWrap) return;
+  var slides = track.children;
+  var count = slides.length;
+  var idx = 0;
+  for(var i=0;i<count;i++){
+    var d = document.createElement('button');
+    d.className = 'carousel-dot' + (i===0?' active':'');
+    d.setAttribute('aria-label','Diapositive '+(i+1));
+    d.addEventListener('click', function(n){ return function(){ go(n); }; }(i));
+    dotsWrap.appendChild(d);
+  }
+  function go(n){
+    idx = (n+count)%count;
+    track.style.transform = 'translateX(-'+(idx*100)+'%)';
+    var dots = dotsWrap.children;
+    for(var j=0;j<dots.length;j++){ dots[j].classList.toggle('active', j===idx); }
+  }
+  document.getElementById('prevPrev').addEventListener('click', function(){ go(idx-1); });
+  document.getElementById('prevNext').addEventListener('click', function(){ go(idx+1); });
+  var auto = setInterval(function(){ go(idx+1); }, 6000);
+  track.closest('.carousel').addEventListener('mouseenter', function(){ clearInterval(auto); });
+})();
 </script>
 </body>
 </html>
