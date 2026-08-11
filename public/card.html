@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediConnect Card - MediConnect Africa</title>
+  <meta name="description" content="La carte de sante numerique MediConnect. Compte famille, mobile money integre, profil medical embarque, QR code d'urgence." />
+  <link rel="icon" href="https://mediconnect4africa.com/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #0A8F58; --greenL: #34D399; --greenD: #065F3C;
+      --bg: #060E18; --card: #0D1B2A; --border: #1a2d42;
+      --text: #F0F6FF; --muted: #8BA3B8; --dim: #5A7A94;
+      --amber: #F59E0B; --blue: #3B82F6; --purple: #8B5CF6;
+      --teal: #14B8A6; --red: #EF4444;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; margin-left:160px; }
+
+    nav { position:sticky; top:0; z-index:100; background:rgba(6,14,24,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 5%; }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; height:64px; gap:32px; }
+    .logo { display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:var(--text); text-decoration:none; }
+    .logo-icon { width:36px; height:36px; border-radius:10px; background:rgba(10,143,88,0.2); border:1.5px solid var(--green); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:300; color:var(--greenL); }
+    .logo span { color:var(--greenL); }
+    .nav-links { display:flex; gap:24px; flex:1; }
+    .nav-links a { color:var(--dim); font-size:14px; text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-actions { display:flex; gap:10px; align-items:center; }
+    .btn { padding:8px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; text-decoration:none; transition:all .2s; display:inline-block; border:none; }
+    .btn-ghost { background:transparent; border:1px solid var(--border); color:var(--muted); }
+    .btn-ghost:hover { border-color:var(--green); color:var(--greenL); }
+    .btn-primary { background:var(--green); border:none; color:#fff; }
+    .btn-primary:hover { background:var(--greenL); }
+
+    .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; background:var(--card); border-right:2px solid var(--border); z-index:99; overflow-y:auto; padding:20px 0; display:flex; flex-direction:column; align-items:center; gap:30px; }
+    .sidebar-overlay { display:none; }
+    .sidebar-header { display:none; }
+    .sidebar-content { display:flex; flex-direction:column; gap:30px; align-items:center; width:100%; padding:0; }
+    .sidebar-item { display:flex; flex-direction:column; align-items:center; gap:8px; padding:15px 12px; color:rgba(255,255,255,0.8); text-decoration:none; transition:all 0.3s ease; border:none; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; width:100%; }
+    .sidebar-item:hover { color:#fff; transform:scale(1.05); }
+    .sidebar-item.active { color:var(--greenL); background:rgba(10,143,88,0.12); border-radius:10px; }
+    .sidebar-item-icon { font-size:24px; }
+    .sidebar-item-text { font-size:11px; text-align:center; line-height:1.3; max-width:120px; word-break:break-word; }
+    .sidebar-toggle { display:none; position:fixed; top:20px; left:20px; z-index:102; background:var(--card); border:2px solid var(--border); color:var(--text); font-size:24px; cursor:pointer; padding:8px 12px; border-radius:8px; transition:all 0.3s ease; }
+    .sidebar-toggle:hover { background:rgba(10,143,88,0.2); border-color:var(--green); }
+
+    @media (max-width:900px) {
+      body { margin-left:0; }
+      nav { padding:0 10px; }
+      .nav-inner { gap:12px; padding:0 10px; height:56px; }
+      .nav-links { display:none; }
+      .sidebar-toggle { display:block; }
+      .sidebar { position:fixed; left:0; top:0; width:160px; height:100vh; transform:translateX(-100%); transition:transform 0.3s ease; z-index:100; }
+      .sidebar.active { transform:translateX(0); }
+      .sidebar-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:98; }
+      .sidebar-overlay.active { display:block; }
+    }
+
+    .hero { max-width:1200px; margin:0 auto; padding:56px 5% 40px; }
+    .hero-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:center; }
+    @media (max-width:900px) { .hero-grid { grid-template-columns:1fr; gap:32px; } }
+    .badge-new { display:inline-block; background:rgba(52,211,153,0.15); color:var(--greenL); border:1px solid rgba(52,211,153,0.3); font-size:11px; font-weight:800; padding:5px 14px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:16px; }
+    .hero-title { font-family:'Space Grotesk',sans-serif; font-size:42px; font-weight:700; line-height:1.15; margin-bottom:18px; }
+    .hero-title .accent { color:var(--greenL); }
+    .hero-desc { color:var(--muted); font-size:16px; line-height:1.75; margin-bottom:28px; max-width:520px; }
+    .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+    .cta-order { background:var(--green); color:#fff; border:none; border-radius:12px; padding:15px 30px; font-weight:800; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all .2s; }
+    .cta-order:hover { background:var(--greenL); transform:translateY(-1px); }
+    .cta-secondary { background:transparent; border:1.5px solid var(--border); color:var(--muted); border-radius:12px; padding:15px 26px; font-weight:700; font-size:14px; text-decoration:none; transition:all .2s; }
+    .cta-secondary:hover { border-color:var(--green); color:var(--greenL); }
+
+    /* Card visual */
+    .mc-card-preview { background:linear-gradient(135deg,#0A3D2E,#071A12); border:1px solid var(--green); border-radius:20px; padding:26px; position:relative; overflow:hidden; }
+    .mc-card-brand { font-size:16px; font-weight:800; color:#fff; margin-bottom:20px; }
+    .mc-card-brand span { color:var(--greenL); }
+    .mc-card-num { font-size:19px; font-weight:700; color:#fff; letter-spacing:3px; margin-bottom:22px; font-family:monospace; }
+    .mc-card-row { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:20px; gap:10px; }
+    .mc-card-field label { display:block; font-size:9px; color:rgba(255,255,255,0.45); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px; }
+    .mc-card-field span { font-size:14px; font-weight:700; color:#fff; }
+    .mc-card-imc { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px; }
+    .mc-imc-item label { display:block; font-size:8px; color:rgba(255,255,255,0.45); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px; }
+    .mc-imc-item span { font-size:12px; font-weight:700; color:#fff; }
+    .imc-val { color:var(--greenL) !important; }
+
+    .family-preview { margin-top:16px; background:rgba(255,255,255,0.04); border-radius:14px; padding:16px; border:1px solid rgba(255,255,255,0.08); }
+    .family-preview-title { font-size:12px; font-weight:700; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; }
+    .family-member { display:flex; align-items:center; gap:10px; border-radius:10px; padding:8px 12px; margin-bottom:8px; }
+    .family-member:last-child { margin-bottom:0; }
+    .family-member .fname { font-size:13px; font-weight:700; color:#fff; }
+    .family-member .frole { font-size:10px; color:rgba(255,255,255,0.5); }
+    .family-status { font-size:10px; font-weight:700; border-radius:20px; padding:2px 8px; margin-left:auto; }
+
+    /* Sections */
+    .section { max-width:1200px; margin:0 auto; padding:36px 5%; }
+    .section-title { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; margin-bottom:8px; text-align:center; }
+    .section-sub { color:var(--muted); font-size:15px; text-align:center; max-width:560px; margin:0 auto 40px; }
+
+    .benefits-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+    .benefit-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:26px; transition:border-color .2s, transform .2s; }
+    .benefit-card:hover { border-color:var(--green); transform:translateY(-2px); }
+    .benefit-icon { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:16px; }
+    .benefit-title { font-size:15px; font-weight:800; margin-bottom:8px; }
+    .benefit-desc { color:var(--muted); font-size:13px; line-height:1.6; }
+
+    /* Comment ca marche */
+    .steps-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    @media (max-width:900px) { .steps-grid { grid-template-columns:1fr 1fr; } }
+    @media (max-width:560px) { .steps-grid { grid-template-columns:1fr; } }
+    .step-card { text-align:center; }
+    .step-num { width:44px; height:44px; border-radius:50%; background:rgba(10,143,88,0.15); border:1.5px solid var(--green); color:var(--greenL); font-weight:800; font-size:18px; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+    .step-title { font-size:14px; font-weight:700; margin-bottom:6px; }
+    .step-desc { color:var(--dim); font-size:12px; line-height:1.6; }
+
+    /* Tarifs */
+    .pricing-box { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:36px; max-width:480px; margin:0 auto; text-align:center; }
+    .pricing-amount { font-family:'Space Grotesk',sans-serif; font-size:44px; font-weight:700; color:var(--greenL); margin:12px 0 4px; }
+    .pricing-amount span { font-size:16px; color:var(--muted); font-weight:600; }
+    .pricing-line { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; color:var(--muted); }
+    .pricing-line:last-of-type { border-bottom:none; }
+    .pricing-line strong { color:var(--text); }
+
+    /* Final CTA */
+    .final-cta { background:linear-gradient(135deg,#0A3D2E,#071A12); border:1px solid var(--green); border-radius:24px; padding:48px 32px; text-align:center; margin:0 5%; }
+    .final-cta h2 { font-family:'Space Grotesk',sans-serif; font-size:28px; margin-bottom:12px; }
+    .final-cta p { color:rgba(255,255,255,0.65); font-size:15px; margin-bottom:26px; max-width:480px; margin-left:auto; margin-right:auto; }
+
+    footer { text-align:center; padding:40px 5%; color:var(--dim); font-size:12px; }
+  </style>
+</head>
+<body>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header"><h3>Navigation</h3></div>
+  <div class="sidebar-content">
+    <a href="/prestataires.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">👥</span>
+      <span class="sidebar-item-text">Prestataires</span>
+    </a>
+    <a href="/prestations.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🩺</span>
+      <span class="sidebar-item-text">Prestations</span>
+    </a>
+    <a href="/card.html" class="sidebar-item active" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💳</span>
+      <span class="sidebar-item-text">Card</span>
+    </a>
+    <a href="/mediconnect.html#tarifs" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">💰</span>
+      <span class="sidebar-item-text">Tarifs</span>
+    </a>
+    <a href="/mediconnect.html#securite" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🔒</span>
+      <span class="sidebar-item-text">Sécurité</span>
+    </a>
+    <a href="/demo.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">🧪</span>
+      <span class="sidebar-item-text">Tests</span>
+    </a>
+    <a href="/api-docs.html" class="sidebar-item" onclick="closeSidebar()">
+      <span class="sidebar-item-icon">📚</span>
+      <span class="sidebar-item-text">API</span>
+    </a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">+</div>
+      <span><span>Medi</span>Connect</span>
+    </a>
+    <div class="nav-links"><a href="/mediconnect.html">Comment ça marche</a></div>
+    <div class="nav-actions">
+      <a href="https://manager.mediconnect4africa.cloud/login" class="btn btn-ghost">Se connecter</a>
+      <a href="https://manager.mediconnect4africa.cloud/register" class="btn btn-primary">Créer un compte →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="badge-new">Nouveau</div>
+      <h1 class="hero-title">Votre santé, <span class="accent">une carte</span> qui vous suit partout</h1>
+      <p class="hero-desc">
+        La MediConnect Card est votre carte de santé numérique. Accédez à tous vos soins dans le réseau, payez sans cash, gérez toute votre famille, et gardez votre profil médical accessible en cas d'urgence — où que vous soyez en Afrique de l'Ouest.
+      </p>
+      <div class="hero-ctas">
+        <a href="/mediconnect.html#patient" class="cta-order">💳 Commander ma carte →</a>
+        <a href="#avantages" class="cta-secondary">En savoir plus</a>
+      </div>
+    </div>
+    <div>
+      <div class="mc-card-preview">
+        <div class="mc-card-brand"><span>Medi</span>Connect Card</div>
+        <div class="mc-card-num">•••• •••• •••• 4821</div>
+        <div class="mc-card-row">
+          <div class="mc-card-field"><label>Titulaire</label><span>ADJOUA KONÉ</span></div>
+          <div class="mc-card-field"><label>Validité</label><span>06/28</span></div>
+          <div style="background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.3);border-radius:20px;padding:3px 10px;align-self:flex-end"><span style="font-size:11px;font-weight:700;color:#34D399">✓ Active</span></div>
+        </div>
+        <div class="mc-card-imc">
+          <div class="mc-imc-item"><label>Taille</label><span>168 cm</span></div>
+          <div class="mc-imc-item"><label>Poids</label><span>62 kg</span></div>
+          <div class="mc-imc-item"><label>IMC</label><span class="imc-val">21.9 — Normal</span></div>
+          <div class="mc-imc-item"><label>Groupe</label><span style="color:#F87171;font-weight:900">O+</span></div>
+        </div>
+      </div>
+      <div class="family-preview">
+        <div class="family-preview-title">Famille Koné — 3 cartes</div>
+        <div class="family-member" style="background:rgba(10,143,88,0.1)">
+          <span style="font-size:18px">👨</span>
+          <div><div class="fname">Kouassi Koné</div><div class="frole">Père · Carte #4820</div></div>
+          <span class="family-status" style="color:#34D399;background:rgba(52,211,153,0.1)">Active</span>
+        </div>
+        <div class="family-member" style="background:rgba(124,58,237,0.1)">
+          <span style="font-size:18px">👧</span>
+          <div><div class="fname">Aya Koné</div><div class="frole">Enfant · 12 ans</div></div>
+          <span class="family-status" style="color:#FCD34D;background:rgba(252,211,77,0.1)">En cours</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="avantages">
+  <h2 class="section-title">Pourquoi la MediConnect Card ?</h2>
+  <p class="section-sub">Une carte pensée pour l'Afrique de l'Ouest : simple à utiliser, valable partout dans le réseau, et utile même sans connexion internet.</p>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon" style="background:rgba(10,143,88,0.15)">💳</div>
+      <div class="benefit-title">Carte physique + numérique</div>
+      <div class="benefit-desc">QR code scannable dans toutes les cliniques, hôpitaux, pharmacies et laboratoires du réseau MediConnect.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon" style="background:rgba(124,58,237,0.15)">👨‍👩‍👧</div>
+      <div class="benefit-title">Compte famille</div>
+      <div class="benefit-desc">Père, mère et enfants (≤18 ans) réunis sous un seul compte — jusqu'à 5 cartes liées, contacts d'urgence partagés.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon" style="background:rgba(59,130,246,0.15)">📱</div>
+      <div class="benefit-title">Mobile money intégré</div>
+      <div class="benefit-desc">Wave, Orange Money, MTN MoMo, Moov — rechargez votre carte en un instant depuis votre téléphone.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon" style="background:rgba(239,68,68,0.15)">🆘</div>
+      <div class="benefit-title">Fiche d'urgence médicale</div>
+      <div class="benefit-desc">Groupe sanguin, allergies et contacts d'urgence accessibles instantanément par un secouriste, même sans compte MediConnect.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon" style="background:rgba(20,184,166,0.15)">⚕️</div>
+      <div class="benefit-title">Profil médical embarqué</div>
+      <div class="benefit-desc">IMC, taille, poids et maladies chroniques renseignés une fois, consultables par tout praticien du réseau.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon" style="background:rgba(245,158,11,0.15)">🌍</div>
+      <div class="benefit-title">Valable partout</div>
+      <div class="benefit-desc">Une seule carte pour tout le réseau MediConnect Africa, dans plusieurs pays d'Afrique de l'Ouest.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title">Comment obtenir votre carte ?</h2>
+  <p class="section-sub">Quatre étapes simples, quelques minutes suffisent.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-title">Créez votre compte</div>
+      <div class="step-desc">Renseignez votre identité, téléphone et informations médicales de base.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-title">Ajoutez vos contacts</div>
+      <div class="step-desc">Indiquez au moins un contact d'urgence à afficher sur votre carte.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-title">Votre demande est traitée</div>
+      <div class="step-desc">Notre équipe génère votre carte physique, prête à être imprimée.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-title">Recevez votre carte</div>
+      <div class="step-desc">Récupérez votre carte MediConnect et activez-la dans l'application.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2 class="section-title">Tarifs</h2>
+  <p class="section-sub">Un prix simple, sans surprise.</p>
+  <div class="pricing-box">
+    <div style="color:var(--dim);font-size:12px;text-transform:uppercase;letter-spacing:0.5px;font-weight:700">MediConnect Card</div>
+    <div class="pricing-amount">1 000 <span>FCFA mise en service</span></div>
+    <div style="color:var(--muted);font-size:14px;margin-bottom:20px">puis 500 FCFA / mois</div>
+    <div class="pricing-line"><span>Carte physique + numérique</span><strong>Incluse</strong></div>
+    <div class="pricing-line"><span>Jusqu'à 5 cartes famille</span><strong>Incluses</strong></div>
+    <div class="pricing-line"><span>QR code d'urgence</span><strong>Inclus</strong></div>
+    <div class="pricing-line"><span>Support mobile money</span><strong>Inclus</strong></div>
+    <a href="/mediconnect.html#patient" class="cta-order" style="width:100%;margin-top:24px;justify-content:center">💳 Commander ma carte →</a>
+  </div>
+</div>
+
+<div class="final-cta">
+  <h2>Prêt à protéger votre famille ?</h2>
+  <p>Créez votre compte MediConnect et commandez votre carte de santé dès aujourd'hui. Quelques minutes suffisent.</p>
+  <a href="/mediconnect.html#patient" class="cta-order">💳 Commander ma carte maintenant →</a>
+</div>
+
+<footer>
+  © MediConnect Africa — mediconnect4africa.cloud
+</footer>
+
+<script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('active');
+    document.querySelector('.sidebar-overlay').classList.toggle('active');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('active');
+    document.querySelector('.sidebar-overlay').classList.remove('active');
+  }
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSidebar(); });
+</script>
+
+</body>
+</html>
